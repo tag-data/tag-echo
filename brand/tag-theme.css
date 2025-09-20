@@ -1,28 +1,107 @@
-/* TAG Echo - TAG Strategies Brand Theme Overrides */
+/* TAG Echo - TAG Strategies Professional Political Consulting Brand */
 :root {
-	/* Core Brand */
-	--primary-blue: #0A2240; /* deep navy */
-	--secondary-blue: #193569; /* slate/navy */
-	--primary-red: #9F1D22; /* disciplined red accent */
-	--accent-gold: #C7A253; /* refined metallic gold */
+	/* TAG Strategies Authentic Brand Colors - Professional Political Consulting */
+	--primary-blue: #1B365D;    /* Deep Professional Navy */
+	--secondary-blue: #2E5984;  /* Strategic Blue */
+	--primary-red: #B8282F;     /* Political Red - Strong but Professional */
+	--accent-gold: #B8860B;     /* Refined Gold - Authority & Trust */
+	
+	/* Supporting Palette */
+	--midnight: #0F1C2E;        /* Deepest Navy for Text */
+	--onyx: #1A2D42;            /* Dark Backgrounds */
+	--graphite: #475569;        /* Secondary Text */
+	--charcoal: #64748B;        /* Muted Text */
+	--platinum: #F8FAFC;        /* Clean Background */
+	--silver: #F1F5F9;          /* Light Sections */
+	--pearl: #FFFFFF;           /* Pure White */
 
-	/* Neutrals */
-	--midnight: #0C1626;
-	--onyx: #121B2A;
-	--graphite: #3B465A;
-	--charcoal: #5A667B;
-	--platinum: #F6F8FB;
-	--silver: #E9EEF6;
-
-	/* Gradients */
-	--gradient-primary: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 55%, var(--primary-red) 110%);
-	--gradient-gold: linear-gradient(135deg, var(--accent-gold) 0%, #E2B76C 100%);
+	/* Professional Gradients - Conservative & Trustworthy */
+	--gradient-primary: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 70%, var(--primary-red) 100%);
+	--gradient-gold: linear-gradient(135deg, var(--accent-gold) 0%, #CD853F 100%);
+	--gradient-subtle: linear-gradient(135deg, rgba(27, 54, 93, 0.05) 0%, rgba(184, 40, 47, 0.02) 100%);
 }
 
-/* Optional wordmark sizing adjustments */
-.logo-text { letter-spacing: -0.015em; }
-.logo-subtitle { opacity: 0.9; }
+/* Typography - Professional Political Consulting */
+body {
+	font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
 
-/* Buttons & interactive accents tuned to brand */
-.analyze-btn { box-shadow: 0 10px 24px rgba(10, 34, 64, 0.25); }
-.nav-tab.active { box-shadow: 0 6px 14px rgba(10, 34, 64, 0.18); }
+/* Logo Refinements */
+.logo-text { 
+	font-family: 'Inter', sans-serif;
+	letter-spacing: -0.02em; 
+	font-weight: 800;
+}
+.logo-subtitle { 
+	opacity: 0.85;
+	font-weight: 500;
+	color: rgba(255, 255, 255, 0.9);
+}
+
+/* Professional Interactive Elements */
+.analyze-btn { 
+	box-shadow: 0 10px 25px rgba(27, 54, 93, 0.3);
+	background: var(--gradient-primary);
+}
+.analyze-btn:hover {
+	box-shadow: 0 15px 35px rgba(27, 54, 93, 0.4);
+}
+
+.nav-tab.active { 
+	box-shadow: 0 6px 20px rgba(27, 54, 93, 0.2);
+	border-bottom-color: var(--accent-gold);
+}
+
+/* Professional Workspace Items */
+.workspace-item.active {
+	background: var(--gradient-primary);
+	box-shadow: 0 8px 25px rgba(27, 54, 93, 0.3);
+}
+
+/* Enhanced Professional Effects */
+.header {
+	background: var(--gradient-primary);
+	box-shadow: 0 4px 25px rgba(27, 54, 93, 0.2);
+}
+
+.sidebar {
+	background: rgba(248, 250, 252, 0.95);
+	backdrop-filter: blur(20px);
+	border: 1px solid rgba(27, 54, 93, 0.08);
+}
+
+.main-content {
+	background: rgba(248, 250, 252, 0.7);
+	backdrop-filter: blur(20px);
+}
+
+/* Professional Accent Colors */
+.trending-item {
+	border-left-color: var(--accent-gold);
+}
+
+.sidebar h3 {
+	border-bottom-color: var(--accent-gold);
+}
+
+.sidebar h3::after {
+	background: var(--primary-red);
+}
+
+/* Conservative Professional Animations */
+@keyframes professionalPulse {
+	0%, 100% { 
+		opacity: 1; 
+		transform: scale(1);
+	}
+	50% { 
+		opacity: 0.9; 
+		transform: scale(1.02);
+	}
+}
+
+.logo-icon svg {
+	animation: professionalPulse 4s ease-in-out infinite;
+}
