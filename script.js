@@ -6,6 +6,7 @@ class TagEcho {
         this.currentTab = 'analyzer';
         this.chatMinimized = false;
         this.analysisResults = null;
+        this.darkMode = false;
         this.workspaceTypes = this.initializeWorkspaceTypes();
         
         this.init();
@@ -287,6 +288,7 @@ class TagEcho {
     }
 
     init() {
+        this.initializeDarkMode();
         this.setupEventListeners();
         this.setupCharacterCounter();
         this.setupChatAssistant();
@@ -302,17 +304,17 @@ class TagEcho {
             });
         });
 
-        // Copy analyzer
-        const analyzeBtn = document.getElementById('analyze-btn');
-        if (analyzeBtn) {
-            analyzeBtn.addEventListener('click', () => this.analyzeCopy());
+        // SMS analyzer
+        const analyzeSmsBtn = document.getElementById('analyze-sms-btn');
+        if (analyzeSmsBtn) {
+            analyzeSmsBtn.addEventListener('click', () => this.analyzeCopy());
         }
 
-        // Copy input
-        const copyInput = document.getElementById('copy-input');
-        if (copyInput) {
-            copyInput.addEventListener('input', () => this.updateCharCount());
-            copyInput.addEventListener('keydown', (e) => {
+        // SMS input
+        const smsInput = document.getElementById('sms-message');
+        if (smsInput) {
+            smsInput.addEventListener('input', () => this.updateCharCount());
+            smsInput.addEventListener('keydown', (e) => {
                 if (e.ctrlKey && e.key === 'Enter') {
                     this.analyzeCopy();
                 }
@@ -375,6 +377,48 @@ class TagEcho {
                 this.loadProject(e.currentTarget.querySelector('.project-name').textContent);
             });
         });
+
+        // Workspace search functionality
+        const workspaceSearch = document.getElementById('workspace-search');
+        if (workspaceSearch) {
+            workspaceSearch.addEventListener('input', (e) => {
+                this.filterWorkspaces(e.target.value);
+            });
+        }
+
+        // Workspace toggle functionality
+        const workspaceToggle = document.getElementById('workspace-toggle');
+        if (workspaceToggle) {
+            workspaceToggle.addEventListener('click', () => {
+                this.toggleWorkspaceSection();
+            });
+        }
+
+        // Mobile navigation menu
+        const navMenu = document.getElementById('nav-menu');
+        const navLinks = document.querySelector('.nav-links');
+        if (navMenu && navLinks) {
+            navMenu.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+        }
+
+        // Navigation CTA button
+        const navCta = document.querySelector('.nav-cta');
+        if (navCta) {
+            navCta.addEventListener('click', () => {
+                this.showNotification('Get Started functionality coming soon!', 'info');
+            });
+        }
+
+        // New workspace button
+        const newWorkspaceBtn = document.querySelector('.new-workspace-btn');
+        if (newWorkspaceBtn) {
+            newWorkspaceBtn.addEventListener('click', () => {
+                this.createNewWorkspace();
+            });
+        }
     }
 
     switchTab(tabId) {
@@ -404,11 +448,11 @@ class TagEcho {
     }
 
     updateCharCount() {
-        const copyInput = document.getElementById('copy-input');
+        const smsInput = document.getElementById('sms-message');
         const charCount = document.getElementById('char-count');
         
-        if (copyInput && charCount) {
-            const count = copyInput.value.length;
+        if (smsInput && charCount) {
+            const count = smsInput.value.length;
             charCount.textContent = count;
             
             // Update color based on channel limits
@@ -444,7 +488,7 @@ class TagEcho {
         this.updateCharCount();
         
         const channel = document.getElementById('channel-select').value;
-        const copyInput = document.getElementById('copy-input');
+        const smsInput = document.getElementById('sms-message');
         
         // Update placeholder based on channel
         const placeholders = {
@@ -455,18 +499,19 @@ class TagEcho {
             web: 'Join the Fight Against Radical Policies\\n\\nOur communities are under attack. Your donation of $25 or more helps us fight back against dangerous policies that threaten our safety and security.'
         };
         
-        if (copyInput && placeholders[channel]) {
-            copyInput.placeholder = placeholders[channel];
+        if (smsInput && placeholders[channel]) {
+            smsInput.placeholder = placeholders[channel];
         }
     }
 
     async analyzeCopy() {
-        const copyInput = document.getElementById('copy-input');
-        const analyzeBtn = document.getElementById('analyze-btn');
-        const resultsSection = document.getElementById('results-section');
+        const smsInput = document.getElementById('sms-message');
+        const analyzeBtn = document.getElementById('analyze-sms-btn');
+        const resultsSection = document.getElementById('sms-analysis-results');
+        const hasFirstNameTag = document.getElementById('has-firstname-tag').checked;
         
-        if (!copyInput.value.trim()) {
-            this.showNotification('Please enter some copy to analyze', 'warning');
+        if (!smsInput.value.trim()) {
+            this.showNotification('Please enter some SMS message to analyze', 'warning');
             return;
         }
 
@@ -476,11 +521,11 @@ class TagEcho {
         
         try {
             // Simulate API call
-            await this.delay(2000);
+            await this.delay(1500);
             
-            // Generate mock analysis results
-            const results = this.generateMockAnalysis(copyInput.value);
-            this.displayAnalysisResults(results);
+            // Analyze the SMS message
+            const analysis = this.analyzeSMSMessage(smsInput.value, hasFirstNameTag);
+            this.displaySMSAnalysis(analysis);
             
             // Show results section
             resultsSection.style.display = 'block';
@@ -494,12 +539,252 @@ class TagEcho {
         } finally {
             // Reset button
             analyzeBtn.classList.remove('loading');
-            analyzeBtn.innerHTML = '<i class="fas fa-search"></i> Analyze Copy';
+            analyzeBtn.innerHTML = '<i class="fas fa-calculator"></i> Check Segments';
         }
     }
 
+    // SMS Analysis based on Paul Sapperstein's business rules
+    analyzeSMSMessage(message, hasFirstNameTag = false) {
+        // Paul's Rules:
+        // - 124 characters without FirstName tag, 116 with FirstName tag
+        // - Each additional link takes 22 characters
+        // - Special characters/emojis/unicode not allowed
+        // - With link + "stop 2 end", must be 160 chars or less total
+        
+        const analysis = {
+            originalMessage: message,
+            messageLength: message.length,
+            hasFirstNameTag: hasFirstNameTag,
+            segments: 1,
+            encoding: 'GSM7',
+            maxSegmentLength: 160,
+            characterBreakdown: [],
+            unicodeCharacters: [],
+            links: [],
+            compliance: []
+        };
+        
+        // Character limit based on FirstName tag
+        const baseLimit = hasFirstNameTag ? 116 : 124;
+        
+        // Detect links (simplified regex for common patterns)
+        const linkRegex = /(https?:\/\/[^\s]+|www\.[^\s]+|[^\s]+\.[a-z]{2,}\/[^\s]*)/gi;
+        const links = message.match(linkRegex) || [];
+        analysis.links = links;
+        
+        // Calculate effective character limit considering additional links
+        // First link is "included", each additional link takes 22 chars
+        const additionalLinkChars = Math.max(0, links.length - 1) * 22;
+        const effectiveLimit = baseLimit - additionalLinkChars;
+        
+        // Check for Unicode characters (non-GSM7)
+        const gsm7Chars = "@£$¥èéùìòÇ\nØø\rÅåΔ_ΦΓΛΩΠΨΣΘΞÆæßÉ !\"#¤%&'()*+,-./0123456789:;<=>?¡ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÑÜ§¿abcdefghijklmnopqrstuvwxyzäöñüà";
+        const extendedGsm7 = "^{}\\[~]|€";
+        
+        for (let i = 0; i < message.length; i++) {
+            const char = message[i];
+            let charType = 'gsm7';
+            
+            if (!gsm7Chars.includes(char) && !extendedGsm7.includes(char)) {
+                charType = 'unicode';
+                analysis.unicodeCharacters.push({
+                    char: char,
+                    position: i,
+                    unicode: char.charCodeAt(0).toString(16)
+                });
+                analysis.encoding = 'Unicode';
+            }
+            
+            analysis.characterBreakdown.push({
+                char: char === ' ' ? '·' : char,
+                type: char === ' ' ? 'space' : charType,
+                position: i
+            });
+        }
+        
+        // Calculate segments based on encoding and length
+        if (analysis.encoding === 'Unicode') {
+            analysis.maxSegmentLength = 70;
+            analysis.segments = Math.ceil(message.length / 67); // 67 chars per segment for concatenated Unicode
+        } else {
+            analysis.maxSegmentLength = 160;
+            if (message.length > 160) {
+                analysis.segments = Math.ceil(message.length / 153); // 153 chars per segment for concatenated GSM7
+            }
+        }
+        
+        // Compliance checks
+        analysis.compliance = this.checkSMSCompliance(message, analysis, effectiveLimit, hasFirstNameTag);
+        
+        return {
+            messageLength: analysis.messageLength,
+            adjustedLength,
+            segments,
+            maxSegmentLength,
+            encoding: isUnicode ? 'Unicode' : 'GSM 7-bit',
+            characters,
+            compliance,
+            hasFirstNameTag,
+            isUnicode
+        };
+    }
+    
+    checkPaulBusinessRules(text, segments, hasFirstNameTag, isUnicode) {
+        const rules = [];
+        const links = (text.match(/https?:\/\/[^\s]+/g) || []).length;
+        const baseLength = text.length;
+        const adjustedLength = hasFirstNameTag ? baseLength + 8 : baseLength;
+        const totalLength = adjustedLength + (links * 22); // Each link adds ~22 chars
+        
+        // Rule 1: Single segment without {FirstName} - 124 chars max
+        if (!hasFirstNameTag) {
+            const limit = 124;
+            if (totalLength <= limit) {
+                rules.push({
+                    rule: `Single segment without {FirstName}: ${totalLength}/${limit} characters`,
+                    status: 'pass',
+                    icon: 'fas fa-check-circle'
+                });
+            } else {
+                rules.push({
+                    rule: `Single segment without {FirstName}: ${totalLength}/${limit} characters (OVER LIMIT)`,
+                    status: 'fail',
+                    icon: 'fas fa-exclamation-circle'
+                });
+            }
+        }
+        
+        // Rule 2: Single segment with {FirstName} - 116 chars max
+        if (hasFirstNameTag) {
+            const limit = 116;
+            if (totalLength <= limit) {
+                rules.push({
+                    rule: `Single segment with {FirstName}: ${totalLength}/${limit} characters`,
+                    status: 'pass',
+                    icon: 'fas fa-check-circle'
+                });
+            } else {
+                rules.push({
+                    rule: `Single segment with {FirstName}: ${totalLength}/${limit} characters (OVER LIMIT)`,
+                    status: 'fail',
+                    icon: 'fas fa-exclamation-circle'
+                });
+            }
+        }
+        
+        // Rule 3: Link counting
+        if (links > 0) {
+            rules.push({
+                rule: `Links detected: ${links} link(s) × 22 chars = ${links * 22} additional characters`,
+                status: 'warning',
+                icon: 'fas fa-link'
+            });
+        }
+        
+        // Rule 4: Multi-segment warning
+        if (segments > 1) {
+            rules.push({
+                rule: `Multi-segment message: ${segments} segments (DOUBLES CLIENT COSTS!)`,
+                status: 'fail',
+                icon: 'fas fa-exclamation-triangle'
+            });
+        } else {
+            rules.push({
+                rule: `Single segment message: Cost-effective`,
+                status: 'pass',
+                icon: 'fas fa-dollar-sign'
+            });
+        }
+        
+        // Rule 5: Character encoding
+        if (isUnicode) {
+            rules.push({
+                rule: 'Unicode encoding detected: Reduces character limit',
+                status: 'warning',
+                icon: 'fas fa-font'
+            });
+        } else {
+            rules.push({
+                rule: 'GSM 7-bit encoding: Standard character limit',
+                status: 'pass',
+                icon: 'fas fa-font'
+            });
+        }
+        
+        return rules;
+    }
+    
+    displaySMSAnalysis(analysis) {
+        // Update message details table
+        document.getElementById('segments-display').textContent = analysis.segments;
+        document.getElementById('length-display').textContent = analysis.messageLength;
+        document.getElementById('max-length-display').textContent = analysis.maxSegmentLength;
+        document.getElementById('encoding-display').textContent = analysis.encoding;
+        
+        // Update segment count color
+        const segmentDisplay = document.getElementById('segments-display');
+        if (analysis.segments > 1) {
+            segmentDisplay.style.color = '#dc2626';
+        } else {
+            segmentDisplay.style.color = '#22c55e';
+        }
+        
+        // Generate character matrix
+        this.generateCharacterMatrix(analysis.characters);
+        
+        // Update compliance results
+        this.displayComplianceResults(analysis.compliance);
+    }
+    
+    generateCharacterMatrix(characters) {
+        const matrixContainer = document.getElementById('character-matrix');
+        matrixContainer.innerHTML = '';
+        
+        characters.forEach(charData => {
+            const charSquare = document.createElement('div');
+            charSquare.className = 'char-square';
+            
+            if (charData.isSpace) {
+                charSquare.className += ' space';
+                charSquare.textContent = '·'; // Middle dot for spaces
+                charSquare.title = 'Space';
+            } else if (charData.isNewline) {
+                charSquare.className += ' gsm7';
+                charSquare.textContent = '↵';
+                charSquare.title = 'Newline';
+            } else if (charData.isGSM7) {
+                charSquare.className += ' gsm7';
+                charSquare.textContent = charData.char;
+                charSquare.title = `GSM 7-bit: ${charData.char}`;
+            } else {
+                charSquare.className += ' unicode';
+                charSquare.textContent = charData.char;
+                charSquare.title = `Unicode: ${charData.char}`;
+            }
+            
+            matrixContainer.appendChild(charSquare);
+        });
+    }
+    
+    displayComplianceResults(complianceRules) {
+        const complianceContainer = document.getElementById('compliance-results');
+        complianceContainer.innerHTML = '';
+        
+        complianceRules.forEach(rule => {
+            const ruleElement = document.createElement('div');
+            ruleElement.className = `compliance-item ${rule.status}`;
+            
+            ruleElement.innerHTML = `
+                <i class="compliance-icon ${rule.icon}"></i>
+                <span>${rule.rule}</span>
+            `;
+            
+            complianceContainer.appendChild(ruleElement);
+        });
+    }
+
     generateMockAnalysis(text) {
-        const channel = document.getElementById('channel-select').value;
+        const channel = document.getElementById('channel-select')?.value || 'sms';
         const length = text.length;
         const urgencyWords = ['urgent', 'now', 'immediately', 'deadline', 'time', 'running out'];
         const ctaWords = ['donate', 'contribute', 'give', 'support', 'join', 'act'];
@@ -730,9 +1015,9 @@ class TagEcho {
     }
 
     useTemplate(template) {
-        const copyInput = document.getElementById('copy-input');
-        if (copyInput) {
-            copyInput.value = template;
+        const smsInput = document.getElementById('sms-message');
+        if (smsInput) {
+            smsInput.value = template;
             this.updateCharCount();
             this.switchTab('analyzer');
             this.showNotification('Template loaded! You can now analyze or modify it.', 'success');
@@ -816,6 +1101,101 @@ class TagEcho {
 
     delay(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    filterWorkspaces(searchTerm) {
+        const workspaceItems = document.querySelectorAll('.workspace-item');
+        const searchLower = searchTerm.toLowerCase();
+        
+        workspaceItems.forEach(item => {
+            const workspaceName = item.querySelector('span').textContent.toLowerCase();
+            const shouldShow = workspaceName.includes(searchLower) || searchTerm === '';
+            
+            if (shouldShow) {
+                item.style.display = 'flex';
+                item.style.opacity = '1';
+                item.style.transform = 'translateX(0)';
+            } else {
+                item.style.opacity = '0';
+                item.style.transform = 'translateX(-10px)';
+                setTimeout(() => {
+                    if (item.style.opacity === '0') {
+                        item.style.display = 'none';
+                    }
+                }, 200);
+            }
+        });
+
+        // Show "no results" message if no workspaces match
+        const visibleWorkspaces = Array.from(workspaceItems).filter(item => 
+            item.style.display !== 'none'
+        );
+        
+        let noResultsMsg = document.getElementById('no-workspace-results');
+        if (visibleWorkspaces.length === 0 && searchTerm !== '') {
+            if (!noResultsMsg) {
+                noResultsMsg = document.createElement('div');
+                noResultsMsg.id = 'no-workspace-results';
+                noResultsMsg.className = 'no-results-message';
+                noResultsMsg.innerHTML = `
+                    <div style="text-align: center; padding: var(--spacing-4); color: var(--text-tertiary);">
+                        <i class="fas fa-search" style="font-size: var(--font-size-xl); margin-bottom: var(--spacing-2); opacity: 0.5;"></i>
+                        <p>No workspaces found</p>
+                        <small>Try a different search term</small>
+                    </div>
+                `;
+                document.querySelector('.workspace-list').appendChild(noResultsMsg);
+            }
+        } else if (noResultsMsg) {
+            noResultsMsg.remove();
+        }
+    }
+
+    toggleWorkspaceSection() {
+        const workspaceContent = document.getElementById('workspace-content');
+        const workspaceToggle = document.getElementById('workspace-toggle');
+        const isCollapsed = workspaceContent.classList.contains('collapsed');
+        
+        if (isCollapsed) {
+            workspaceContent.classList.remove('collapsed');
+            workspaceToggle.innerHTML = '<i class="fas fa-chevron-up"></i>';
+        } else {
+            workspaceContent.classList.add('collapsed');
+            workspaceToggle.innerHTML = '<i class="fas fa-chevron-down"></i>';
+        }
+    }
+
+    createNewWorkspace() {
+        // Simulate new workspace creation dialog
+        const workspaceName = prompt('Enter workspace name:');
+        if (workspaceName && workspaceName.trim()) {
+            const cleanName = workspaceName.trim().toLowerCase().replace(/\s+/g, '-');
+            
+            // Create new workspace element
+            const workspaceList = document.getElementById('workspace-list');
+            const newWorkspace = document.createElement('div');
+            newWorkspace.className = 'workspace-item';
+            newWorkspace.innerHTML = `
+                <i class="fas fa-folder"></i>
+                <span>${cleanName}</span>
+            `;
+            
+            // Add event listener
+            newWorkspace.addEventListener('click', (e) => {
+                document.querySelectorAll('.workspace-item').forEach(i => i.classList.remove('active'));
+                e.currentTarget.classList.add('active');
+                this.switchWorkspace(cleanName);
+            });
+            
+            // Insert before the new workspace button
+            workspaceList.appendChild(newWorkspace);
+            
+            // Switch to new workspace
+            document.querySelectorAll('.workspace-item').forEach(i => i.classList.remove('active'));
+            newWorkspace.classList.add('active');
+            
+            this.showNotification(`Workspace "${cleanName}" created successfully!`, 'success');
+        }
     }
 }
 

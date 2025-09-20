@@ -1,560 +1,252 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TAG Echo - AI-Powered Political Copywriting Platform</title>
+    <title>TAG Echo - AI-Powered Political Copywriting</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <div class="logo-section">
-                <div class="logo">
-                    <i class="fas fa-bullhorn"></i>
-                    <span class="logo-text">TAG Echo</span>
-                </div>
-                <div class="tagline">AI-Powered Political Copywriting Platform</div>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-name">TAG Echo</span>
             </div>
-            <div class="user-section">
-                <div class="user-info">
-                    <img src="https://via.placeholder.com/40x40/4285f4/ffffff?text=TC" alt="User" class="user-avatar">
-                    <span class="user-name">Ted Clark</span>
+            <div class="nav-links">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <button class="nav-cta">Get Started</button>
+            </div>
+            <button class="nav-menu" id="nav-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <main class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    AI-powered copywriting<br>
+                    that drives results
+                </h1>
+                <p class="hero-subtitle">
+                    Create compelling political and marketing copy with advanced AI technology. 
+                    Analyze performance, optimize messaging, and scale your campaigns effortlessly.
+                </p>
+                <div class="hero-actions">
+                    <button class="btn-primary" id="get-started">Get Started</button>
+                    <button class="btn-secondary" id="watch-demo">
+                        <i class="fas fa-play"></i>
+                        Watch Demo
+                    </button>
                 </div>
-                <button class="settings-btn"><i class="fas fa-cog"></i></button>
+            </div>
+            <div class="hero-visual">
+                <div class="demo-interface">
+                    <div class="demo-header">
+                        <div class="demo-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <span class="demo-title">Copy Analyzer</span>
+                    </div>
+                    <div class="demo-content">
+                        <div class="demo-input">
+                            <div class="demo-text-line"></div>
+                            <div class="demo-text-line short"></div>
+                            <div class="demo-text-line"></div>
+                        </div>
+                        <div class="demo-metrics">
+                            <div class="demo-metric">
+                                <div class="demo-label">Engagement</div>
+                                <div class="demo-bar">
+                                    <div class="demo-fill" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="demo-metric">
+                                <div class="demo-label">Clarity</div>
+                                <div class="demo-bar">
+                                    <div class="demo-fill" style="width: 92%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </header>
+    </main>
 
-    <!-- Main Container -->
-    <div class="main-container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="workspace-section">
-                <div class="workspace-header">
-                    <h3><i class="fas fa-folder"></i> Workspaces</h3>
-                    <button class="workspace-toggle" id="workspace-toggle">
-                        <i class="fas fa-chevron-up"></i>
-                    </button>
-                </div>
-                <div class="workspace-content" id="workspace-content">
-                    <div class="workspace-search">
-                        <input type="text" id="workspace-search" placeholder="Search workspaces..." autocomplete="off">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <div class="workspace-list" id="workspace-list">
-                    <div class="workspace-item active">
-                        <i class="fas fa-vote-yea"></i>
-                        <span>budd-for-senate-ct</span>
-                    </div>
-                    <div class="workspace-item">
-                        <i class="fas fa-vote-yea"></i>
-                        <span>butler-for-congress-tx-09</span>
-                    </div>
-                    <div class="workspace-item">
-                        <i class="fas fa-heartbeat"></i>
-                        <span>dynamic-sports-medicine</span>
-                    </div>
-                    <div class="workspace-item">
-                        <i class="fas fa-fire"></i>
-                        <span>florida-firebrand-pac</span>
-                    </div>
-                    <div class="workspace-item">
-                        <i class="fas fa-shield-alt"></i>
-                        <span>frontline-policy</span>
-                    </div>
-                    <div class="workspace-item">
-                        <i class="fas fa-home"></i>
-                        <span>gilkey-windows</span>
-                    </div>
-                    <div class="workspace-item">
-                        <i class="fas fa-vote-yea"></i>
-                        <span>hern-for-congress-ok-01</span>
-                    </div>
-                    <div class="workspace-item">
-                        <i class="fas fa-vote-yea"></i>
-                        <span>kennedy-for-senate-la</span>
-                    </div>
-                    <div class="workspace-item">
-                        <i class="fas fa-vote-yea"></i>
-                        <span>knight-for-congress-tn-7</span>
-                    </div>
-                    <div class="workspace-item">
-                        <i class="fas fa-star"></i>
-                        <span>lone-star-network</span>
-                    </div>
-                    <div class="workspace-item">
-                        <i class="fas fa-vote-yea"></i>
-                        <span>lopez-for-congress-ca-13</span>
-                    </div>
-                    <div class="workspace-item">
-                        <i class="fas fa-vote-yea"></i>
-                        <span>luttrell-for-congress-tx-08</span>
-                    </div>
-                    <div class="workspace-item">
-                        <i class="fas fa-vote-yea"></i>
-                        <span>males-for-congress-ca-25</span>
-                    </div>
-                    <div class="workspace-item">
-                        <i class="fas fa-vote-yea"></i>
-                        <span>miguez-for-senate-la</span>
-                    </div>
-                    <div class="workspace-item">
-                        <i class="fas fa-vote-yea"></i>
-                        <span>miller-meeks-for-congress-ia-01</span>
-                    </div>
-                    <div class="workspace-item">
-                        <i class="fas fa-vote-yea"></i>
-                        <span>moore-for-congress-wv-02</span>
-                    </div>
-                    <div class="workspace-item">
-                        <i class="fas fa-vote-yea"></i>
-                        <span>moore-for-senate-al</span>
-                    </div>
-                    <div class="workspace-item">
-                        <i class="fas fa-vote-yea"></i>
-                        <span>morris-for-senate-ky</span>
-                    </div>
-                    <div class="workspace-item">
-                        <i class="fas fa-history"></i>
-                        <span>old-general</span>
-                    </div>
-                    <div class="workspace-item">
-                        <i class="fas fa-vote-yea"></i>
-                        <span>owens-for-congress-ut-04</span>
-                    </div>
-                    <div class="workspace-item">
-                        <i class="fas fa-flag-usa"></i>
-                        <span>palmetto-patriots-pac</span>
-                    </div>
-                    <div class="workspace-item">
-                        <i class="fas fa-utensils"></i>
-                        <span>perrys-restaurant-group</span>
-                    </div>
-                    <div class="workspace-item">
-                        <i class="fas fa-vote-yea"></i>
-                        <span>pino-for-congress-nj-09</span>
-                    </div>
-                    <div class="workspace-item">
-                        <i class="fas fa-balance-scale"></i>
-                        <span>reitz-for-attorney-general-tx</span>
-                    </div>
-                    <div class="workspace-item">
-                        <i class="fas fa-stop-circle"></i>
-                        <span>stop-newsom-pac</span>
-                    </div>
-                    <div class="workspace-item">
-                        <i class="fas fa-bullhorn"></i>
-                        <span>tag-siege-hdm</span>
-                    </div>
-                    <div class="workspace-item">
-                        <i class="fas fa-laptop-code"></i>
-                        <span>tag-tech</span>
-                    </div>
-                    <div class="workspace-item">
-                        <i class="fas fa-vote-yea"></i>
-                        <span>tuberville-for-governor-al</span>
-                    </div>
-                </div>
-                <button class="new-workspace-btn">
-                    <i class="fas fa-plus"></i> New Workspace
-                </button>
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="features-container">
+            <div class="section-header">
+                <h2 class="section-title">Everything you need to craft winning copy</h2>
+                <p class="section-subtitle">
+                    Powerful tools designed for political campaigns, marketing teams, and content creators
+                </p>
             </div>
-
-            <div class="trending-section">
-                <h3><i class="fas fa-fire"></i> Trending Topics</h3>
-                <div class="trending-list">
-                    <div class="trending-item">
-                        <div class="trend-title">Healthcare Reform</div>
-                        <div class="trend-sentiment positive">+15% engagement</div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
                     </div>
-                    <div class="trending-item">
-                        <div class="trend-title">Economic Policy</div>
-                        <div class="trend-sentiment neutral">Stable</div>
+                    <h3 class="feature-title">AI Copy Analysis</h3>
+                    <p class="feature-description">
+                        Get instant insights on engagement potential, clarity, and effectiveness 
+                        of your messaging with advanced AI analysis.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-magic"></i>
                     </div>
-                    <div class="trending-item">
-                        <div class="trend-title">Climate Action</div>
-                        <div class="trend-sentiment positive">+8% engagement</div>
+                    <h3 class="feature-title">Smart Generation</h3>
+                    <p class="feature-description">
+                        Generate high-converting copy variations tailored to your audience, 
+                        tone, and campaign objectives.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
                     </div>
-                    <div class="trending-item">
-                        <div class="trend-title">Education Funding</div>
-                        <div class="trend-sentiment negative">-3% engagement</div>
+                    <h3 class="feature-title">SMS Compliance</h3>
+                    <p class="feature-description">
+                        Ensure your messages meet character limits and compliance requirements 
+                        to avoid costly multi-segment charges.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
                     </div>
+                    <h3 class="feature-title">Performance Analytics</h3>
+                    <p class="feature-description">
+                        Track campaign performance with detailed analytics and optimize 
+                        your messaging strategy based on real data.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Proven Templates</h3>
+                    <p class="feature-description">
+                        Access a library of high-performing templates tested across 
+                        thousands of successful campaigns.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="feature-title">Team Collaboration</h3>
+                    <p class="feature-description">
+                        Work seamlessly with your team using shared workspaces, 
+                        version control, and collaborative editing.
+                    </p>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="recent-projects">
-                <h3><i class="fas fa-history"></i> Recent Projects</h3>
-                <div class="project-list">
-                    <div class="project-item">
-                        <div class="project-name">WinRed Donation Drive</div>
-                        <div class="project-date">2 hours ago</div>
-                    </div>
-                    <div class="project-item">
-                        <div class="project-name">SMS Campaign - Healthcare</div>
-                        <div class="project-date">Yesterday</div>
-                    </div>
-                    <div class="project-item">
-                        <div class="project-name">Email Series - Economy</div>
-                        <div class="project-date">3 days ago</div>
-                    </div>
-                </div>
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="cta-container">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to transform your copywriting?</h2>
+                <p class="cta-subtitle">
+                    Join thousands of successful campaigns using TAG Echo to create compelling, 
+                    high-converting copy that drives real results.
+                </p>
+                <button class="btn-primary large" id="cta-get-started">Get Started Today</button>
+                <p class="cta-note">Free trial • No credit card required</p>
             </div>
-        </aside>
+        </div>
+    </section>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Top Navigation -->
-            <nav class="content-nav">
-                <div class="nav-tabs">
-                    <button class="nav-tab active" data-tab="analyzer">
-                        <i class="fas fa-brain"></i> Copy Analyzer
-                    </button>
-                    <button class="nav-tab" data-tab="generator">
-                        <i class="fas fa-magic"></i> AI Generator
-                    </button>
-                    <button class="nav-tab" data-tab="analytics">
-                        <i class="fas fa-chart-line"></i> Analytics
-                    </button>
-                    <button class="nav-tab" data-tab="templates">
-                        <i class="fas fa-file-alt"></i> Templates
-                    </button>
+    <!-- Hidden App Interface -->
+    <div class="app-interface hidden" id="app-interface">
+        <!-- Copy Analyzer Tab -->
+        <div class="analyzer-container">
+            <div class="input-section">
+                <div class="input-header">
+                    <h2>SMS Compliance Analyzer</h2>
+                    <p class="subtitle">Prevent Multi-Segment Messages & Double Client Costs</p>
                 </div>
-            </nav>
-
-            <!-- Copy Analyzer Tab -->
-            <div class="tab-content active" id="analyzer">
-                <div class="analyzer-container">
-                    <div class="input-section">
-                        <div class="input-header">
-                            <h2>Paul's SMS Compliance Analyzer</h2>
-                            <p class="paul-rules-subtitle">Prevent Multi-Segment Messages & Double Client Costs</p>
-                            <div class="paul-rules-summary">
-                                <div class="rule-item">
-                                    <strong>124 chars</strong> without {FirstName}
-                                </div>
-                                <div class="rule-item">
-                                    <strong>116 chars</strong> with {FirstName}
-                                </div>
-                                <div class="rule-item">
-                                    <strong>+22 chars</strong> per link
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="sms-input-container">
-                            <label for="sms-message" class="input-label">Original Message</label>
-                            <textarea 
-                                id="sms-message" 
-                                placeholder="Their Looney train's left the station.
-
-Midnight deadline looms. Chip in now & help us hold the line → https://move.gop/1dzwh
-
-- Sen. Kennedy
-
-Stop 2 End"
-                                rows="8"
-                            ></textarea>
-                            <div class="input-controls">
-                                <label class="checkbox-control">
-                                    <input type="checkbox" id="has-firstname-tag">
-                                    <span>Has {FirstName} tag</span>
-                                </label>
-                                <button class="analyze-btn" id="analyze-sms-btn">
-                                    <i class="fas fa-calculator"></i> Check Segments
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Paul's SMS Analysis Results (exact replica of screenshot) -->
-                    <div class="sms-analysis-results" id="sms-analysis-results" style="display: none;">
-                        
-                        <!-- Message Details Table (exactly like screenshot) -->
-                        <div class="message-details-card">
-                            <h3>Message Details</h3>
-                            <div class="details-table">
-                                <div class="table-header">
-                                    <span>Segments</span>
-                                    <span>Message Length</span>
-                                    <span>Max Segment Length</span>
-                                    <span>Encoding Type</span>
-                                </div>
-                                <div class="table-data">
-                                    <span id="segments-display" class="segment-count">3</span>
-                                    <span id="length-display">160</span>
-                                    <span id="max-length-display">201</span>
-                                    <span id="encoding-display">Unicode</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Character Breakdown Matrix (exactly like screenshot) -->
-                        <div class="character-breakdown-card">
-                            <h3>Message Breakdown</h3>
-                            <div class="character-matrix" id="character-matrix">
-                                <!-- Character squares will be populated here -->
-                            </div>
-                            
-                            <!-- Legend (exactly like screenshot) -->
-                            <div class="breakdown-legend">
-                                <h4>Legend</h4>
-                                <div class="legend-items">
-                                    <div class="legend-item">
-                                        <div class="legend-square gsm7"></div>
-                                        <span>Regular 7bit character, present in GSM7 character set</span>
-                                    </div>
-                                    <div class="legend-item">
-                                        <div class="legend-square unicode"></div>
-                                        <span>Unicode character. Character not present in GSM character set.</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Paul's Business Rules Compliance Check -->
-                        <div class="compliance-status-card">
-                            <h3>Paul's Business Rules Compliance</h3>
-                            <div class="compliance-results" id="compliance-results">
-                                <!-- Compliance items will be populated here -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-                                <div class="metric">
-                                    <div class="metric-label">Engagement</div>
-                                    <div class="metric-bar">
-                                        <div class="metric-fill" style="width: 78%"></div>
-                                    </div>
-                                    <div class="metric-value">78%</div>
-                                </div>
-                                <div class="metric">
-                                    <div class="metric-label">Urgency</div>
-                                    <div class="metric-bar">
-                                        <div class="metric-fill" style="width: 92%"></div>
-                                    </div>
-                                    <div class="metric-value">92%</div>
-                                </div>
-                                <div class="metric">
-                                    <div class="metric-label">Clarity</div>
-                                    <div class="metric-bar">
-                                        <div class="metric-fill" style="width: 85%"></div>
-                                    </div>
-                                    <div class="metric-value">85%</div>
-                                </div>
-                                <div class="metric">
-                                    <div class="metric-label">Call-to-Action</div>
-                                    <div class="metric-bar">
-                                        <div class="metric-fill" style="width: 88%"></div>
-                                    </div>
-                                    <div class="metric-value">88%</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="insights-grid">
-                            <div class="insight-card positive">
-                                <div class="insight-header">
-                                    <i class="fas fa-thumbs-up"></i>
-                                    <h4>Strong Points</h4>
-                                </div>
-                                <ul id="positive-insights">
-                                    <li>Excellent urgency indicators ("URGENT", "NOW", "Time is running out")</li>
-                                    <li>Clear call-to-action with specific donation amount</li>
-                                    <li>Emotional appeal targeting security concerns</li>
-                                </ul>
-                            </div>
-
-                            <div class="insight-card negative">
-                                <div class="insight-header">
-                                    <i class="fas fa-exclamation-triangle"></i>
-                                    <h4>Areas for Improvement</h4>
-                                </div>
-                                <ul id="negative-insights">
-                                    <li>Message length may be too long for SMS (160+ chars)</li>
-                                    <li>Could benefit from personalization</li>
-                                    <li>Consider A/B testing different donation amounts</li>
-                                </ul>
-                            </div>
-
-                            <div class="insight-card suggestions">
-                                <div class="insight-header">
-                                    <i class="fas fa-lightbulb"></i>
-                                    <h4>AI Suggestions</h4>
-                                </div>
-                                <div id="ai-suggestions">
-                                    <div class="suggestion">
-                                        <strong>Shorter Version:</strong> "URGENT: Stop the radical left from defunding police! Donate $25 NOW to protect our communities!"
-                                    </div>
-                                    <div class="suggestion">
-                                        <strong>Personalized:</strong> "Hi [Name], your community needs YOU to stop police defunding. Donate $25 now!"
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="predicted-performance">
-                            <h3>Predicted Performance</h3>
-                            <div class="performance-grid">
-                                <div class="performance-metric">
-                                    <div class="metric-icon"><i class="fas fa-mouse-pointer"></i></div>
-                                    <div class="metric-info">
-                                        <div class="metric-title">Click Rate</div>
-                                        <div class="metric-prediction">12.5% ± 2.1%</div>
-                                    </div>
-                                </div>
-                                <div class="performance-metric">
-                                    <div class="metric-icon"><i class="fas fa-donate"></i></div>
-                                    <div class="metric-info">
-                                        <div class="metric-title">Donation Rate</div>
-                                        <div class="metric-prediction">3.2% ± 0.8%</div>
-                                    </div>
-                                </div>
-                                <div class="performance-metric">
-                                    <div class="metric-icon"><i class="fas fa-share"></i></div>
-                                    <div class="metric-info">
-                                        <div class="metric-title">Share Rate</div>
-                                        <div class="metric-prediction">1.8% ± 0.4%</div>
-                                    </div>
-                                </div>
-                                <div class="performance-metric">
-                                    <div class="metric-icon"><i class="fas fa-dollar-sign"></i></div>
-                                    <div class="metric-info">
-                                        <div class="metric-title">Avg. Donation</div>
-                                        <div class="metric-prediction">$47.50</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- AI Generator Tab -->
-            <div class="tab-content" id="generator">
-                <div class="generator-container">
-                    <h2>AI Copy Generator</h2>
-                    <div class="generator-form">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Campaign Type</label>
-                                <select>
-                                    <option>Fundraising</option>
-                                    <option>Voter Mobilization</option>
-                                    <option>Issue Advocacy</option>
-                                    <option>Event Promotion</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Tone</label>
-                                <select>
-                                    <option>Urgent</option>
-                                    <option>Inspirational</option>
-                                    <option>Informational</option>
-                                    <option>Aggressive</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Key Message/Topic</label>
-                            <input type="text" placeholder="e.g., Healthcare reform, Tax cuts, Border security">
-                        </div>
-                        <div class="form-group">
-                            <label>Target Audience</label>
-                            <input type="text" placeholder="e.g., Conservative voters 45+, Young professionals, Rural communities">
-                        </div>
-                        <button class="generate-btn">
-                            <i class="fas fa-magic"></i> Generate Copy Variations
+                
+                <div class="sms-input-container">
+                    <label for="sms-message" class="input-label">Message Content</label>
+                    <textarea 
+                        id="sms-message" 
+                        placeholder="Enter your SMS message here..."
+                        rows="6"
+                    ></textarea>
+                    <div class="input-controls">
+                        <label class="checkbox-control">
+                            <input type="checkbox" id="has-firstname-tag">
+                            <span>Has {FirstName} tag</span>
+                        </label>
+                        <button class="analyze-btn" id="analyze-sms-btn">
+                            <i class="fas fa-search"></i> Analyze Message
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Analytics Tab -->
-            <div class="tab-content" id="analytics">
-                <div class="analytics-container">
-                    <h2>Performance Analytics</h2>
-                    <div class="analytics-grid">
-                        <div class="analytics-card">
-                            <h3>Campaign Performance</h3>
-                            <div class="chart-placeholder">
-                                <i class="fas fa-chart-line"></i>
-                                <p>Interactive charts coming soon</p>
-                            </div>
+            <!-- Analysis Results -->
+            <div class="sms-analysis-results" id="sms-analysis-results" style="display: none;">
+                <div class="message-details-card">
+                    <h3>Message Details</h3>
+                    <div class="details-table">
+                        <div class="table-header">
+                            <span>Segments</span>
+                            <span>Message Length</span>
+                            <span>Max Segment Length</span>
+                            <span>Encoding Type</span>
                         </div>
-                        <div class="analytics-card">
-                            <h3>Top Performing Messages</h3>
-                            <div class="top-messages">
-                                <div class="message-item">
-                                    <div class="message-text">"Join us in making history! Donate $25 today!"</div>
-                                    <div class="message-stats">CTR: 15.2% | Donations: $12,450</div>
-                                </div>
-                                <div class="message-item">
-                                    <div class="message-text">"Time is running out - we need your help NOW!"</div>
-                                    <div class="message-stats">CTR: 13.8% | Donations: $9,870</div>
-                                </div>
+                        <div class="table-data">
+                            <span id="segments-display" class="segment-count">1</span>
+                            <span id="length-display">0</span>
+                            <span id="max-length-display">160</span>
+                            <span id="encoding-display">GSM7</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="character-breakdown-card">
+                    <h3>Message Breakdown</h3>
+                    <div class="character-matrix" id="character-matrix"></div>
+                    
+                    <div class="breakdown-legend">
+                        <h4>Legend</h4>
+                        <div class="legend-items">
+                            <div class="legend-item">
+                                <div class="legend-square gsm7"></div>
+                                <span>Regular 7bit character, present in GSM7 character set</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-square unicode"></div>
+                                <span>Unicode character. Character not present in GSM character set.</span>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Templates Tab -->
-            <div class="tab-content" id="templates">
-                <div class="templates-container">
-                    <h2>Proven Templates</h2>
-                    <div class="template-grid">
-                        <div class="template-card">
-                            <h4>Urgent Fundraising</h4>
-                            <p>"URGENT: [Issue] is under attack! We need $[Amount] by [Deadline] to fight back. Donate now!"</p>
-                            <button class="use-template-btn">Use Template</button>
-                        </div>
-                        <div class="template-card">
-                            <h4>Grassroots Mobilization</h4>
-                            <p>"Join thousands of [Supporters] fighting for [Cause]. Your voice matters - take action today!"</p>
-                            <button class="use-template-btn">Use Template</button>
-                        </div>
-                        <div class="template-card">
-                            <h4>Thank You & Ask</h4>
-                            <p>"Thanks to supporters like you, we've [Achievement]. Help us do more - donate $[Amount] today!"</p>
-                            <button class="use-template-btn">Use Template</button>
-                        </div>
-                    </div>
+                <div class="compliance-status-card">
+                    <h3>Compliance Status</h3>
+                    <div class="compliance-results" id="compliance-results"></div>
                 </div>
             </div>
-        </main>
-    </div>
-
-    <!-- Chat Assistant (Floating) -->
-    <div class="chat-assistant" id="chat-assistant">
-        <div class="chat-header">
-            <div class="chat-title">
-                <i class="fas fa-robot"></i>
-                TAG Echo AI Assistant
-            </div>
-            <button class="chat-toggle" id="chat-toggle">
-                <i class="fas fa-minus"></i>
-            </button>
-        </div>
-        <div class="chat-messages" id="chat-messages">
-            <div class="message ai-message">
-                <div class="message-avatar">
-                    <i class="fas fa-robot"></i>
-                </div>
-                <div class="message-content">
-                    Hi! I'm your TAG Echo AI assistant. I can help you analyze copy, generate new messages, and optimize your political campaigns. What would you like to work on today?
-                </div>
-            </div>
-        </div>
-        <div class="chat-input-container">
-            <input type="text" id="chat-input" placeholder="Ask me anything about your copy...">
-            <button class="chat-send" id="chat-send">
-                <i class="fas fa-paper-plane"></i>
-            </button>
         </div>
     </div>
 
