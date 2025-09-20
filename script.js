@@ -618,18 +618,19 @@ class TagEcho {
         
         return {
             messageLength: analysis.messageLength,
-            adjustedLength,
-            segments,
-            maxSegmentLength,
-            encoding: isUnicode ? 'Unicode' : 'GSM 7-bit',
-            characters,
-            compliance,
-            hasFirstNameTag,
-            isUnicode
+            segments: analysis.segments,
+            maxSegmentLength: analysis.maxSegmentLength,
+            encoding: analysis.encoding,
+            characterBreakdown: analysis.characterBreakdown,
+            unicodeCharacters: analysis.unicodeCharacters,
+            links: analysis.links,
+            compliance: analysis.compliance,
+            hasFirstNameTag: analysis.hasFirstNameTag,
+            effectiveLimit: effectiveLimit
         };
     }
     
-    checkPaulBusinessRules(text, segments, hasFirstNameTag, isUnicode) {
+    checkSMSCompliance(message, analysis, effectiveLimit, hasFirstNameTag) {
         const rules = [];
         const links = (text.match(/https?:\/\/[^\s]+/g) || []).length;
         const baseLength = text.length;
