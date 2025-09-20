@@ -1,0 +1,28 @@
+/* TAG Echo - TAG Strategies Brand Theme Overrides */
+:root {
+	/* Core Brand */
+	--primary-blue: #0A2240; /* deep navy */
+	--secondary-blue: #193569; /* slate/navy */
+	--primary-red: #9F1D22; /* disciplined red accent */
+	--accent-gold: #C7A253; /* refined metallic gold */
+
+	/* Neutrals */
+	--midnight: #0C1626;
+	--onyx: #121B2A;
+	--graphite: #3B465A;
+	--charcoal: #5A667B;
+	--platinum: #F6F8FB;
+	--silver: #E9EEF6;
+
+	/* Gradients */
+	--gradient-primary: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 55%, var(--primary-red) 110%);
+	--gradient-gold: linear-gradient(135deg, var(--accent-gold) 0%, #E2B76C 100%);
+}
+
+/* Optional wordmark sizing adjustments */
+.logo-text { letter-spacing: -0.015em; }
+.logo-subtitle { opacity: 0.9; }
+
+/* Buttons & interactive accents tuned to brand */
+.analyze-btn { box-shadow: 0 10px 24px rgba(10, 34, 64, 0.25); }
+.nav-tab.active { box-shadow: 0 6px 14px rgba(10, 34, 64, 0.18); }
