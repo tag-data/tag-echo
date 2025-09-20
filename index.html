@@ -199,38 +199,57 @@
         <div class="app-header">
             <div class="app-header-left">
                 <div class="app-brand">
-                    <span class="brand-name">TAG Echo</span>
-                    <span class="brand-subtitle">Raise. Create. Win.</span>
+                    <div class="brand-logo">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <div class="brand-text">
+                        <span class="brand-name">TAG Echo</span>
+                        <span class="brand-subtitle">Enterprise Platform</span>
+                    </div>
                 </div>
             </div>
+            
             <div class="app-header-center">
                 <div class="workspace-selector">
                     <div class="current-workspace">
                         <div class="workspace-info">
-                            <span class="workspace-name">Miguez for Senate</span>
-                            <span class="workspace-type">Campaign</span>
+                            <span class="workspace-name">Miguez for Senate LA</span>
+                            <span class="workspace-type">Campaign Workspace</span>
                         </div>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                 </div>
             </div>
+            
             <div class="app-header-right">
-                <div class="header-controls">
-                    <div class="client-toggle">
-                        <button class="toggle-btn" id="external-toggle" data-mode="external">
-                            <span>Client</span>
-                        </button>
-                        <button class="toggle-btn active" id="internal-toggle" data-mode="internal">
-                            <span>Internal</span>
-                        </button>
+                <div class="header-actions">
+                    <button class="header-btn" title="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    <button class="header-btn" title="Settings">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+                
+                <div class="client-toggle">
+                    <button class="toggle-btn" id="external-toggle" data-mode="external">
+                        <i class="fas fa-users"></i>
+                        <span>Client View</span>
+                    </button>
+                    <button class="toggle-btn active" id="internal-toggle" data-mode="internal">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Admin View</span>
+                    </button>
+                </div>
+                
+                <div class="user-profile">
+                    <div class="user-info">
+                        <span class="user-name">Ted Clark</span>
+                        <span class="user-role" id="user-role">System Administrator</span>
                     </div>
-                    <div class="user-profile">
-                        <div class="user-avatar">TC</div>
-                        <div class="user-info">
-                            <span class="user-name">Ted Clark</span>
-                            <span class="user-role" id="user-role">Internal Admin</span>
-                        </div>
-                    </div>
+                    <div class="user-avatar">TC</div>
+                    <i class="fas fa-chevron-down"></i>
                 </div>
             </div>
         </div>
@@ -239,68 +258,87 @@
         <div class="app-layout">
             <!-- Sidebar -->
             <div class="app-sidebar">
-                <!-- Navigation Tabs -->
+                <!-- Main Navigation -->
                 <div class="sidebar-nav">
-                    <!-- External Client Navigation -->
-                    <div class="nav-group external-nav">
-                        <button class="nav-tab active" data-tab="analyzer">
-                            <i class="fas fa-mobile-alt"></i>
-                            <span>SMS Analyzer</span>
-                        </button>
-                        <button class="nav-tab" data-tab="templates">
-                            <i class="fas fa-file-alt"></i>
-                            <span>Templates</span>
-                        </button>
-                        <button class="nav-tab" data-tab="analytics">
-                            <i class="fas fa-chart-line"></i>
-                            <span>Analytics</span>
-                        </button>
-                        <button class="nav-tab" data-tab="campaigns">
-                            <i class="fas fa-bullhorn"></i>
-                            <span>Campaigns</span>
-                        </button>
+                    <div class="nav-section">
+                        <h3 class="nav-section-title">Core Tools</h3>
+                        <div class="nav-group external-nav">
+                            <button class="nav-tab active" data-tab="analyzer">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>SMS Analyzer</span>
+                            </button>
+                            <button class="nav-tab" data-tab="templates">
+                                <i class="fas fa-file-alt"></i>
+                                <span>Templates</span>
+                            </button>
+                            <button class="nav-tab" data-tab="analytics">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Analytics</span>
+                            </button>
+                            <button class="nav-tab" data-tab="campaigns">
+                                <i class="fas fa-bullhorn"></i>
+                                <span>Campaigns</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Internal Team Navigation -->
+                        <div class="nav-group internal-nav active">
+                            <button class="nav-tab active" data-tab="analyzer">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>SMS Analyzer</span>
+                            </button>
+                            <button class="nav-tab" data-tab="templates">
+                                <i class="fas fa-file-alt"></i>
+                                <span>Templates</span>
+                            </button>
+                        </div>
                     </div>
                     
-                    <!-- Internal Team Navigation -->
-                    <div class="nav-group internal-nav active">
-                        <button class="nav-tab active" data-tab="analyzer">
-                            <i class="fas fa-mobile-alt"></i>
-                            <span>SMS Analyzer</span>
-                        </button>
-                        <button class="nav-tab" data-tab="p2p-dashboard">
-                            <i class="fas fa-chart-line"></i>
-                            <span>P2P Analytics</span>
-                        </button>
-                        <button class="nav-tab" data-tab="procurement">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span>Procurement</span>
-                        </button>
-                        <button class="nav-tab" data-tab="compliance">
-                            <i class="fas fa-shield-alt"></i>
-                            <span>Compliance</span>
-                        </button>
-                        <button class="nav-tab" data-tab="looker-builder">
-                            <i class="fas fa-cube"></i>
-                            <span>Looker Builder</span>
-                        </button>
-                        <button class="nav-tab" data-tab="templates">
-                            <i class="fas fa-file-alt"></i>
-                            <span>Templates</span>
-                        </button>
-                        <button class="nav-tab" data-tab="admin">
-                            <i class="fas fa-tools"></i>
-                            <span>Admin</span>
-                        </button>
+                    <div class="nav-section internal-only">
+                        <h3 class="nav-section-title">Business Intelligence</h3>
+                        <div class="nav-group internal-nav">
+                            <button class="nav-tab" data-tab="p2p-dashboard">
+                                <i class="fas fa-chart-line"></i>
+                                <span>P2P Analytics</span>
+                            </button>
+                            <button class="nav-tab" data-tab="procurement">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span>Procurement</span>
+                            </button>
+                            <button class="nav-tab" data-tab="compliance">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Compliance</span>
+                            </button>
+                            <button class="nav-tab" data-tab="looker-builder">
+                                <i class="fas fa-cube"></i>
+                                <span>Report Builder</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="nav-section internal-only">
+                        <h3 class="nav-section-title">Administration</h3>
+                        <div class="nav-group internal-nav">
+                            <button class="nav-tab" data-tab="admin">
+                                <i class="fas fa-tools"></i>
+                                <span>System Admin</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Workspace List -->
+                <!-- Workspace Section -->
                 <div class="workspace-section">
                     <div class="section-header">
-                        <h3>Workspaces</h3>
-                        <button class="new-workspace-btn" title="New Workspace">
-                            <i class="fas fa-plus"></i>
-                        </button>
+                        <h3>Active Workspaces</h3>
+                        <div class="workspace-actions">
+                            <button class="workspace-filter-btn" title="Filter Workspaces">
+                                <i class="fas fa-filter"></i>
+                            </button>
+                            <button class="new-workspace-btn" title="New Workspace">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="workspace-search">
                         <input type="text" id="workspace-search" placeholder="Search workspaces...">
@@ -654,95 +692,40 @@
                     </div>
                 </div>
 
-                <!-- Trending Topics Sidebar -->
-                <div class="trending-sidebar internal-only">
-                    <div class="trending-header">
-                        <h3>Trending Topics</h3>
-                        <span class="trending-update">Updated 2 min ago</span>
+                <!-- Quick Stats Panel -->
+                <div class="quick-stats-panel internal-only">
+                    <div class="stats-header">
+                        <h3>Quick Stats</h3>
+                        <span class="stats-update">Live</span>
                     </div>
-                    <div class="trending-content">
-                        <div class="trending-section">
-                            <h4>Political Headlines</h4>
-                            <div class="trending-topics">
-                                <div class="topic-item hot">
-                                    <div class="topic-indicator"></div>
-                                    <div class="topic-content">
-                                        <span class="topic-title">Border Security Bill</span>
-                                        <span class="topic-engagement">+847% mentions</span>
-                                    </div>
-                                </div>
-                                <div class="topic-item trending">
-                                    <div class="topic-indicator"></div>
-                                    <div class="topic-content">
-                                        <span class="topic-title">Infrastructure Spending</span>
-                                        <span class="topic-engagement">+234% mentions</span>
-                                    </div>
-                                </div>
-                                <div class="topic-item rising">
-                                    <div class="topic-indicator"></div>
-                                    <div class="topic-content">
-                                        <span class="topic-title">Healthcare Reform</span>
-                                        <span class="topic-engagement">+156% mentions</span>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value">24</div>
+                            <div class="stat-label">Active Campaigns</div>
                         </div>
-
-                        <div class="trending-section">
-                            <h4>Social Media Buzz</h4>
-                            <div class="trending-topics">
-                                <div class="topic-item hot">
-                                    <div class="topic-indicator"></div>
-                                    <div class="topic-content">
-                                        <span class="topic-title">#DefundThePolice</span>
-                                        <span class="topic-engagement">127K tweets</span>
-                                    </div>
-                                </div>
-                                <div class="topic-item trending">
-                                    <div class="topic-indicator"></div>
-                                    <div class="topic-content">
-                                        <span class="topic-title">#TaxReform</span>
-                                        <span class="topic-engagement">89K tweets</span>
-                                    </div>
-                                </div>
-                                <div class="topic-item rising">
-                                    <div class="topic-indicator"></div>
-                                    <div class="topic-content">
-                                        <span class="topic-title">#AmericaFirst</span>
-                                        <span class="topic-engagement">67K tweets</span>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="stat-item">
+                            <div class="stat-value">$2.8M</div>
+                            <div class="stat-label">Total Raised</div>
                         </div>
-
-                        <div class="trending-section">
-                            <h4>Content Opportunities</h4>
-                            <div class="content-suggestions">
-                                <div class="suggestion-item">
-                                    <i class="fas fa-lightbulb"></i>
-                                    <span>Border security messaging resonating strongly with base</span>
-                                </div>
-                                <div class="suggestion-item">
-                                    <i class="fas fa-chart-line"></i>
-                                    <span>Economic messaging showing 23% higher engagement</span>
-                                </div>
-                                <div class="suggestion-item">
-                                    <i class="fas fa-target"></i>
-                                    <span>Healthcare attacks effective in swing districts</span>
-                                </div>
-                            </div>
+                        <div class="stat-item">
+                            <div class="stat-value">94%</div>
+                            <div class="stat-label">Compliance Score</div>
                         </div>
-
-                        <div class="trending-actions">
-                            <button class="trending-btn">
-                                <i class="fas fa-plus"></i>
-                                Generate Content
-                            </button>
-                            <button class="trending-btn secondary">
-                                <i class="fas fa-download"></i>
-                                Export Topics
-                            </button>
+                        <div class="stat-item">
+                            <div class="stat-value">156</div>
+                            <div class="stat-label">Active Vendors</div>
                         </div>
+                    </div>
+                    
+                    <div class="quick-actions">
+                        <button class="quick-action-btn">
+                            <i class="fas fa-plus"></i>
+                            <span>New Campaign</span>
+                        </button>
+                        <button class="quick-action-btn">
+                            <i class="fas fa-file-export"></i>
+                            <span>Export Report</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -1818,6 +1801,20 @@ ORDER BY total_cost DESC;</textarea>
                     </div>
                 </div>
             </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Live Update Indicator -->
+    <div class="update-indicator" id="update-indicator">
+        <div class="update-info">
+            <div class="commit-info">
+                <i class="fas fa-code-branch"></i>
+                <span id="commit-hash">Loading...</span>
+            </div>
+            <div class="update-time">
+                <i class="fas fa-clock"></i>
+                <span id="last-update">Checking...</span>
             </div>
         </div>
     </div>
