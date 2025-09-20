@@ -1,0 +1,153 @@
+# Cursor Rules — TAG Echo Production Standards
+
+## Prime Directives
+- Make **small, reviewable diffs**. Keep changes scoped; avoid drive-by refactors unless explicitly requested.
+- **TypeScript first**. Prefer `*.ts`/`*.tsx`. Add/upgrade types rather than using `any`.
+- **Preserve existing style** (lint rules, Prettier, naming, folder structure) unless the task is to change them.
+- **Document while coding**: update README/changelogs, inline JSDoc, and component stories/tests for all public APIs.
+- **Security, a11y, perf by default** (see checklists below).
+- **Explain decisions** in PR descriptions and commit messages (briefly; link to sources if relevant).
+
+## MANDATORY REPOSITORY CLEANUP PROTOCOL
+
+### **Before Agent Completion:**
+1. **Remove all development documentation** from root directory
+2. **Delete empty directories** and unused files  
+3. **Ensure clean folder structure** with only production files in root
+4. **Validate all imports and dependencies** are working
+5. **Test that UI loads correctly** without broken styling
+6. **Commit cleanup changes** with clear description
+
+### **Required Clean Structure:**
+```
+├── index.html           # Main application
+├── script.js           # Core functionality  
+├── styles.css          # Enterprise styling
+├── package.json        # Dependencies
+├── src/                # Core application modules (if needed)
+├── tests/              # Unit tests and validation (if needed)
+└── .cursorrules        # This file
+```
+
+### **Forbidden in Root After Cleanup:**
+- ❌ Documentation files (`docs/`, `dev/` directories)
+- ❌ Empty directories (`src/components/`, `src/config/`)
+- ❌ Duplicate files (`theme.ts` + `theme.js`)
+- ❌ Build artifacts or temporary files
+- ❌ Overcomplicated module structures
+
+**AGENTS MUST ENSURE REPOSITORY IS SQUARED BEFORE COMPLETION**
+
+## Auto-Context (read before changing code)
+Always load and consider, if present:
+- `package.json`, `pnpm-lock.yaml` / `yarn.lock` / `package-lock.json`
+- `tsconfig*.json`, `next.config.*`, `vite.config.*`, `webpack.config.*`
+- `eslint*.*`, `.prettierrc*`, `stylelint*.*`, `postcss.config.*`, `tailwind.config.*`
+- Framework files: `app/`, `pages/`, `src/`, `components/`, `lib/`, `server/`, `api/`
+- Routing and data files: `app/route.ts`, `app/api/**/route.ts`, `src/routes/**`
+- Tests & stories: `__tests__/`, `tests/`, `*.test.*`, `*.spec.*`, `*.stories.*`
+- Infra: `Dockerfile*`, `docker-compose*`, `.github/workflows/**`, `vercel.json`, `netlify.*`, `fly.toml`
+- DB/schema: `prisma/schema.prisma`, `drizzle.config.*`, `migrations/**`
+- Env templates: `.env*`, `.env.example` (never commit real secrets)
+
+If missing or inconsistent, propose minimal scaffolding to align with these rules.
+
+## Editing Rules
+- Maintain **strict typing**. If a type is unclear, add narrow interfaces/types and refinements rather than widening.
+- Keep **public APIs stable**; deprecate before removing. Add `@deprecated` JSDoc with guidance and version.
+- For **UI work**: add/extend a Storybook story and a unit test. For **API work**: add route tests + schema validation.
+- **i18n**: never hardcode user-visible strings if an i18n system exists. Add keys + default messages.
+- **State management**: prefer local component state; reach for context/zustand/redux only when shared or cross-cutting.
+
+## Stack Presets (apply whichever matches the repo)
+
+### Next.js (App Router)
+- Use **Server Components** by default; mark interactive parts as `use client`.
+- Fetch in the server layer; pass data to client components as props.
+- Validate inputs with **Zod** (or the project's chosen schema lib).
+- Route handlers: return typed responses; set caching headers; opt into **Route Segment Config** (`dynamic`, `revalidate`) consciously.
+- Images: use `next/image` with defined `sizes` and `alt`.
+
+### React (Vite/CRA)
+- Functional components + hooks only.
+- Co-locate styles and tests next to components.
+- Prefer **controlled components** for forms; use `react-hook-form` + schema validation if present.
+
+### Vue/Nuxt
+- Use `<script setup lang="ts">`.
+- Emit/props typed; use `defineProps`/`defineEmits`.
+- Nuxt server routes: validate body/query, set caching.
+
+### SvelteKit
+- Use form actions and `load` functions; validate with schema; keep client JS minimal.
+- Prefer stores only when state is shared or persisted.
+
+## Styling & Design System
+- If Tailwind exists, use it; otherwise, follow the existing CSS approach (CSS Modules/SCSS/Vanilla Extract).
+- Enforce design tokens; do not introduce ad-hoc colors, spacing, or typography.
+- Prefer composition over deep component conditionals.
+
+## API & Data
+- All external calls go through a **typed API layer**. No direct `fetch()` in components unless explicitly allowed.
+- Add **error boundaries**/fallback UI for data-fetching components.
+- Cache responses appropriately (HTTP headers or framework cache). Consider stale-while-revalidate.
+
+## Testing (always add/maintain)
+- **Unit** (Vitest/Jest): components, utils, hooks. Aim for critical paths rather than 100%.
+- **E2E** (Playwright/Cypress): at least happy-path for new flows or endpoints.
+- **Accessibility tests**: include `@testing-library` queries by role/name; optional axe checks if project uses it.
+
+## Linting & Format
+- Run existing linters/formatters; fix or annotate with rationale. Prefer code changes over `eslint-disable`.
+- Keep import order consistent (plugin settings). No unused exports.
+
+## Accessibility Checklist (WCAG 2.1 AA)
+- Provide `alt` text; visible labels linked to inputs; form errors with `aria-describedby`.
+- Color contrast ≥ 4.5:1; no information conveyed by color alone.
+- Keyboard nav: focus states; no key traps; `tabIndex` used sparingly.
+- Landmarks/roles: header/nav/main/footer; meaningful headings structure.
+
+## Performance Checklist
+- Tree-shake and code-split. Avoid large client bundles; push logic server-side when possible.
+- Images: optimized, lazy-loaded, width/height defined. Use responsive `sizes`.
+- Avoid **N+1** in data fetching; batch or expand server selects.
+- Memoization: `useMemo`/`useCallback`/`React.memo` only when profiling indicates benefit.
+
+## Security Checklist
+- Never log secrets or user PII.
+- Validate and sanitize all inputs (server and client).
+- Set security headers (CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy) via framework config or middleware.
+- Prevent SSRF/CSRF/XSS: use same-site cookies, encode output, prefer parameterized queries/ORM.
+- Use env variables via typed config; commit **example** env updates.
+
+## SEO & Social (for public sites)
+- Unique `<title>`/`meta description`; canonical URLs.
+- Open Graph/Twitter cards; structured data (JSON-LD) when relevant.
+- Clean, stable routes; avoid duplicate content.
+
+## Git & CI
+- Conventional commits (e.g., `feat:`, `fix:`, `chore:`). Keep messages ≤ 72 chars summary + body if needed.
+- Update snapshots, run tests/lint in CI, ensure typecheck passes.
+- For migrations: include `up` + `down`; seed scripts deterministic.
+
+## PR Template (generate when opening PRs)
+- **What**: short summary of the change.
+- **Why**: problem/user story.
+- **How**: key implementation details.
+- **Screenshots/Recordings** (if UI).
+- **Tests**: coverage added/updated.
+- **Risk & Rollback**: how to revert if needed.
+- **Migration/Infra**: any ops steps.
+
+## Task Prompts (you can ask the AI these directly)
+- **Create component**: "Generate a responsive, accessible `<Button>` that supports variants (primary/secondary/ghost), sizes, loading state, and forwards refs. Add Storybook stories and tests."
+- **Add API route**: "Add `POST /api/contacts` with Zod validation, rate-limiting middleware, and unit + integration tests."
+- **Fix bug**: "Investigate and fix hydration mismatch in `Header`. Prefer server components; add test reproducing issue."
+- **Improve perf**: "Reduce LCP on the homepage below 2.5s by deferring non-critical JS and optimizing hero image."
+
+## When You're Unsure
+- Prefer proposing **two minimal options** with tradeoffs.
+- Ask for the smallest clarifying detail needed to proceed; otherwise pick the most conservative choice that preserves API/stability.
+
+---
+# End of Rules
