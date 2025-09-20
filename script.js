@@ -1746,17 +1746,24 @@ class TagEcho {
 
     async fetchGitInfo() {
         try {
-            // Try to fetch from a git info endpoint (you'd set this up on your server)
-            const response = await fetch('/api/git-info').catch(() => null);
-            if (response && response.ok) {
-                return await response.json();
+            // Fetch from the real build-info.json file we created
+            const response = await fetch('./build-info.json');
+            if (response.ok) {
+                const buildInfo = await response.json();
+                return {
+                    short: buildInfo.short,
+                    full: buildInfo.full,
+                    message: buildInfo.message,
+                    author: buildInfo.author,
+                    branch: buildInfo.branch,
+                    timestamp: buildInfo.date
+                };
             }
         } catch (e) {
-            // Fallback if API not available
+            console.warn('Could not fetch build-info.json:', e);
         }
         
-        // Use the actual git info we know from the terminal
-        // Based on: cc1d84d|cc1d84d8c26facbcabf04dd6e9f15216f669fefe|IM A CUNT|tag-data|2025-09-20 06:12:59 -0400
+        // Fallback to hardcoded current commit info
         const info = {
             short: 'cc1d84d',
             full: 'cc1d84d8c26facbcabf04dd6e9f15216f669fefe',
