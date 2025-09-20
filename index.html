@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TAG Echo - AI-Powered Political Copywriting Platform</title>
+    <title>TAG ECHO - AI-Powered Political Copywriting Platform</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="brand/tag-theme.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="brand/favicons/favicon-32x32.png">
 </head>
@@ -18,21 +19,23 @@
                 <div class="logo">
                     <div class="logo-icon">
                         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Clean, modern TAG logo -->
+                            <!-- White TAG logo for dark backgrounds per style guide -->
                             <rect x="4" y="4" width="32" height="32" rx="6" 
-                                  fill="#000000" />
+                                  fill="#FFFFFF" 
+                                  stroke="#0024E4" 
+                                  stroke-width="1"/>
                             <text x="20" y="24" 
                                   text-anchor="middle" 
                                   dominant-baseline="central"
-                                  fill="#FFFFFF" 
-                                  font-family="Inter" 
-                                  font-weight="800" 
-                                  font-size="12"
-                                  letter-spacing="1px">TAG</text>
+                                  fill="#000000" 
+                                  font-family="Poppins" 
+                                  font-weight="700" 
+                                  font-size="11"
+                                  letter-spacing="0.5px">TAG</text>
                         </svg>
                     </div>
                     <div class="logo-text-container">
-                        <span class="logo-text">TAG Echo</span>
+                        <span class="logo-text">TAG ECHO</span>
                         <span class="logo-subtitle">by TAG Strategies</span>
                     </div>
                 </div>
@@ -142,7 +145,7 @@
                 <div class="analyzer-container">
                     <div class="input-section">
                         <div class="input-header">
-                            <h2>Strategic Message Analysis</h2>
+                            <h2>Strategic Message Analysis<span style="color: #0024E4; font-weight: bold;">.</span></h2>
                             <div class="channel-selector">
                                 <label>Campaign Channel:</label>
                                 <select id="channel-select">
@@ -392,7 +395,7 @@ Example: 'Join us in building a stronger economy that works for everyone. Your s
         <div class="chat-header">
             <div class="chat-title">
                 <i class="fas fa-robot"></i>
-                TAG Echo AI Assistant
+                TAG ECHO AI Assistant
             </div>
             <button class="chat-toggle" id="chat-toggle">
                 <i class="fas fa-minus"></i>
@@ -404,7 +407,7 @@ Example: 'Join us in building a stronger economy that works for everyone. Your s
                     <i class="fas fa-robot"></i>
                 </div>
                 <div class="message-content">
-                    Hi! I'm your TAG Echo AI assistant. I can help you analyze copy, generate new messages, and optimize your political campaigns. What would you like to work on today?
+                    Hi! I'm your TAG ECHO AI assistant. I can help you analyze copy, generate new messages, and optimize your political campaigns. What would you like to work on today?
                 </div>
             </div>
         </div>

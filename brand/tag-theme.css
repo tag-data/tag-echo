@@ -1,62 +1,61 @@
-/* TAG Echo - REAL TAG Strategies Brand from tagstrategies.co */
+/* TAG Echo - ACTUAL TAG Strategies Brand from style guide */
 :root {
-	/* ACTUAL TAG Strategies Colors - Clean & Modern */
-	--primary-black: #000000;    /* Pure black from tagstrategies.co */
-	--primary-white: #FFFFFF;    /* Clean white */
-	--accent-color: #000000;     /* Black accent */
-	--text-gray: #666666;        /* Medium gray for text */
-	--light-gray: #f5f5f5;       /* Light background */
+	/* REAL TAG Strategies Colors from brand guide */
+	--tag-black: #000000;        /* Primary background - pure black */
+	--tag-blue: #0024E4;         /* TAG Blue accent - key highlights */
+	--tag-white: #FFFFFF;        /* Primary text on dark mode */
+	--tag-gray: #585858;         /* Secondary text, inactive states */
 	
-	/* Override existing variables to match TAG Strategies */
-	--primary-blue: #000000;     /* Use black instead of blue */
-	--secondary-blue: #333333;   /* Dark gray */
-	--primary-red: #000000;      /* Use black instead of red */
-	--accent-gold: #000000;      /* Use black instead of gold */
+	/* Override existing variables with correct TAG branding */
+	--primary-blue: #0024E4;     /* TAG Blue */
+	--secondary-blue: #0024E4;   /* TAG Blue */
+	--primary-red: #0024E4;      /* Use TAG Blue instead */
+	--accent-gold: #0024E4;      /* Use TAG Blue instead */
 	
-	/* Clean backgrounds */
-	--midnight: #000000;
-	--onyx: #111111;
-	--graphite: #333333;
-	--charcoal: #666666;
-	--platinum: #FFFFFF;
-	--silver: #f9f9f9;
-	--pearl: #FFFFFF;
+	/* Dark mode first backgrounds */
+	--midnight: #000000;         /* Pure black */
+	--onyx: #000000;            /* Pure black */
+	--graphite: #585858;        /* Mid gray */
+	--charcoal: #585858;        /* Mid gray */
+	--platinum: #000000;        /* Dark background */
+	--silver: #111111;          /* Slightly lighter black */
+	--pearl: #FFFFFF;           /* White text */
 
-	/* Simple, clean gradients */
-	--gradient-primary: linear-gradient(135deg, #000000 0%, #333333 100%);
-	--gradient-gold: linear-gradient(135deg, #000000 0%, #333333 100%);
-	--gradient-subtle: linear-gradient(135deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.02) 100%);
+	/* Dark gradients */
+	--gradient-primary: linear-gradient(135deg, #000000 0%, #111111 100%);
+	--gradient-gold: linear-gradient(135deg, #0024E4 0%, #000000 100%);
+	--gradient-subtle: linear-gradient(135deg, rgba(0,36,228,0.1) 0%, rgba(0,0,0,0.05) 100%);
 }
 
-/* Typography - Clean & Modern like tagstrategies.co */
+/* Typography - Geometric sans-serif from TAG style guide */
 body {
-	font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+	font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	text-rendering: optimizeLegibility;
-	background: #FFFFFF;
-	color: #000000;
+	background: #000000;  /* Dark mode first */
+	color: #FFFFFF;       /* White text on dark */
 }
 
-/* Logo Refinements - TAG Strategies Style */
+/* Logo Refinements - TAG Strategies Dark Mode */
 .logo-text { 
-	font-family: 'Inter', sans-serif;
+	font-family: 'Poppins', sans-serif;
 	letter-spacing: -0.02em; 
-	font-weight: 800;
-	color: #000000;
+	font-weight: 700;  /* Bold as per style guide */
+	color: #FFFFFF;    /* White logo on dark */
 }
 .logo-subtitle { 
-	opacity: 0.7;
+	opacity: 0.8;
 	font-weight: 400;
-	color: #666666;
+	color: #585858;    /* Mid gray from style guide */
 }
 
 .tagline-main {
-	color: #000000;
-	font-weight: 600;
+	color: #FFFFFF;       /* White text */
+	font-weight: 700;     /* Bold for impact */
 }
 
 .tagline-sub {
-	color: #666666;
+	color: #585858;       /* Mid gray for secondary */
 	opacity: 1;
 }
 
@@ -80,41 +79,68 @@ body {
 	box-shadow: 0 8px 25px rgba(27, 54, 93, 0.3);
 }
 
-/* Clean TAG Strategies Aesthetic */
+/* TAG Strategies Dark Mode Aesthetic */
 .header {
-	background: #FFFFFF;
-	border-bottom: 1px solid #e0e0e0;
-	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	background: #000000;                    /* Pure black background */
+	border-bottom: 1px solid #585858;      /* Mid gray border */
+	box-shadow: 0 2px 8px rgba(0,36,228,0.2);  /* TAG Blue glow */
 }
 
 .sidebar {
-	background: #FFFFFF;
-	border-right: 1px solid #e0e0e0;
+	background: #000000;                    /* Pure black sidebar */
+	border-right: 1px solid #585858;       /* Mid gray border */
 	box-shadow: none;
 }
 
 .main-content {
-	background: #FFFFFF;
+	background: #000000;                    /* Pure black content area */
+	color: #FFFFFF;                         /* White text */
 }
 
-/* Clean, modern buttons */
+/* TAG Blue accent buttons */
 .analyze-btn {
-	background: #000000;
+	background: #0024E4;                    /* TAG Blue */
 	border: none;
-	box-shadow: none;
+	color: #FFFFFF;                         /* White text */
+	box-shadow: 0 4px 12px rgba(0,36,228,0.3);  /* TAG Blue glow */
 }
 
-/* Professional Accent Colors */
+.analyze-btn:hover {
+	background: #0020CC;                    /* Slightly darker blue on hover */
+	box-shadow: 0 6px 16px rgba(0,36,228,0.4);
+}
+
+/* TAG Blue Accent Colors */
 .trending-item {
-	border-left-color: var(--accent-gold);
+	border-left-color: #0024E4;  /* TAG Blue accent */
 }
 
 .sidebar h3 {
-	border-bottom-color: var(--accent-gold);
+	border-bottom-color: #0024E4;  /* TAG Blue underline */
+	color: #FFFFFF;                /* White text */
 }
 
+/* Blue period brand motif */
 .sidebar h3::after {
-	background: var(--primary-red);
+	content: '.';
+	color: #0024E4;              /* TAG Blue period */
+	font-weight: bold;
+	margin-left: 2px;
+}
+
+/* Navigation tabs with TAG styling */
+.nav-tab.active {
+	color: #FFFFFF;
+	border-bottom-color: #0024E4;  /* TAG Blue active indicator */
+	background: rgba(0,36,228,0.1); /* Subtle TAG Blue background */
+}
+
+.nav-tab {
+	color: #585858;               /* Mid gray inactive tabs */
+}
+
+.nav-tab:hover {
+	color: #FFFFFF;               /* White on hover */
 }
 
 /* Conservative Professional Animations */
