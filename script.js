@@ -1,5 +1,5 @@
-// TAG Echo - AI-Powered Political Copywriting Platform
-// Interactive JavaScript functionality
+// TAG Echo - Enterprise Political Copywriting Platform
+// Professional JavaScript functionality
 
 class TagEcho {
     constructor() {
@@ -210,11 +210,11 @@ class TagEcho {
         
         // Update placeholder based on channel
         const placeholders = {
-            sms: 'URGENT: The radical left is trying to defund our police! We need YOUR help to stop them. Donate $25 NOW to protect our communities. Time is running out!',
-            email: 'Subject: URGENT: Stop the Radical Left - Donate $25 NOW\\n\\nDear [Name],\\n\\nThe radical left is launching their most dangerous attack yet...',
-            social: '🚨 BREAKING: The radical left wants to defund our police! We can\'t let this happen. Join thousands fighting back → Donate $25 #DefendPolice',
-            winred: 'URGENT: Stop radical left policies! Your $25 donation protects our communities. Donate NOW!',
-            web: 'Join the Fight Against Radical Policies\\n\\nOur communities are under attack. Your donation of $25 or more helps us fight back against dangerous policies that threaten our safety and security.'
+            email: 'Subject: Join Our Movement for Change\\n\\nDear [Name],\\n\\nOur community deserves strong leadership on the issues that matter most. Together, we can build a better future for all families...',
+            sms: 'Join our campaign for positive change in our community. Your support helps us reach more voters and share our message. Contribute today!',
+            social: 'Our community deserves strong leadership. Join thousands of neighbors supporting positive change. Your voice matters! #CommunityFirst',
+            web: 'Building a Stronger Community Together\\n\\nOur campaign is focused on the issues that matter most to working families. With your support, we can create real change in our community.',
+            print: 'Together, we can build a stronger future for our community. Join our campaign for positive change and help us reach every voter with our message of hope and progress.'
         };
         
         if (copyInput && placeholders[channel]) {
@@ -256,16 +256,16 @@ class TagEcho {
         } finally {
             // Reset button
             analyzeBtn.classList.remove('loading');
-            analyzeBtn.innerHTML = '<i class="fas fa-search"></i> Analyze Copy';
+            analyzeBtn.innerHTML = '<i class="fas fa-search"></i> Analyze Message';
         }
     }
 
     generateMockAnalysis(text) {
         const channel = document.getElementById('channel-select').value;
         const length = text.length;
-        const urgencyWords = ['urgent', 'now', 'immediately', 'deadline', 'time', 'running out'];
-        const ctaWords = ['donate', 'contribute', 'give', 'support', 'join', 'act'];
-        const emotionalWords = ['fight', 'defend', 'protect', 'stop', 'save', 'help'];
+        const urgencyWords = ['urgent', 'now', 'today', 'deadline', 'time', 'important'];
+        const ctaWords = ['donate', 'contribute', 'support', 'join', 'participate', 'volunteer'];
+        const emotionalWords = ['community', 'together', 'future', 'change', 'help', 'build'];
         
         // Calculate scores based on content analysis
         const urgencyScore = this.calculateWordScore(text.toLowerCase(), urgencyWords) * 20 + Math.random() * 20 + 60;
@@ -281,23 +281,23 @@ class TagEcho {
         const suggestions = [];
         
         if (urgencyScore > 80) {
-            positiveInsights.push('Excellent urgency indicators create immediate action motivation');
+            positiveInsights.push('Strong motivational language encourages immediate action');
         }
         if (ctaScore > 85) {
             positiveInsights.push('Clear and compelling call-to-action');
         }
         if (engagementScore > 75) {
-            positiveInsights.push('Strong emotional appeal targeting key concerns');
+            positiveInsights.push('Effective community-focused messaging');
         }
         
         if (length > 160 && channel === 'sms') {
-            negativeInsights.push('Message length exceeds SMS character limit (160 chars)');
+            negativeInsights.push('Message length may exceed SMS character limits');
         }
         if (urgencyScore < 70) {
-            negativeInsights.push('Could benefit from stronger urgency language');
+            negativeInsights.push('Could benefit from stronger action-oriented language');
         }
-        if (!text.includes('$')) {
-            negativeInsights.push('Consider including specific donation amount');
+        if (!text.toLowerCase().includes('support') && !text.toLowerCase().includes('join')) {
+            negativeInsights.push('Consider including clearer participation opportunities');
         }
         
         suggestions.push({
@@ -345,14 +345,18 @@ class TagEcho {
         if (words.length <= 10) return text;
         
         const key_words = words.filter(word => 
-            word.toLowerCase().includes('urgent') ||
-            word.toLowerCase().includes('donate') ||
-            word.toLowerCase().includes('now') ||
-            word.includes('$') ||
-            word.toLowerCase().includes('stop')
+            word.toLowerCase().includes('community') ||
+            word.toLowerCase().includes('support') ||
+            word.toLowerCase().includes('join') ||
+            word.toLowerCase().includes('together') ||
+            word.toLowerCase().includes('change')
         );
         
-        return key_words.slice(0, 15).join(' ') + '...';
+        if (key_words.length > 0) {
+            return key_words.slice(0, 12).join(' ') + '...';
+        }
+        
+        return words.slice(0, 12).join(' ') + '...';
     }
 
     generatePersonalizedVersion(text) {
@@ -451,15 +455,15 @@ class TagEcho {
 
     generateAIResponse(userMessage) {
         const responses = {
-            'help': 'I can help you analyze political copy, generate new messages, and optimize your campaigns. What specific task would you like assistance with?',
-            'analyze': 'To analyze your copy, paste it into the Copy Analyzer tab and click "Analyze Copy". I\'ll provide detailed insights on engagement potential, urgency, clarity, and call-to-action effectiveness.',
-            'generate': 'Use the AI Generator tab to create new copy variations. Specify your campaign type, tone, target audience, and key message for best results.',
+            'help': 'I can assist with message analysis, content generation, and strategic recommendations for your political communications. What would you like help with?',
+            'analyze': 'To analyze your message, enter it in the Message Analyzer tab and click "Analyze Message". I\'ll provide insights on engagement potential, clarity, and effectiveness.',
+            'generate': 'Use the Content Generator tab to create message variations. Specify your message type, tone, target audience, and key topic for optimal results.',
             'improve': this.analysisResults ? 
-                `Based on your recent analysis (score: ${this.analysisResults.overallScore}), I recommend focusing on ${this.analysisResults.metrics.urgency < 70 ? 'urgency language' : 'call-to-action clarity'}.` :
-                'Please analyze some copy first, then I can provide specific improvement suggestions.',
-            'templates': 'Check out the Templates tab for proven high-performing message formats. You can customize them for your specific campaign needs.',
-            'performance': 'The Analytics tab shows your campaign performance metrics. I can help interpret the data and suggest optimization strategies.',
-            'default': 'I\'m here to help with your political copywriting needs. You can ask me about analyzing copy, generating new messages, improving performance, or using templates.'
+                `Based on your recent analysis (score: ${this.analysisResults.overallScore}), I recommend focusing on ${this.analysisResults.metrics.urgency < 70 ? 'action-oriented language' : 'message clarity'}.` :
+                'Please analyze a message first, then I can provide specific improvement recommendations.',
+            'templates': 'The Templates tab contains proven message formats for various campaign communications. You can customize them for your specific needs.',
+            'performance': 'The Performance tab displays campaign metrics and analytics. I can help interpret the data and suggest optimization strategies.',
+            'default': 'I\'m here to help with your political messaging needs. Ask me about message analysis, content generation, performance optimization, or template usage.'
         };
         
         const lowerMessage = userMessage.toLowerCase();
@@ -671,8 +675,8 @@ class TagEcho {
     }
 
     generateCopy() {
-        // Simulate copy generation
-        this.showNotification('AI Copy Generator coming soon! This will integrate with advanced language models.', 'info');
+        // Simulate content generation
+        this.showNotification('Content generation feature coming soon. This will provide AI-powered message variations.', 'info');
     }
 
     switchWorkspace(workspaceName) {
