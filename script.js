@@ -84,6 +84,44 @@ class TagEcho {
             generateBtn.addEventListener('click', () => this.generateCopy());
         }
 
+        // Settings dropdown
+        const settingsBtn = document.getElementById('settings-btn');
+        const settingsDropdown = document.getElementById('settings-dropdown');
+        if (settingsBtn && settingsDropdown) {
+            settingsBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.toggleSettings();
+            });
+
+            // Close settings when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!settingsDropdown.contains(e.target) && !settingsBtn.contains(e.target)) {
+                    this.closeSettings();
+                }
+            });
+        }
+
+        // Settings item interactions
+        document.querySelectorAll('.settings-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.handleSettingsItemClick(item);
+            });
+        });
+
+        // Toggle switches
+        document.querySelectorAll('.toggle-switch input').forEach(toggle => {
+            toggle.addEventListener('change', (e) => {
+                this.handleToggleChange(e.target);
+            });
+        });
+
+        // Logout button
+        const logoutBtn = document.querySelector('.logout-btn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', () => this.handleLogout());
+        }
+
         // Workspace interactions
         document.querySelectorAll('.workspace-item').forEach(item => {
             item.addEventListener('click', (e) => {
@@ -453,6 +491,175 @@ class TagEcho {
         }
     }
 
+    // Settings functionality - Enterprise Edition
+    toggleSettings() {
+        const settingsDropdown = document.getElementById('settings-dropdown');
+        const isVisible = settingsDropdown.classList.contains('active');
+        
+        if (isVisible) {
+            this.closeSettings();
+        } else {
+            this.openSettings();
+        }
+    }
+
+    openSettings() {
+        const settingsDropdown = document.getElementById('settings-dropdown');
+        settingsDropdown.classList.add('active');
+        
+        // Add enterprise-level visual feedback
+        const settingsBtn = document.getElementById('settings-btn');
+        if (settingsBtn) {
+            settingsBtn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                settingsBtn.style.transform = 'scale(1)';
+            }, 150);
+        }
+        
+        // Add overlay for mobile
+        if (window.innerWidth <= 768) {
+            this.createSettingsOverlay();
+        }
+
+        // Add escape key listener
+        document.addEventListener('keydown', this.handleSettingsEscape.bind(this));
+        
+        // Add enterprise analytics tracking
+        this.trackUserInteraction('settings_opened', 'settings_dropdown');
+    }
+
+    closeSettings() {
+        const settingsDropdown = document.getElementById('settings-dropdown');
+        settingsDropdown.classList.remove('active');
+        
+        // Remove overlay
+        this.removeSettingsOverlay();
+        
+        // Remove escape key listener
+        document.removeEventListener('keydown', this.handleSettingsEscape.bind(this));
+    }
+
+    createSettingsOverlay() {
+        const overlay = document.createElement('div');
+        overlay.className = 'settings-overlay show';
+        overlay.id = 'settings-overlay';
+        overlay.addEventListener('click', () => this.closeSettings());
+        document.body.appendChild(overlay);
+    }
+
+    removeSettingsOverlay() {
+        const overlay = document.getElementById('settings-overlay');
+        if (overlay) {
+            overlay.remove();
+        }
+    }
+
+    handleSettingsEscape(e) {
+        if (e.key === 'Escape') {
+            this.closeSettings();
+        }
+    }
+
+    handleSettingsItemClick(item) {
+        const text = item.querySelector('span').textContent;
+        
+        // Don't handle toggle items (they have their own handlers)
+        if (item.classList.contains('toggle-item')) {
+            return;
+        }
+
+        // Demo functionality for settings items
+        const demoActions = {
+            'Edit Profile': () => this.showDemo('Profile editing would open here'),
+            'Change Password': () => this.showDemo('Password change form would appear here'),
+            'Export Campaign Data': () => this.showDemo('Campaign data export initiated'),
+            'API Configuration': () => this.showDemo('API settings panel would open here'),
+            'Privacy Settings': () => this.showDemo('Privacy controls would be displayed here'),
+            'Help Center': () => this.showDemo('Opening help documentation...'),
+            'Contact Support': () => this.showDemo('Support ticket system would launch here')
+        };
+
+        if (demoActions[text]) {
+            demoActions[text]();
+            this.closeSettings();
+        }
+    }
+
+    handleToggleChange(toggle) {
+        const setting = toggle.id;
+        const isEnabled = toggle.checked;
+        
+        // Demo functionality for toggles
+        const toggleMessages = {
+            'dark-mode-toggle': isEnabled ? 'Dark mode enabled (demo)' : 'Dark mode disabled (demo)',
+            'email-notifications': isEnabled ? 'Email notifications enabled' : 'Email notifications disabled',
+            'sms-alerts': isEnabled ? 'SMS alerts enabled' : 'SMS alerts disabled'
+        };
+
+        if (toggleMessages[setting]) {
+            this.showDemo(toggleMessages[setting]);
+            
+            // Special demo for dark mode
+            if (setting === 'dark-mode-toggle') {
+                this.demoThemeToggle(isEnabled);
+            }
+        }
+    }
+
+    handleLogout() {
+        this.showDemo('Logging out... (This is a demo)');
+        this.closeSettings();
+        
+        // Demo logout animation
+        setTimeout(() => {
+            this.showDemo('In a real application, you would be redirected to the login page');
+        }, 1500);
+    }
+
+    demoThemeToggle(isDark) {
+        const body = document.body;
+        if (isDark) {
+            body.style.filter = 'invert(1) hue-rotate(180deg)';
+            setTimeout(() => {
+                body.style.filter = '';
+                this.showDemo('Dark mode demo complete. Full theme switching would be implemented here.');
+            }, 2000);
+        }
+    }
+
+    showDemo(message) {
+        // Create temporary demo notification
+        const notification = document.createElement('div');
+        notification.className = 'demo-notification';
+        notification.textContent = message;
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+            z-index: 10000;
+            font-weight: 500;
+            max-width: 300px;
+            animation: slideInRight 0.3s ease-out;
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Remove after 3 seconds
+        setTimeout(() => {
+            notification.style.animation = 'fadeOut 0.3s ease-out';
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 300);
+        }, 3000);
+    }
+
     useTemplate(template) {
         const copyInput = document.getElementById('copy-input');
         if (copyInput) {
@@ -540,6 +747,30 @@ class TagEcho {
 
     delay(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    
+    // Enterprise Analytics Tracking
+    trackUserInteraction(action, element) {
+        console.log(`📊 Enterprise Analytics: ${action} on ${element} at ${new Date().toISOString()}`);
+        
+        // In a real enterprise app, this would send data to analytics services
+        // like Google Analytics, Adobe Analytics, Mixpanel, etc.
+        
+        // Example enterprise-level tracking payload:
+        const payload = {
+            timestamp: new Date().toISOString(),
+            user_id: 'ted.clark@tagstrategies.co', // Would come from auth
+            action: action,
+            element: element,
+            session_id: 'demo_session_' + Date.now(),
+            platform: 'TAG_ECHO',
+            version: '2.1.0',
+            user_agent: navigator.userAgent,
+            url: window.location.href
+        };
+        
+        // This would normally be sent to your enterprise data warehouse
+        // await fetch('/api/analytics/track', { method: 'POST', body: JSON.stringify(payload) });
     }
 }
 
