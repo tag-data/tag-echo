@@ -1,0 +1,16 @@
+{
+  "name": "tag-echo",
+  "version": "1.0.0",
+  "description": "AI-Powered Political Copywriting Platform for TAG Strategies",
+  "main": "index.html",
+  "scripts": {
+    "dev": "live-server --port=3000 --open=/index.html",
+    "start": "live-server --port=3000 --open=/index.html"
+  },
+  "keywords": ["political", "copywriting", "ai", "tag-strategies"],
+  "author": "TAG Strategies",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}

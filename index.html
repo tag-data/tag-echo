@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAG Echo - AI-Powered Political Copywriting Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">
+                    <i class="fas fa-bullhorn"></i>
+                    <span class="logo-text">TAG Echo</span>
+                </div>
+                <div class="tagline">AI-Powered Political Copywriting Platform</div>
+            </div>
+            <div class="user-section">
+                <div class="user-info">
+                    <img src="https://via.placeholder.com/40x40/4285f4/ffffff?text=TC" alt="User" class="user-avatar">
+                    <span class="user-name">Ted Clark</span>
+                </div>
+                <button class="settings-btn"><i class="fas fa-cog"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="workspace-section">
+                <h3><i class="fas fa-folder"></i> Workspaces</h3>
+                <div class="workspace-list">
+                    <div class="workspace-item active">
+                        <i class="fas fa-vote-yea"></i>
+                        <span>2024 Senate Campaign</span>
+                    </div>
+                    <div class="workspace-item">
+                        <i class="fas fa-flag-usa"></i>
+                        <span>Presidential PAC</span>
+                    </div>
+                    <div class="workspace-item">
+                        <i class="fas fa-users"></i>
+                        <span>Local Elections</span>
+                    </div>
+                </div>
+                <button class="new-workspace-btn">
+                    <i class="fas fa-plus"></i> New Workspace
+                </button>
+            </div>
+
+            <div class="trending-section">
+                <h3><i class="fas fa-fire"></i> Trending Topics</h3>
+                <div class="trending-list">
+                    <div class="trending-item">
+                        <div class="trend-title">Healthcare Reform</div>
+                        <div class="trend-sentiment positive">+15% engagement</div>
+                    </div>
+                    <div class="trending-item">
+                        <div class="trend-title">Economic Policy</div>
+                        <div class="trend-sentiment neutral">Stable</div>
+                    </div>
+                    <div class="trending-item">
+                        <div class="trend-title">Climate Action</div>
+                        <div class="trend-sentiment positive">+8% engagement</div>
+                    </div>
+                    <div class="trending-item">
+                        <div class="trend-title">Education Funding</div>
+                        <div class="trend-sentiment negative">-3% engagement</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recent-projects">
+                <h3><i class="fas fa-history"></i> Recent Projects</h3>
+                <div class="project-list">
+                    <div class="project-item">
+                        <div class="project-name">WinRed Donation Drive</div>
+                        <div class="project-date">2 hours ago</div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-name">SMS Campaign - Healthcare</div>
+                        <div class="project-date">Yesterday</div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-name">Email Series - Economy</div>
+                        <div class="project-date">3 days ago</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Navigation -->
+            <nav class="content-nav">
+                <div class="nav-tabs">
+                    <button class="nav-tab active" data-tab="analyzer">
+                        <i class="fas fa-brain"></i> Copy Analyzer
+                    </button>
+                    <button class="nav-tab" data-tab="generator">
+                        <i class="fas fa-magic"></i> AI Generator
+                    </button>
+                    <button class="nav-tab" data-tab="analytics">
+                        <i class="fas fa-chart-line"></i> Analytics
+                    </button>
+                    <button class="nav-tab" data-tab="templates">
+                        <i class="fas fa-file-alt"></i> Templates
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Copy Analyzer Tab -->
+            <div class="tab-content active" id="analyzer">
+                <div class="analyzer-container">
+                    <div class="input-section">
+                        <div class="input-header">
+                            <h2>Analyze Your Political Copy</h2>
+                            <div class="channel-selector">
+                                <label>Channel:</label>
+                                <select id="channel-select">
+                                    <option value="sms">SMS/Text</option>
+                                    <option value="email">Email</option>
+                                    <option value="social">Social Media</option>
+                                    <option value="winred">WinRed</option>
+                                    <option value="web">Website</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="copy-input-container">
+                            <textarea 
+                                id="copy-input" 
+                                placeholder="Paste your political copy here for AI analysis...
+
+Example: 'URGENT: The radical left is trying to defund our police! We need YOUR help to stop them. Donate $25 NOW to protect our communities. Time is running out!'"
+                                rows="6"
+                            ></textarea>
+                            <div class="input-tools">
+                                <div class="char-count">
+                                    <span id="char-count">0</span> characters
+                                </div>
+                                <button class="analyze-btn" id="analyze-btn">
+                                    <i class="fas fa-search"></i> Analyze Copy
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="results-section" id="results-section" style="display: none;">
+                        <div class="score-overview">
+                            <div class="main-score">
+                                <div class="score-circle">
+                                    <div class="score-value" id="main-score">85</div>
+                                    <div class="score-label">Overall Score</div>
+                                </div>
+                            </div>
+                            <div class="score-breakdown">
+                                <div class="metric">
+                                    <div class="metric-label">Engagement</div>
+                                    <div class="metric-bar">
+                                        <div class="metric-fill" style="width: 78%"></div>
+                                    </div>
+                                    <div class="metric-value">78%</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-label">Urgency</div>
+                                    <div class="metric-bar">
+                                        <div class="metric-fill" style="width: 92%"></div>
+                                    </div>
+                                    <div class="metric-value">92%</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-label">Clarity</div>
+                                    <div class="metric-bar">
+                                        <div class="metric-fill" style="width: 85%"></div>
+                                    </div>
+                                    <div class="metric-value">85%</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-label">Call-to-Action</div>
+                                    <div class="metric-bar">
+                                        <div class="metric-fill" style="width: 88%"></div>
+                                    </div>
+                                    <div class="metric-value">88%</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="insights-grid">
+                            <div class="insight-card positive">
+                                <div class="insight-header">
+                                    <i class="fas fa-thumbs-up"></i>
+                                    <h4>Strong Points</h4>
+                                </div>
+                                <ul id="positive-insights">
+                                    <li>Excellent urgency indicators ("URGENT", "NOW", "Time is running out")</li>
+                                    <li>Clear call-to-action with specific donation amount</li>
+                                    <li>Emotional appeal targeting security concerns</li>
+                                </ul>
+                            </div>
+
+                            <div class="insight-card negative">
+                                <div class="insight-header">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <h4>Areas for Improvement</h4>
+                                </div>
+                                <ul id="negative-insights">
+                                    <li>Message length may be too long for SMS (160+ chars)</li>
+                                    <li>Could benefit from personalization</li>
+                                    <li>Consider A/B testing different donation amounts</li>
+                                </ul>
+                            </div>
+
+                            <div class="insight-card suggestions">
+                                <div class="insight-header">
+                                    <i class="fas fa-lightbulb"></i>
+                                    <h4>AI Suggestions</h4>
+                                </div>
+                                <div id="ai-suggestions">
+                                    <div class="suggestion">
+                                        <strong>Shorter Version:</strong> "URGENT: Stop the radical left from defunding police! Donate $25 NOW to protect our communities!"
+                                    </div>
+                                    <div class="suggestion">
+                                        <strong>Personalized:</strong> "Hi [Name], your community needs YOU to stop police defunding. Donate $25 now!"
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="predicted-performance">
+                            <h3>Predicted Performance</h3>
+                            <div class="performance-grid">
+                                <div class="performance-metric">
+                                    <div class="metric-icon"><i class="fas fa-mouse-pointer"></i></div>
+                                    <div class="metric-info">
+                                        <div class="metric-title">Click Rate</div>
+                                        <div class="metric-prediction">12.5% ± 2.1%</div>
+                                    </div>
+                                </div>
+                                <div class="performance-metric">
+                                    <div class="metric-icon"><i class="fas fa-donate"></i></div>
+                                    <div class="metric-info">
+                                        <div class="metric-title">Donation Rate</div>
+                                        <div class="metric-prediction">3.2% ± 0.8%</div>
+                                    </div>
+                                </div>
+                                <div class="performance-metric">
+                                    <div class="metric-icon"><i class="fas fa-share"></i></div>
+                                    <div class="metric-info">
+                                        <div class="metric-title">Share Rate</div>
+                                        <div class="metric-prediction">1.8% ± 0.4%</div>
+                                    </div>
+                                </div>
+                                <div class="performance-metric">
+                                    <div class="metric-icon"><i class="fas fa-dollar-sign"></i></div>
+                                    <div class="metric-info">
+                                        <div class="metric-title">Avg. Donation</div>
+                                        <div class="metric-prediction">$47.50</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Generator Tab -->
+            <div class="tab-content" id="generator">
+                <div class="generator-container">
+                    <h2>AI Copy Generator</h2>
+                    <div class="generator-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Campaign Type</label>
+                                <select>
+                                    <option>Fundraising</option>
+                                    <option>Voter Mobilization</option>
+                                    <option>Issue Advocacy</option>
+                                    <option>Event Promotion</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Tone</label>
+                                <select>
+                                    <option>Urgent</option>
+                                    <option>Inspirational</option>
+                                    <option>Informational</option>
+                                    <option>Aggressive</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Key Message/Topic</label>
+                            <input type="text" placeholder="e.g., Healthcare reform, Tax cuts, Border security">
+                        </div>
+                        <div class="form-group">
+                            <label>Target Audience</label>
+                            <input type="text" placeholder="e.g., Conservative voters 45+, Young professionals, Rural communities">
+                        </div>
+                        <button class="generate-btn">
+                            <i class="fas fa-magic"></i> Generate Copy Variations
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Tab -->
+            <div class="tab-content" id="analytics">
+                <div class="analytics-container">
+                    <h2>Performance Analytics</h2>
+                    <div class="analytics-grid">
+                        <div class="analytics-card">
+                            <h3>Campaign Performance</h3>
+                            <div class="chart-placeholder">
+                                <i class="fas fa-chart-line"></i>
+                                <p>Interactive charts coming soon</p>
+                            </div>
+                        </div>
+                        <div class="analytics-card">
+                            <h3>Top Performing Messages</h3>
+                            <div class="top-messages">
+                                <div class="message-item">
+                                    <div class="message-text">"Join us in making history! Donate $25 today!"</div>
+                                    <div class="message-stats">CTR: 15.2% | Donations: $12,450</div>
+                                </div>
+                                <div class="message-item">
+                                    <div class="message-text">"Time is running out - we need your help NOW!"</div>
+                                    <div class="message-stats">CTR: 13.8% | Donations: $9,870</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Templates Tab -->
+            <div class="tab-content" id="templates">
+                <div class="templates-container">
+                    <h2>Proven Templates</h2>
+                    <div class="template-grid">
+                        <div class="template-card">
+                            <h4>Urgent Fundraising</h4>
+                            <p>"URGENT: [Issue] is under attack! We need $[Amount] by [Deadline] to fight back. Donate now!"</p>
+                            <button class="use-template-btn">Use Template</button>
+                        </div>
+                        <div class="template-card">
+                            <h4>Grassroots Mobilization</h4>
+                            <p>"Join thousands of [Supporters] fighting for [Cause]. Your voice matters - take action today!"</p>
+                            <button class="use-template-btn">Use Template</button>
+                        </div>
+                        <div class="template-card">
+                            <h4>Thank You & Ask</h4>
+                            <p>"Thanks to supporters like you, we've [Achievement]. Help us do more - donate $[Amount] today!"</p>
+                            <button class="use-template-btn">Use Template</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Chat Assistant (Floating) -->
+    <div class="chat-assistant" id="chat-assistant">
+        <div class="chat-header">
+            <div class="chat-title">
+                <i class="fas fa-robot"></i>
+                TAG Echo AI Assistant
+            </div>
+            <button class="chat-toggle" id="chat-toggle">
+                <i class="fas fa-minus"></i>
+            </button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="message ai-message">
+                <div class="message-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="message-content">
+                    Hi! I'm your TAG Echo AI assistant. I can help you analyze copy, generate new messages, and optimize your political campaigns. What would you like to work on today?
+                </div>
+            </div>
+        </div>
+        <div class="chat-input-container">
+            <input type="text" id="chat-input" placeholder="Ask me anything about your copy...">
+            <button class="chat-send" id="chat-send">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
