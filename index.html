@@ -34,19 +34,129 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="workspace-section">
-                <h3><i class="fas fa-folder"></i> Workspaces</h3>
-                <div class="workspace-list">
+                <div class="workspace-header">
+                    <h3><i class="fas fa-folder"></i> Workspaces</h3>
+                    <button class="workspace-toggle" id="workspace-toggle">
+                        <i class="fas fa-chevron-up"></i>
+                    </button>
+                </div>
+                <div class="workspace-content" id="workspace-content">
+                    <div class="workspace-search">
+                        <input type="text" id="workspace-search" placeholder="Search workspaces..." autocomplete="off">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="workspace-list" id="workspace-list">
                     <div class="workspace-item active">
                         <i class="fas fa-vote-yea"></i>
-                        <span>2024 Senate Campaign</span>
+                        <span>budd-for-senate-ct</span>
+                    </div>
+                    <div class="workspace-item">
+                        <i class="fas fa-vote-yea"></i>
+                        <span>butler-for-congress-tx-09</span>
+                    </div>
+                    <div class="workspace-item">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>dynamic-sports-medicine</span>
+                    </div>
+                    <div class="workspace-item">
+                        <i class="fas fa-fire"></i>
+                        <span>florida-firebrand-pac</span>
+                    </div>
+                    <div class="workspace-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>frontline-policy</span>
+                    </div>
+                    <div class="workspace-item">
+                        <i class="fas fa-home"></i>
+                        <span>gilkey-windows</span>
+                    </div>
+                    <div class="workspace-item">
+                        <i class="fas fa-vote-yea"></i>
+                        <span>hern-for-congress-ok-01</span>
+                    </div>
+                    <div class="workspace-item">
+                        <i class="fas fa-vote-yea"></i>
+                        <span>kennedy-for-senate-la</span>
+                    </div>
+                    <div class="workspace-item">
+                        <i class="fas fa-vote-yea"></i>
+                        <span>knight-for-congress-tn-7</span>
+                    </div>
+                    <div class="workspace-item">
+                        <i class="fas fa-star"></i>
+                        <span>lone-star-network</span>
+                    </div>
+                    <div class="workspace-item">
+                        <i class="fas fa-vote-yea"></i>
+                        <span>lopez-for-congress-ca-13</span>
+                    </div>
+                    <div class="workspace-item">
+                        <i class="fas fa-vote-yea"></i>
+                        <span>luttrell-for-congress-tx-08</span>
+                    </div>
+                    <div class="workspace-item">
+                        <i class="fas fa-vote-yea"></i>
+                        <span>males-for-congress-ca-25</span>
+                    </div>
+                    <div class="workspace-item">
+                        <i class="fas fa-vote-yea"></i>
+                        <span>miguez-for-senate-la</span>
+                    </div>
+                    <div class="workspace-item">
+                        <i class="fas fa-vote-yea"></i>
+                        <span>miller-meeks-for-congress-ia-01</span>
+                    </div>
+                    <div class="workspace-item">
+                        <i class="fas fa-vote-yea"></i>
+                        <span>moore-for-congress-wv-02</span>
+                    </div>
+                    <div class="workspace-item">
+                        <i class="fas fa-vote-yea"></i>
+                        <span>moore-for-senate-al</span>
+                    </div>
+                    <div class="workspace-item">
+                        <i class="fas fa-vote-yea"></i>
+                        <span>morris-for-senate-ky</span>
+                    </div>
+                    <div class="workspace-item">
+                        <i class="fas fa-history"></i>
+                        <span>old-general</span>
+                    </div>
+                    <div class="workspace-item">
+                        <i class="fas fa-vote-yea"></i>
+                        <span>owens-for-congress-ut-04</span>
                     </div>
                     <div class="workspace-item">
                         <i class="fas fa-flag-usa"></i>
-                        <span>Presidential PAC</span>
+                        <span>palmetto-patriots-pac</span>
                     </div>
                     <div class="workspace-item">
-                        <i class="fas fa-users"></i>
-                        <span>Local Elections</span>
+                        <i class="fas fa-utensils"></i>
+                        <span>perrys-restaurant-group</span>
+                    </div>
+                    <div class="workspace-item">
+                        <i class="fas fa-vote-yea"></i>
+                        <span>pino-for-congress-nj-09</span>
+                    </div>
+                    <div class="workspace-item">
+                        <i class="fas fa-balance-scale"></i>
+                        <span>reitz-for-attorney-general-tx</span>
+                    </div>
+                    <div class="workspace-item">
+                        <i class="fas fa-stop-circle"></i>
+                        <span>stop-newsom-pac</span>
+                    </div>
+                    <div class="workspace-item">
+                        <i class="fas fa-bullhorn"></i>
+                        <span>tag-siege-hdm</span>
+                    </div>
+                    <div class="workspace-item">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>tag-tech</span>
+                    </div>
+                    <div class="workspace-item">
+                        <i class="fas fa-vote-yea"></i>
+                        <span>tuberville-for-governor-al</span>
                     </div>
                 </div>
                 <button class="new-workspace-btn">
@@ -120,47 +230,101 @@
                 <div class="analyzer-container">
                     <div class="input-section">
                         <div class="input-header">
-                            <h2>Analyze Your Political Copy</h2>
-                            <div class="channel-selector">
-                                <label>Channel:</label>
-                                <select id="channel-select">
-                                    <option value="sms">SMS/Text</option>
-                                    <option value="email">Email</option>
-                                    <option value="social">Social Media</option>
-                                    <option value="winred">WinRed</option>
-                                    <option value="web">Website</option>
-                                </select>
+                            <h2>Paul's SMS Compliance Analyzer</h2>
+                            <p class="paul-rules-subtitle">Prevent Multi-Segment Messages & Double Client Costs</p>
+                            <div class="paul-rules-summary">
+                                <div class="rule-item">
+                                    <strong>124 chars</strong> without {FirstName}
+                                </div>
+                                <div class="rule-item">
+                                    <strong>116 chars</strong> with {FirstName}
+                                </div>
+                                <div class="rule-item">
+                                    <strong>+22 chars</strong> per link
+                                </div>
                             </div>
                         </div>
                         
-                        <div class="copy-input-container">
+                        <div class="sms-input-container">
+                            <label for="sms-message" class="input-label">Original Message</label>
                             <textarea 
-                                id="copy-input" 
-                                placeholder="Paste your political copy here for AI analysis...
+                                id="sms-message" 
+                                placeholder="Their Looney train's left the station.
 
-Example: 'URGENT: The radical left is trying to defund our police! We need YOUR help to stop them. Donate $25 NOW to protect our communities. Time is running out!'"
-                                rows="6"
+Midnight deadline looms. Chip in now & help us hold the line → https://move.gop/1dzwh
+
+- Sen. Kennedy
+
+Stop 2 End"
+                                rows="8"
                             ></textarea>
-                            <div class="input-tools">
-                                <div class="char-count">
-                                    <span id="char-count">0</span> characters
-                                </div>
-                                <button class="analyze-btn" id="analyze-btn">
-                                    <i class="fas fa-search"></i> Analyze Copy
+                            <div class="input-controls">
+                                <label class="checkbox-control">
+                                    <input type="checkbox" id="has-firstname-tag">
+                                    <span>Has {FirstName} tag</span>
+                                </label>
+                                <button class="analyze-btn" id="analyze-sms-btn">
+                                    <i class="fas fa-calculator"></i> Check Segments
                                 </button>
                             </div>
                         </div>
                     </div>
 
-                    <div class="results-section" id="results-section" style="display: none;">
-                        <div class="score-overview">
-                            <div class="main-score">
-                                <div class="score-circle">
-                                    <div class="score-value" id="main-score">85</div>
-                                    <div class="score-label">Overall Score</div>
+                    <!-- Paul's SMS Analysis Results (exact replica of screenshot) -->
+                    <div class="sms-analysis-results" id="sms-analysis-results" style="display: none;">
+                        
+                        <!-- Message Details Table (exactly like screenshot) -->
+                        <div class="message-details-card">
+                            <h3>Message Details</h3>
+                            <div class="details-table">
+                                <div class="table-header">
+                                    <span>Segments</span>
+                                    <span>Message Length</span>
+                                    <span>Max Segment Length</span>
+                                    <span>Encoding Type</span>
+                                </div>
+                                <div class="table-data">
+                                    <span id="segments-display" class="segment-count">3</span>
+                                    <span id="length-display">160</span>
+                                    <span id="max-length-display">201</span>
+                                    <span id="encoding-display">Unicode</span>
                                 </div>
                             </div>
-                            <div class="score-breakdown">
+                        </div>
+
+                        <!-- Character Breakdown Matrix (exactly like screenshot) -->
+                        <div class="character-breakdown-card">
+                            <h3>Message Breakdown</h3>
+                            <div class="character-matrix" id="character-matrix">
+                                <!-- Character squares will be populated here -->
+                            </div>
+                            
+                            <!-- Legend (exactly like screenshot) -->
+                            <div class="breakdown-legend">
+                                <h4>Legend</h4>
+                                <div class="legend-items">
+                                    <div class="legend-item">
+                                        <div class="legend-square gsm7"></div>
+                                        <span>Regular 7bit character, present in GSM7 character set</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-square unicode"></div>
+                                        <span>Unicode character. Character not present in GSM character set.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Paul's Business Rules Compliance Check -->
+                        <div class="compliance-status-card">
+                            <h3>Paul's Business Rules Compliance</h3>
+                            <div class="compliance-results" id="compliance-results">
+                                <!-- Compliance items will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
                                 <div class="metric">
                                     <div class="metric-label">Engagement</div>
                                     <div class="metric-bar">

@@ -11,6 +11,17 @@
     --warning-orange: #F97316;
     --error-red: #EF4444;
     
+    /* Light Mode Colors */
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #F9FAFB;
+    --bg-tertiary: #F3F4F6;
+    --text-primary: #111827;
+    --text-secondary: #374151;
+    --text-tertiary: #6B7280;
+    --border-primary: #E5E7EB;
+    --border-secondary: #D1D5DB;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    
     /* Neutrals */
     --white: #FFFFFF;
     --gray-50: #F9FAFB;
@@ -50,11 +61,46 @@
     --border-radius-xl: 1rem;
     
     /* Shadows */
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --shadow-sm: 0 1px 2px 0 var(--shadow-color);
+    --shadow: 0 1px 3px 0 var(--shadow-color), 0 1px 2px 0 var(--shadow-color);
+    --shadow-md: 0 4px 6px -1px var(--shadow-color), 0 2px 4px -1px var(--shadow-color);
+    --shadow-lg: 0 10px 15px -3px var(--shadow-color), 0 4px 6px -2px var(--shadow-color);
+    --shadow-xl: 0 20px 25px -5px var(--shadow-color), 0 10px 10px -5px var(--shadow-color);
+}
+
+/* Dark Mode Variables */
+[data-theme="dark"] {
+    /* Dark Mode Colors */
+    --bg-primary: #0F172A;
+    --bg-secondary: #1E293B;
+    --bg-tertiary: #334155;
+    --text-primary: #F1F5F9;
+    --text-secondary: #CBD5E1;
+    --text-tertiary: #94A3B8;
+    --border-primary: #334155;
+    --border-secondary: #475569;
+    --shadow-color: rgba(0, 0, 0, 0.4);
+    
+    /* Update gray scale for dark mode */
+    --gray-50: #0F172A;
+    --gray-100: #1E293B;
+    --gray-200: #334155;
+    --gray-300: #475569;
+    --gray-400: #64748B;
+    --gray-500: #94A3B8;
+    --gray-600: #CBD5E1;
+    --gray-700: #E2E8F0;
+    --gray-800: #F1F5F9;
+    --gray-900: #F8FAFC;
+    
+    /* Adjust brand colors for better contrast in dark mode */
+    --primary-red: #EF4444;
+    --primary-blue: #3B82F6;
+    --secondary-blue: #60A5FA;
+    --accent-gold: #FBBF24;
+    --success-green: #22C55E;
+    --warning-orange: #FB923C;
+    --error-red: #F87171;
 }
 
 /* Reset and Base Styles */
@@ -68,9 +114,10 @@ body {
     font-family: var(--font-family);
     font-size: var(--font-size-base);
     line-height: 1.5;
-    color: var(--gray-900);
-    background-color: var(--gray-50);
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
     overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Header */
@@ -166,21 +213,23 @@ body {
 /* Sidebar */
 .sidebar {
     width: 320px;
-    background: var(--white);
-    border-right: 1px solid var(--gray-200);
+    background: var(--bg-primary);
+    border-right: 1px solid var(--border-primary);
     padding: var(--spacing-6);
     overflow-y: auto;
     box-shadow: var(--shadow-sm);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .sidebar h3 {
     font-size: var(--font-size-lg);
     font-weight: 600;
-    color: var(--gray-800);
+    color: var(--text-primary);
     margin-bottom: var(--spacing-4);
     display: flex;
     align-items: center;
     gap: var(--spacing-2);
+    transition: color 0.3s ease;
 }
 
 .sidebar h3 i {
@@ -207,7 +256,7 @@ body {
 }
 
 .workspace-item:hover {
-    background: var(--gray-100);
+    background: var(--bg-tertiary);
 }
 
 .workspace-item.active {
@@ -221,9 +270,9 @@ body {
 
 .new-workspace-btn {
     width: 100%;
-    background: var(--gray-100);
-    border: 2px dashed var(--gray-300);
-    color: var(--gray-600);
+    background: var(--bg-tertiary);
+    border: 2px dashed var(--border-secondary);
+    color: var(--text-tertiary);
     padding: var(--spacing-3);
     border-radius: var(--border-radius);
     cursor: pointer;
@@ -232,7 +281,7 @@ body {
 }
 
 .new-workspace-btn:hover {
-    background: var(--gray-200);
+    background: var(--bg-secondary);
     border-color: var(--primary-blue);
     color: var(--primary-blue);
 }
@@ -245,14 +294,16 @@ body {
     padding: var(--spacing-3);
     border-radius: var(--border-radius);
     margin-bottom: var(--spacing-2);
-    background: var(--gray-50);
+    background: var(--bg-secondary);
     border-left: 4px solid var(--primary-red);
+    transition: background-color 0.3s ease;
 }
 
 .trend-title {
     font-weight: 500;
-    color: var(--gray-800);
+    color: var(--text-primary);
     margin-bottom: var(--spacing-1);
+    transition: color 0.3s ease;
 }
 
 .trend-sentiment {
@@ -285,34 +336,38 @@ body {
 }
 
 .project-item:hover {
-    background: var(--gray-100);
+    background: var(--bg-tertiary);
 }
 
 .project-name {
     font-weight: 500;
-    color: var(--gray-800);
+    color: var(--text-primary);
     margin-bottom: var(--spacing-1);
+    transition: color 0.3s ease;
 }
 
 .project-date {
     font-size: var(--font-size-sm);
-    color: var(--gray-500);
+    color: var(--text-tertiary);
+    transition: color 0.3s ease;
 }
 
 /* Main Content */
 .main-content {
     flex: 1;
-    background: var(--white);
+    background: var(--bg-primary);
     overflow-y: auto;
+    transition: background-color 0.3s ease;
 }
 
 .content-nav {
-    background: var(--white);
-    border-bottom: 1px solid var(--gray-200);
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border-primary);
     padding: 0 var(--spacing-6);
     position: sticky;
     top: 0;
     z-index: 50;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .nav-tabs {
@@ -326,7 +381,7 @@ body {
     padding: var(--spacing-4) var(--spacing-6);
     cursor: pointer;
     font-weight: 500;
-    color: var(--gray-600);
+    color: var(--text-tertiary);
     border-bottom: 3px solid transparent;
     transition: all 0.2s ease;
     display: flex;
@@ -336,13 +391,13 @@ body {
 
 .nav-tab:hover {
     color: var(--primary-blue);
-    background: var(--gray-50);
+    background: var(--bg-secondary);
 }
 
 .nav-tab.active {
     color: var(--primary-blue);
     border-bottom-color: var(--primary-blue);
-    background: var(--gray-50);
+    background: var(--bg-secondary);
 }
 
 /* Tab Content */
@@ -361,12 +416,13 @@ body {
 }
 
 .input-section {
-    background: var(--white);
+    background: var(--bg-primary);
     border-radius: var(--border-radius-lg);
     padding: var(--spacing-6);
     margin-bottom: var(--spacing-6);
     box-shadow: var(--shadow);
-    border: 1px solid var(--gray-200);
+    border: 1px solid var(--border-primary);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .input-header {
@@ -379,7 +435,8 @@ body {
 .input-header h2 {
     font-size: var(--font-size-2xl);
     font-weight: 700;
-    color: var(--gray-900);
+    color: var(--text-primary);
+    transition: color 0.3s ease;
 }
 
 .channel-selector {
@@ -390,15 +447,18 @@ body {
 
 .channel-selector label {
     font-weight: 500;
-    color: var(--gray-700);
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
 }
 
 .channel-selector select {
     padding: var(--spacing-2) var(--spacing-3);
-    border: 1px solid var(--gray-300);
+    border: 1px solid var(--border-secondary);
     border-radius: var(--border-radius);
-    background: var(--white);
+    background: var(--bg-primary);
+    color: var(--text-primary);
     font-size: var(--font-size-sm);
+    transition: all 0.3s ease;
 }
 
 .copy-input-container {
@@ -408,10 +468,12 @@ body {
 #copy-input {
     width: 100%;
     padding: var(--spacing-4);
-    border: 2px solid var(--gray-300);
+    border: 2px solid var(--border-secondary);
     border-radius: var(--border-radius-lg);
     font-size: var(--font-size-base);
     font-family: var(--font-family);
+    background: var(--bg-primary);
+    color: var(--text-primary);
     resize: vertical;
     transition: all 0.2s ease;
 }
@@ -419,7 +481,11 @@ body {
 #copy-input:focus {
     outline: none;
     border-color: var(--primary-blue);
-    box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+#copy-input::placeholder {
+    color: var(--text-tertiary);
 }
 
 .input-tools {
@@ -431,7 +497,8 @@ body {
 
 .char-count {
     font-size: var(--font-size-sm);
-    color: var(--gray-500);
+    color: var(--text-tertiary);
+    transition: color 0.3s ease;
 }
 
 .analyze-btn {
@@ -460,11 +527,12 @@ body {
 
 /* Results Section */
 .results-section {
-    background: var(--white);
+    background: var(--bg-primary);
     border-radius: var(--border-radius-lg);
     padding: var(--spacing-6);
     box-shadow: var(--shadow);
-    border: 1px solid var(--gray-200);
+    border: 1px solid var(--border-primary);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .score-overview {
@@ -472,7 +540,8 @@ body {
     gap: var(--spacing-8);
     margin-bottom: var(--spacing-8);
     padding-bottom: var(--spacing-6);
-    border-bottom: 1px solid var(--gray-200);
+    border-bottom: 1px solid var(--border-primary);
+    transition: border-color 0.3s ease;
 }
 
 .main-score {
@@ -496,8 +565,9 @@ body {
     position: absolute;
     width: 90px;
     height: 90px;
-    background: var(--white);
+    background: var(--bg-primary);
     border-radius: 50%;
+    transition: background-color 0.3s ease;
 }
 
 .score-value {
@@ -509,8 +579,9 @@ body {
 
 .score-label {
     font-size: var(--font-size-sm);
-    color: var(--gray-600);
+    color: var(--text-tertiary);
     z-index: 1;
+    transition: color 0.3s ease;
 }
 
 .score-breakdown {
@@ -527,15 +598,17 @@ body {
 .metric-label {
     width: 120px;
     font-weight: 500;
-    color: var(--gray-700);
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
 }
 
 .metric-bar {
     flex: 1;
     height: 8px;
-    background: var(--gray-200);
+    background: var(--border-primary);
     border-radius: 4px;
     overflow: hidden;
+    transition: background-color 0.3s ease;
 }
 
 .metric-fill {
@@ -548,7 +621,8 @@ body {
     width: 50px;
     text-align: right;
     font-weight: 600;
-    color: var(--gray-800);
+    color: var(--text-primary);
+    transition: color 0.3s ease;
 }
 
 /* Insights Grid */
@@ -560,25 +634,26 @@ body {
 }
 
 .insight-card {
-    background: var(--gray-50);
+    background: var(--bg-secondary);
     border-radius: var(--border-radius-lg);
     padding: var(--spacing-5);
     border-left: 4px solid var(--primary-blue);
+    transition: background-color 0.3s ease;
 }
 
 .insight-card.positive {
     border-left-color: var(--success-green);
-    background: #F0FDF4;
+    background: var(--bg-tertiary);
 }
 
 .insight-card.negative {
     border-left-color: var(--warning-orange);
-    background: #FFFBEB;
+    background: var(--bg-tertiary);
 }
 
 .insight-card.suggestions {
     border-left-color: var(--secondary-blue);
-    background: #EFF6FF;
+    background: var(--bg-tertiary);
 }
 
 .insight-header {
@@ -603,7 +678,8 @@ body {
 .insight-header h4 {
     font-size: var(--font-size-lg);
     font-weight: 600;
-    color: var(--gray-800);
+    color: var(--text-primary);
+    transition: color 0.3s ease;
 }
 
 .insight-card ul {
@@ -612,9 +688,10 @@ body {
 
 .insight-card li {
     padding: var(--spacing-2) 0;
-    color: var(--gray-700);
+    color: var(--text-secondary);
     position: relative;
     padding-left: var(--spacing-5);
+    transition: color 0.3s ease;
 }
 
 .insight-card li::before {
@@ -636,9 +713,10 @@ body {
 .suggestion {
     margin-bottom: var(--spacing-3);
     padding: var(--spacing-3);
-    background: var(--white);
+    background: var(--bg-primary);
     border-radius: var(--border-radius);
-    border: 1px solid var(--gray-200);
+    border: 1px solid var(--border-primary);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .suggestion strong {
@@ -649,8 +727,9 @@ body {
 .predicted-performance h3 {
     font-size: var(--font-size-xl);
     font-weight: 600;
-    color: var(--gray-900);
+    color: var(--text-primary);
     margin-bottom: var(--spacing-5);
+    transition: color 0.3s ease;
 }
 
 .performance-grid {
@@ -660,8 +739,8 @@ body {
 }
 
 .performance-metric {
-    background: var(--white);
-    border: 1px solid var(--gray-200);
+    background: var(--bg-primary);
+    border: 1px solid var(--border-primary);
     border-radius: var(--border-radius-lg);
     padding: var(--spacing-5);
     display: flex;

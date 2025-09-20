@@ -6,8 +6,284 @@ class TagEcho {
         this.currentTab = 'analyzer';
         this.chatMinimized = false;
         this.analysisResults = null;
+        this.workspaceTypes = this.initializeWorkspaceTypes();
         
         this.init();
+    }
+
+    initializeWorkspaceTypes() {
+        return {
+            // Workspace Type Definitions
+            TYPES: {
+                CANDIDATE: {
+                    id: 'candidate',
+                    name: 'Political Candidate',
+                    icon: 'fas fa-vote-yea',
+                    color: '#DC143C',
+                    description: 'Individual candidate campaigns',
+                    provisioning: {
+                        maxUsers: 25,
+                        features: ['sms', 'email', 'social', 'analytics', 'compliance'],
+                        storage: '10GB',
+                        apiCalls: 50000
+                    }
+                },
+                PAC: {
+                    id: 'pac',
+                    name: 'PAC',
+                    icon: 'fas fa-flag-usa',
+                    color: '#1E3A8A',
+                    description: 'Political Action Committee',
+                    provisioning: {
+                        maxUsers: 15,
+                        features: ['sms', 'email', 'social', 'analytics', 'compliance', 'donor-management'],
+                        storage: '25GB',
+                        apiCalls: 75000
+                    }
+                },
+                SUPER_PAC: {
+                    id: 'super_pac',
+                    name: 'Super PAC',
+                    icon: 'fas fa-star-and-crescent',
+                    color: '#F59E0B',
+                    description: 'Independent expenditure committees',
+                    provisioning: {
+                        maxUsers: 50,
+                        features: ['sms', 'email', 'social', 'analytics', 'compliance', 'donor-management', 'ie-tracking'],
+                        storage: '100GB',
+                        apiCalls: 150000
+                    }
+                },
+                PRIVATE_CLIENT: {
+                    id: 'private_client',
+                    name: 'Private Client',
+                    icon: 'fas fa-building',
+                    color: '#10B981',
+                    description: 'Private sector clients',
+                    provisioning: {
+                        maxUsers: 10,
+                        features: ['sms', 'email', 'social', 'analytics'],
+                        storage: '5GB',
+                        apiCalls: 25000
+                    }
+                },
+                INTERNAL: {
+                    id: 'internal',
+                    name: 'Internal',
+                    icon: 'fas fa-cog',
+                    color: '#6B7280',
+                    description: 'TAG internal operations',
+                    provisioning: {
+                        maxUsers: 100,
+                        features: ['all'],
+                        storage: 'unlimited',
+                        apiCalls: 'unlimited'
+                    }
+                }
+            },
+
+            // Workspace Classifications
+            WORKSPACES: {
+                'budd-for-senate-ct': {
+                    type: 'candidate',
+                    candidate: 'Ted Budd',
+                    office: 'U.S. Senate',
+                    state: 'Connecticut',
+                    election: '2024',
+                    status: 'active'
+                },
+                'butler-for-congress-tx-09': {
+                    type: 'candidate',
+                    candidate: 'Butler',
+                    office: 'U.S. House',
+                    district: 'TX-09',
+                    election: '2024',
+                    status: 'active'
+                },
+                'dynamic-sports-medicine': {
+                    type: 'private_client',
+                    industry: 'Healthcare/Sports Medicine',
+                    clientType: 'Medical Practice',
+                    status: 'active'
+                },
+                'florida-firebrand-pac': {
+                    type: 'pac',
+                    focus: 'Conservative Advocacy',
+                    state: 'Florida',
+                    status: 'active'
+                },
+                'frontline-policy': {
+                    type: 'pac',
+                    focus: 'Policy Advocacy',
+                    status: 'active'
+                },
+                'gilkey-windows': {
+                    type: 'private_client',
+                    industry: 'Construction/Home Improvement',
+                    clientType: 'Local Business',
+                    status: 'active'
+                },
+                'hern-for-congress-ok-01': {
+                    type: 'candidate',
+                    candidate: 'Kevin Hern',
+                    office: 'U.S. House',
+                    district: 'OK-01',
+                    election: '2024',
+                    status: 'active'
+                },
+                'kennedy-for-senate-la': {
+                    type: 'candidate',
+                    candidate: 'John Kennedy',
+                    office: 'U.S. Senate',
+                    state: 'Louisiana',
+                    election: '2024',
+                    status: 'active'
+                },
+                'knight-for-congress-tn-7': {
+                    type: 'candidate',
+                    candidate: 'Knight',
+                    office: 'U.S. House',
+                    district: 'TN-7',
+                    election: '2024',
+                    status: 'active'
+                },
+                'lone-star-network': {
+                    type: 'super_pac',
+                    focus: 'Texas Republican Support',
+                    state: 'Texas',
+                    status: 'active'
+                },
+                'lopez-for-congress-ca-13': {
+                    type: 'candidate',
+                    candidate: 'Lopez',
+                    office: 'U.S. House',
+                    district: 'CA-13',
+                    election: '2024',
+                    status: 'active'
+                },
+                'luttrell-for-congress-tx-08': {
+                    type: 'candidate',
+                    candidate: 'Morgan Luttrell',
+                    office: 'U.S. House',
+                    district: 'TX-08',
+                    election: '2024',
+                    status: 'active'
+                },
+                'males-for-congress-ca-25': {
+                    type: 'candidate',
+                    candidate: 'Males',
+                    office: 'U.S. House',
+                    district: 'CA-25',
+                    election: '2024',
+                    status: 'active'
+                },
+                'miguez-for-senate-la': {
+                    type: 'candidate',
+                    candidate: 'Miguez',
+                    office: 'U.S. Senate',
+                    state: 'Louisiana',
+                    election: '2024',
+                    status: 'active'
+                },
+                'miller-meeks-for-congress-ia-01': {
+                    type: 'candidate',
+                    candidate: 'Mariannette Miller-Meeks',
+                    office: 'U.S. House',
+                    district: 'IA-01',
+                    election: '2024',
+                    status: 'active'
+                },
+                'moore-for-congress-wv-02': {
+                    type: 'candidate',
+                    candidate: 'Moore',
+                    office: 'U.S. House',
+                    district: 'WV-02',
+                    election: '2024',
+                    status: 'active'
+                },
+                'moore-for-senate-al': {
+                    type: 'candidate',
+                    candidate: 'Moore',
+                    office: 'U.S. Senate',
+                    state: 'Alabama',
+                    election: '2024',
+                    status: 'active'
+                },
+                'morris-for-senate-ky': {
+                    type: 'candidate',
+                    candidate: 'Morris',
+                    office: 'U.S. Senate',
+                    state: 'Kentucky',
+                    election: '2024',
+                    status: 'active'
+                },
+                'old-general': {
+                    type: 'internal',
+                    purpose: 'General Discussion',
+                    status: 'active'
+                },
+                'owens-for-congress-ut-04': {
+                    type: 'candidate',
+                    candidate: 'Burgess Owens',
+                    office: 'U.S. House',
+                    district: 'UT-04',
+                    election: '2024',
+                    status: 'active'
+                },
+                'palmetto-patriots-pac': {
+                    type: 'pac',
+                    focus: 'South Carolina Conservative',
+                    state: 'South Carolina',
+                    status: 'active'
+                },
+                'perrys-restaurant-group': {
+                    type: 'private_client',
+                    industry: 'Food Service/Restaurant',
+                    clientType: 'Restaurant Chain',
+                    status: 'active'
+                },
+                'pino-for-congress-nj-09': {
+                    type: 'candidate',
+                    candidate: 'Pino',
+                    office: 'U.S. House',
+                    district: 'NJ-09',
+                    election: '2024',
+                    status: 'active'
+                },
+                'reitz-for-attorney-general-tx': {
+                    type: 'candidate',
+                    candidate: 'Reitz',
+                    office: 'Attorney General',
+                    state: 'Texas',
+                    election: '2024',
+                    status: 'active'
+                },
+                'stop-newsom-pac': {
+                    type: 'pac',
+                    focus: 'Anti-Newsom California',
+                    state: 'California',
+                    status: 'active'
+                },
+                'tag-siege-hdm': {
+                    type: 'internal',
+                    purpose: 'HDM Operations',
+                    status: 'active'
+                },
+                'tag-tech': {
+                    type: 'internal',
+                    purpose: 'Technology Development',
+                    status: 'active'
+                },
+                'tuberville-for-governor-al': {
+                    type: 'candidate',
+                    candidate: 'Tommy Tuberville',
+                    office: 'Governor',
+                    state: 'Alabama',
+                    election: '2026',
+                    status: 'active'
+                }
+            }
+        };
     }
 
     init() {
