@@ -2,9 +2,10 @@
 /* Inspired by TAG Strategies branding */
 
 :root {
-    /* TAG Strategies Brand Colors */
-    --primary-red: #DC143C;
-    --primary-blue: #1E3A8A;
+    /* TAG Strategies Enterprise Brand Colors */
+    --primary-black: #111111;
+    --primary-white: #FFFFFF;
+    --primary-blue: #0024E4;
     --secondary-blue: #3B82F6;
     --accent-gold: #F59E0B;
     --success-green: #10B981;
