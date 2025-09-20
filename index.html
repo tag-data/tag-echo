@@ -33,14 +33,14 @@
     <main class="hero">
         <div class="hero-container">
             <div class="hero-content">
-                <h1 class="hero-title">
-                    AI-powered copywriting<br>
-                    that drives results
-                </h1>
-                <p class="hero-subtitle">
-                    Create compelling political and marketing copy with advanced AI technology. 
-                    Analyze performance, optimize messaging, and scale your campaigns effortlessly.
-                </p>
+                    <h1 class="hero-title">
+                        Authentic. Creative. Consistent.<br>
+                        <span class="hero-tagline">Raise. Create. Win.</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Craft compelling political and marketing copy that resonates with your audience. 
+                        Our platform combines proven messaging strategies with cutting-edge technology to help you raise awareness, create impact, and win campaigns.
+                    </p>
                 <div class="hero-actions">
                     <button class="btn-primary" id="get-started">Get Started</button>
                     <button class="btn-secondary" id="watch-demo">
@@ -91,7 +91,7 @@
             <div class="section-header">
                 <h2 class="section-title">Everything you need to craft winning copy</h2>
                 <p class="section-subtitle">
-                    Powerful tools designed for political campaigns, marketing teams, and content creators
+                    <strong>Authentic, Creative, and Consistent</strong> tools designed for political campaigns, marketing teams, and content creators who are ready to <strong>Raise. Create. Win.</strong>
                 </p>
             </div>
             <div class="features-grid">
@@ -155,6 +155,26 @@
                         version control, and collaborative editing.
                     </p>
                 </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3 class="feature-title">P2P Analytics</h3>
+                    <p class="feature-description">
+                        Comprehensive procure-to-pay reporting with real-time insights 
+                        into spending patterns, vendor performance, and compliance metrics.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-receipt"></i>
+                    </div>
+                    <h3 class="feature-title">Spend Management</h3>
+                    <p class="feature-description">
+                        Track campaign expenditures, monitor budget utilization, 
+                        and ensure compliance with procurement policies across all vendors.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
@@ -163,10 +183,9 @@
     <section class="cta">
         <div class="cta-container">
             <div class="cta-content">
-                <h2 class="cta-title">Ready to transform your copywriting?</h2>
+                <h2 class="cta-title">Ready to Raise. Create. Win.?</h2>
                 <p class="cta-subtitle">
-                    Join thousands of successful campaigns using TAG Echo to create compelling, 
-                    high-converting copy that drives real results.
+                    Join successful campaigns using TAG Echo to create <strong>authentic, creative, and consistent</strong> copy that drives real results and wins elections.
                 </p>
                 <button class="btn-primary large" id="cta-get-started">Get Started Today</button>
                 <p class="cta-note">Free trial • No credit card required</p>
@@ -176,13 +195,569 @@
 
     <!-- Hidden App Interface -->
     <div class="app-interface hidden" id="app-interface">
-        <!-- Copy Analyzer Tab -->
-        <div class="analyzer-container">
-            <div class="input-section">
-                <div class="input-header">
-                    <h2>SMS Compliance Analyzer</h2>
-                    <p class="subtitle">Prevent Multi-Segment Messages & Double Client Costs</p>
+        <!-- App Header -->
+        <div class="app-header">
+            <div class="app-header-left">
+                <div class="app-brand">
+                    <span class="brand-name">TAG Echo</span>
+                    <span class="brand-subtitle">Raise. Create. Win.</span>
                 </div>
+            </div>
+            <div class="app-header-center">
+                <div class="workspace-selector">
+                    <div class="current-workspace">
+                        <div class="workspace-info">
+                            <span class="workspace-name">Miguez for Senate</span>
+                            <span class="workspace-type">Campaign</span>
+                        </div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="app-header-right">
+                <div class="header-controls">
+                    <div class="client-toggle">
+                        <button class="toggle-btn" id="external-toggle" data-mode="external">
+                            <span>Client</span>
+                        </button>
+                        <button class="toggle-btn active" id="internal-toggle" data-mode="internal">
+                            <span>Internal</span>
+                        </button>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-avatar">TC</div>
+                        <div class="user-info">
+                            <span class="user-name">Ted Clark</span>
+                            <span class="user-role" id="user-role">Internal Admin</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- App Layout -->
+        <div class="app-layout">
+            <!-- Sidebar -->
+            <div class="app-sidebar">
+                <!-- Navigation Tabs -->
+                <div class="sidebar-nav">
+                    <!-- External Client Navigation -->
+                    <div class="nav-group external-nav">
+                        <button class="nav-tab active" data-tab="analyzer">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>SMS Analyzer</span>
+                        </button>
+                        <button class="nav-tab" data-tab="templates">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Templates</span>
+                        </button>
+                        <button class="nav-tab" data-tab="analytics">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Analytics</span>
+                        </button>
+                        <button class="nav-tab" data-tab="campaigns">
+                            <i class="fas fa-bullhorn"></i>
+                            <span>Campaigns</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Internal Team Navigation -->
+                    <div class="nav-group internal-nav active">
+                        <button class="nav-tab active" data-tab="analyzer">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>SMS Analyzer</span>
+                        </button>
+                        <button class="nav-tab" data-tab="p2p-dashboard">
+                            <i class="fas fa-chart-line"></i>
+                            <span>P2P Analytics</span>
+                        </button>
+                        <button class="nav-tab" data-tab="procurement">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Procurement</span>
+                        </button>
+                        <button class="nav-tab" data-tab="compliance">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Compliance</span>
+                        </button>
+                        <button class="nav-tab" data-tab="looker-builder">
+                            <i class="fas fa-cube"></i>
+                            <span>Looker Builder</span>
+                        </button>
+                        <button class="nav-tab" data-tab="templates">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Templates</span>
+                        </button>
+                        <button class="nav-tab" data-tab="admin">
+                            <i class="fas fa-tools"></i>
+                            <span>Admin</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Workspace List -->
+                <div class="workspace-section">
+                    <div class="section-header">
+                        <h3>Workspaces</h3>
+                        <button class="new-workspace-btn" title="New Workspace">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="workspace-search">
+                        <input type="text" id="workspace-search" placeholder="Search workspaces...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="workspace-list" id="workspace-list">
+                        <!-- Senate Campaigns -->
+                        <div class="workspace-group">
+                            <div class="group-header">
+                                <i class="fas fa-landmark"></i>
+                                <span>Senate Campaigns</span>
+                            </div>
+                            <div class="workspace-item active">
+                                <div class="workspace-icon candidate">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Miguez for Senate LA</span>
+                                    <span class="workspace-meta">Louisiana • Internal Client</span>
+                                </div>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon candidate">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Kennedy for Senate LA</span>
+                                    <span class="workspace-meta">Louisiana • P2P Active</span>
+                                </div>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon candidate">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Morris for Senate KY</span>
+                                    <span class="workspace-meta">Kentucky • Internal Client</span>
+                                </div>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon candidate">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Moore for Senate AL</span>
+                                    <span class="workspace-meta">Alabama • Internal Client</span>
+                                </div>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon candidate">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Budd for Senate NC</span>
+                                    <span class="workspace-meta">North Carolina • P2P Active</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- House Campaigns -->
+                        <div class="workspace-group">
+                            <div class="group-header">
+                                <i class="fas fa-building-columns"></i>
+                                <span>House Campaigns</span>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon candidate">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Butler for Congress TX-09</span>
+                                    <span class="workspace-meta">Texas • Internal Client</span>
+                                </div>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon candidate">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Hern for Congress OK-01</span>
+                                    <span class="workspace-meta">Oklahoma • Voter Trove 90%</span>
+                                </div>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon candidate">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Knight for Congress TN-7</span>
+                                    <span class="workspace-meta">Tennessee • P2P Active</span>
+                                </div>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon candidate">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Lopez for Congress CA-13</span>
+                                    <span class="workspace-meta">California • Internal Client</span>
+                                </div>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon candidate">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Luttrell for Congress TX-08</span>
+                                    <span class="workspace-meta">Texas • P2P Active</span>
+                                </div>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon candidate">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Males for Congress CA-25</span>
+                                    <span class="workspace-meta">California • Internal Client</span>
+                                </div>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon candidate">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Miller-Meeks for Congress IA-01</span>
+                                    <span class="workspace-meta">Iowa • P2P Active</span>
+                                </div>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon candidate">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Moore for Congress WV-02</span>
+                                    <span class="workspace-meta">West Virginia • P2P Active</span>
+                                </div>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon candidate">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Owens for Congress UT-04</span>
+                                    <span class="workspace-meta">Utah • P2P Active</span>
+                                </div>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon candidate">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Pino for Congress NJ-09</span>
+                                    <span class="workspace-meta">New Jersey • Internal Client</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PACs & Organizations -->
+                        <div class="workspace-group">
+                            <div class="group-header">
+                                <i class="fas fa-flag-usa"></i>
+                                <span>PACs & Organizations</span>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon pac">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Florida Firebrand PAC</span>
+                                    <span class="workspace-meta">Conservative • Revenue Share</span>
+                                </div>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon pac">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Palmetto Patriots PAC</span>
+                                    <span class="workspace-meta">South Carolina • P2P Active</span>
+                                </div>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon pac">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Stop Newsom PAC</span>
+                                    <span class="workspace-meta">California • Rate Pending</span>
+                                </div>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon pac">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Frontline Policy</span>
+                                    <span class="workspace-meta">Policy Advocacy • API Access</span>
+                                </div>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon pac">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Lone Star Network</span>
+                                    <span class="workspace-meta">Texas Super PAC • P2P Active</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Private Clients -->
+                        <div class="workspace-group">
+                            <div class="group-header">
+                                <i class="fas fa-building"></i>
+                                <span>Private Clients</span>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon private">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Anderson Parker</span>
+                                    <span class="workspace-meta">Retail • Custom Lists</span>
+                                </div>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon private">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Dynamic Sports Medicine</span>
+                                    <span class="workspace-meta">Healthcare • P2P Active</span>
+                                </div>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon private">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Gilkey Windows</span>
+                                    <span class="workspace-meta">Construction • P2P Active</span>
+                                </div>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon private">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Perrys Restaurant Group</span>
+                                    <span class="workspace-meta">Food Service • P2P Active</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Account Managers & Teams -->
+                        <div class="workspace-group">
+                            <div class="group-header">
+                                <i class="fas fa-users"></i>
+                                <span>Account Management</span>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon team">
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Account Managers</span>
+                                    <span class="workspace-meta">Client Relations Team</span>
+                                </div>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon team">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Atlas Group</span>
+                                    <span class="workspace-meta">Data & Analytics</span>
+                                </div>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon team">
+                                    <i class="fas fa-newspaper"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Breaking News</span>
+                                    <span class="workspace-meta">Content & Messaging</span>
+                                </div>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon team">
+                                    <i class="fas fa-flag"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Billing Flags</span>
+                                    <span class="workspace-meta">Revenue Operations</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Internal Operations (only visible in internal mode) -->
+                        <div class="workspace-group internal-only">
+                            <div class="group-header">
+                                <i class="fas fa-cog"></i>
+                                <span>Internal Operations</span>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon internal">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">P2P Data</span>
+                                    <span class="workspace-meta">Live Operations Thread</span>
+                                </div>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon internal">
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">TAG Tech</span>
+                                    <span class="workspace-meta">Technology Development</span>
+                                </div>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon internal">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">TAG Siege HDM</span>
+                                    <span class="workspace-meta">HDM Operations</span>
+                                </div>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon internal">
+                                    <i class="fas fa-chart-bar"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Pipelines</span>
+                                    <span class="workspace-meta">Data Processing</span>
+                                </div>
+                            </div>
+                            <div class="workspace-item">
+                                <div class="workspace-icon internal">
+                                    <i class="fas fa-comments"></i>
+                                </div>
+                                <div class="workspace-details">
+                                    <span class="workspace-name">Old General</span>
+                                    <span class="workspace-meta">General Discussion</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trending Topics Sidebar -->
+                <div class="trending-sidebar internal-only">
+                    <div class="trending-header">
+                        <h3>Trending Topics</h3>
+                        <span class="trending-update">Updated 2 min ago</span>
+                    </div>
+                    <div class="trending-content">
+                        <div class="trending-section">
+                            <h4>Political Headlines</h4>
+                            <div class="trending-topics">
+                                <div class="topic-item hot">
+                                    <div class="topic-indicator"></div>
+                                    <div class="topic-content">
+                                        <span class="topic-title">Border Security Bill</span>
+                                        <span class="topic-engagement">+847% mentions</span>
+                                    </div>
+                                </div>
+                                <div class="topic-item trending">
+                                    <div class="topic-indicator"></div>
+                                    <div class="topic-content">
+                                        <span class="topic-title">Infrastructure Spending</span>
+                                        <span class="topic-engagement">+234% mentions</span>
+                                    </div>
+                                </div>
+                                <div class="topic-item rising">
+                                    <div class="topic-indicator"></div>
+                                    <div class="topic-content">
+                                        <span class="topic-title">Healthcare Reform</span>
+                                        <span class="topic-engagement">+156% mentions</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="trending-section">
+                            <h4>Social Media Buzz</h4>
+                            <div class="trending-topics">
+                                <div class="topic-item hot">
+                                    <div class="topic-indicator"></div>
+                                    <div class="topic-content">
+                                        <span class="topic-title">#DefundThePolice</span>
+                                        <span class="topic-engagement">127K tweets</span>
+                                    </div>
+                                </div>
+                                <div class="topic-item trending">
+                                    <div class="topic-indicator"></div>
+                                    <div class="topic-content">
+                                        <span class="topic-title">#TaxReform</span>
+                                        <span class="topic-engagement">89K tweets</span>
+                                    </div>
+                                </div>
+                                <div class="topic-item rising">
+                                    <div class="topic-indicator"></div>
+                                    <div class="topic-content">
+                                        <span class="topic-title">#AmericaFirst</span>
+                                        <span class="topic-engagement">67K tweets</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="trending-section">
+                            <h4>Content Opportunities</h4>
+                            <div class="content-suggestions">
+                                <div class="suggestion-item">
+                                    <i class="fas fa-lightbulb"></i>
+                                    <span>Border security messaging resonating strongly with base</span>
+                                </div>
+                                <div class="suggestion-item">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>Economic messaging showing 23% higher engagement</span>
+                                </div>
+                                <div class="suggestion-item">
+                                    <i class="fas fa-target"></i>
+                                    <span>Healthcare attacks effective in swing districts</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="trending-actions">
+                            <button class="trending-btn">
+                                <i class="fas fa-plus"></i>
+                                Generate Content
+                            </button>
+                            <button class="trending-btn secondary">
+                                <i class="fas fa-download"></i>
+                                Export Topics
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="app-main">
+
+        <!-- Copy Analyzer Tab -->
+        <div class="tab-content active" id="analyzer">
+            <div class="analyzer-container">
+                <div class="input-section">
+                    <div class="input-header">
+                        <h2>SMS Compliance Analyzer</h2>
+                        <p class="subtitle">Prevent Multi-Segment Messages & Double Client Costs</p>
+                    </div>
                 
                 <div class="sms-input-container">
                     <label for="sms-message" class="input-label">Message Content</label>
@@ -246,6 +821,1003 @@
                     <h3>Compliance Status</h3>
                     <div class="compliance-results" id="compliance-results"></div>
                 </div>
+            </div>
+        </div>
+
+        <!-- P2P Analytics Dashboard Tab -->
+        <div class="tab-content" id="p2p-dashboard">
+            <div class="p2p-container">
+                <div class="p2p-header">
+                    <div class="header-main">
+                        <h2>P2P Analytics - Miguez for Senate LA</h2>
+                        <p class="subtitle">Real-time campaign performance and spending insights</p>
+                    </div>
+                    <div class="live-counter-section">
+                        <div class="counter-label">Total Raised (Live)</div>
+                        <div class="live-counter">
+                            <span class="currency-symbol">$</span>
+                            <h2 class="counter--amount" id="live-raised-counter">2,847,239</h2>
+                        </div>
+                        <div class="counter-meta">
+                            <span class="counter-update">Updated 12 seconds ago</span>
+                            <span class="counter-status live">LIVE</span>
+                        </div>
+                    </div>
+                    <div class="p2p-filters">
+                        <select id="workspace-filter" class="filter-select">
+                            <option value="all">All Workspaces</option>
+                            <option value="internal">Internal Operations</option>
+                            <option value="campaigns">Campaign Workspaces</option>
+                            <option value="pac">PAC Workspaces</option>
+                        </select>
+                        <select id="period-filter" class="filter-select">
+                            <option value="30d">Last 30 Days</option>
+                            <option value="90d">Last 90 Days</option>
+                            <option value="ytd">Year to Date</option>
+                            <option value="custom">Custom Range</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Real P2P Issues from Team Operations -->
+                <div class="p2p-alerts">
+                    <div class="alert-card critical">
+                        <div class="alert-header">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <h3>Dashboard Sync Issues</h3>
+                            <span class="alert-status">Active</span>
+                        </div>
+                        <div class="alert-content">
+                            <p>Jobs from yesterday not showing on P2P dashboard - data pipeline broken</p>
+                            <div class="alert-actions">
+                                <button class="alert-btn primary">Trigger Manual Refresh</button>
+                                <button class="alert-btn secondary">View BigQuery Logs</button>
+                            </div>
+                            <div class="alert-meta">
+                                <span>Last seen: 30 minutes ago</span>
+                                <span>Affected: 15 clients</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert-card warning">
+                        <div class="alert-header">
+                            <i class="fas fa-filter"></i>
+                            <h3>Client Filtering Bug</h3>
+                            <span class="alert-status">Ongoing</span>
+                        </div>
+                        <div class="alert-content">
+                            <p>Internal client filter showing all TAG clients instead of filtered subset</p>
+                            <div class="alert-actions">
+                                <button class="alert-btn primary">Fix Filter Logic</button>
+                                <button class="alert-btn secondary">Update Client Mapping</button>
+                            </div>
+                            <div class="alert-meta">
+                                <span>Reported by: Austin Harrington</span>
+                                <span>Impact: Revenue reporting accuracy</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert-card info">
+                        <div class="alert-header">
+                            <i class="fas fa-users"></i>
+                            <h3>Audience Refresh Needed</h3>
+                            <span class="alert-status">Scheduled</span>
+                        </div>
+                        <div class="alert-content">
+                            <p>P2P audiences last refreshed in January - models need retraining</p>
+                            <div class="alert-actions">
+                                <button class="alert-btn primary">Refresh Audiences</button>
+                                <button class="alert-btn secondary">View Model Performance</button>
+                            </div>
+                            <div class="alert-meta">
+                                <span>Core list: 856K numbers</span>
+                                <span>Secondary tier: 810K numbers</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live P2P Operations Metrics -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                        <div class="metric-content">
+                            <h3 class="metric-value">159%</h3>
+                            <p class="metric-label">Current ROI</p>
+                            <span class="metric-change positive">Live campaigns</span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div class="metric-content">
+                            <h3 class="metric-value">856K</h3>
+                            <p class="metric-label">Core P2P List</p>
+                            <span class="metric-change positive">+14K this refresh</span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <div class="metric-content">
+                            <h3 class="metric-value">810K</h3>
+                            <p class="metric-label">Secondary Tier</p>
+                            <span class="metric-change neutral">Unused numbers</span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-sync"></i>
+                        </div>
+                        <div class="metric-content">
+                            <h3 class="metric-value">8 min</h3>
+                            <p class="metric-label">Dashboard Refresh</p>
+                            <span class="metric-change neutral">Auto-sync cycle</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rate Management Section -->
+                <div class="rate-management">
+                    <div class="section-header">
+                        <h3>P2P Rate Management</h3>
+                        <button class="rate-btn">
+                            <i class="fas fa-plus"></i>
+                            Add New Rate
+                        </button>
+                    </div>
+                    <div class="rate-alerts">
+                        <div class="rate-alert">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>HDM rates changing to 4/6/8 for January 2025</span>
+                            <button class="rate-update-btn">Update Rates</button>
+                        </div>
+                        <div class="rate-alert">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Tuberville-MT pairing missing rate assignment</span>
+                            <button class="rate-fix-btn">Fix Rate</button>
+                        </div>
+                    </div>
+                    <div class="recent-rates">
+                        <div class="rate-item">
+                            <span class="rate-client">Hunt Victory</span>
+                            <span class="rate-value">Standard Rate</span>
+                            <span class="rate-date">Expires: 2025-12-31</span>
+                            <span class="rate-status active">Active</span>
+                        </div>
+                        <div class="rate-item">
+                            <span class="rate-client">Stop Newsom PAC</span>
+                            <span class="rate-value">Standard Rate</span>
+                            <span class="rate-date">Added: Today</span>
+                            <span class="rate-status pending">Pending</span>
+                        </div>
+                        <div class="rate-item">
+                            <span class="rate-client">Hamadeh P2PM</span>
+                            <span class="rate-value">Backfill Rate</span>
+                            <span class="rate-date">Effective: Beginning</span>
+                            <span class="rate-status active">Active</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Process Flow Analysis -->
+                <div class="process-flow-section">
+                    <div class="section-header">
+                        <h3>P2P Process Flow Analysis</h3>
+                        <button class="process-optimize-btn">
+                            <i class="fas fa-magic"></i>
+                            Optimize Process
+                        </button>
+                    </div>
+                    <div class="process-timeline">
+                        <div class="process-step bottleneck">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Purchase Requisition</h4>
+                                <p>Avg: 2.3 days</p>
+                                <span class="bottleneck-indicator">Manual approval bottleneck</span>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Vendor Selection</h4>
+                                <p>Avg: 4.1 days</p>
+                                <span class="status-good">Automated</span>
+                            </div>
+                        </div>
+                        <div class="process-step bottleneck">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Purchase Order</h4>
+                                <p>Avg: 6.2 days</p>
+                                <span class="bottleneck-indicator">Approval delays</span>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>Invoice Processing</h4>
+                                <p>Avg: 3.1 days</p>
+                                <span class="status-good">Optimized</span>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <h4>Payment</h4>
+                                <p>Avg: 2.6 days</p>
+                                <span class="status-good">Automated</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vendor Risk Analysis -->
+                <div class="vendor-risk-section">
+                    <div class="section-header">
+                        <h3>Vendor Risk & Performance Matrix</h3>
+                        <div class="risk-filters">
+                            <button class="risk-filter active" data-risk="all">All Vendors</button>
+                            <button class="risk-filter" data-risk="high">High Risk</button>
+                            <button class="risk-filter" data-risk="medium">Medium Risk</button>
+                            <button class="risk-filter" data-risk="low">Low Risk</button>
+                        </div>
+                    </div>
+                    <div class="vendor-matrix">
+                        <div class="matrix-quadrant high-value-high-risk">
+                            <h4>High Value / High Risk</h4>
+                            <div class="vendor-bubble critical">
+                                <span class="vendor-name">Facebook Ads</span>
+                                <span class="vendor-spend">$487K</span>
+                            </div>
+                        </div>
+                        <div class="matrix-quadrant high-value-low-risk">
+                            <h4>High Value / Low Risk</h4>
+                            <div class="vendor-bubble optimal">
+                                <span class="vendor-name">Google Ads</span>
+                                <span class="vendor-spend">$398K</span>
+                            </div>
+                        </div>
+                        <div class="matrix-quadrant low-value-high-risk">
+                            <h4>Low Value / High Risk</h4>
+                            <div class="vendor-bubble warning">
+                                <span class="vendor-name">Local Print Co.</span>
+                                <span class="vendor-spend">$23K</span>
+                            </div>
+                        </div>
+                        <div class="matrix-quadrant low-value-low-risk">
+                            <h4>Low Value / Low Risk</h4>
+                            <div class="vendor-bubble stable">
+                                <span class="vendor-name">Office Depot</span>
+                                <span class="vendor-spend">$12K</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vendor Performance Table -->
+                <div class="vendor-performance">
+                    <div class="section-header">
+                        <h3>Top Vendor Performance</h3>
+                        <button class="export-btn">
+                            <i class="fas fa-download"></i>
+                            Export Report
+                        </button>
+                    </div>
+                    <div class="vendor-table">
+                        <div class="table-header">
+                            <span>Vendor</span>
+                            <span>Total Spend</span>
+                            <span>Orders</span>
+                            <span>Avg. Pay Time</span>
+                            <span>Performance</span>
+                        </div>
+                        <div class="table-row">
+                            <div class="vendor-info">
+                                <div class="vendor-avatar">FB</div>
+                                <div>
+                                    <div class="vendor-name">Facebook Ads</div>
+                                    <div class="vendor-category">Media & Advertising</div>
+                                </div>
+                            </div>
+                            <span class="spend-amount">$487,250</span>
+                            <span>89</span>
+                            <span>2.1 days</span>
+                            <div class="performance-badge excellent">Excellent</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="vendor-info">
+                                <div class="vendor-avatar">GG</div>
+                                <div>
+                                    <div class="vendor-name">Google Ads</div>
+                                    <div class="vendor-category">Media & Advertising</div>
+                                </div>
+                            </div>
+                            <span class="spend-amount">$398,100</span>
+                            <span>76</span>
+                            <span>1.8 days</span>
+                            <div class="performance-badge excellent">Excellent</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="vendor-info">
+                                <div class="vendor-avatar">MS</div>
+                                <div>
+                                    <div class="vendor-name">Microsoft Services</div>
+                                    <div class="vendor-category">Technology</div>
+                                </div>
+                            </div>
+                            <span class="spend-amount">$156,800</span>
+                            <span>23</span>
+                            <span>3.4 days</span>
+                            <div class="performance-badge good">Good</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="vendor-info">
+                                <div class="vendor-avatar">TW</div>
+                                <div>
+                                    <div class="vendor-name">Twitter Ads</div>
+                                    <div class="vendor-category">Media & Advertising</div>
+                                </div>
+                            </div>
+                            <span class="spend-amount">$134,500</span>
+                            <span>45</span>
+                            <span>5.2 days</span>
+                            <div class="performance-badge average">Average</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Procurement Tab -->
+        <div class="tab-content" id="procurement">
+            <div class="procurement-container">
+                <div class="section-header">
+                    <h2>Procurement Management</h2>
+                    <p class="subtitle">Streamline purchase requisitions and approvals</p>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <button class="action-btn primary">
+                        <i class="fas fa-plus"></i>
+                        New Purchase Request
+                    </button>
+                    <button class="action-btn secondary">
+                        <i class="fas fa-file-upload"></i>
+                        Bulk Import
+                    </button>
+                    <button class="action-btn secondary">
+                        <i class="fas fa-cog"></i>
+                        Approval Workflows
+                    </button>
+                </div>
+
+                <!-- Pending Approvals -->
+                <div class="pending-approvals">
+                    <h3>Pending Approvals</h3>
+                    <div class="approval-list">
+                        <div class="approval-item urgent">
+                            <div class="approval-info">
+                                <h4>Media Buy - Q4 Campaign</h4>
+                                <p>Requested by: Sarah Johnson • $45,000</p>
+                                <span class="approval-tag">Urgent</span>
+                            </div>
+                            <div class="approval-actions">
+                                <button class="approve-btn">Approve</button>
+                                <button class="reject-btn">Reject</button>
+                            </div>
+                        </div>
+                        <div class="approval-item">
+                            <div class="approval-info">
+                                <h4>Office Equipment Purchase</h4>
+                                <p>Requested by: Mike Chen • $3,200</p>
+                            </div>
+                            <div class="approval-actions">
+                                <button class="approve-btn">Approve</button>
+                                <button class="reject-btn">Reject</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Purchase Orders -->
+                <div class="recent-orders">
+                    <h3>Recent Purchase Orders</h3>
+                    <div class="orders-table">
+                        <div class="table-header">
+                            <span>PO Number</span>
+                            <span>Vendor</span>
+                            <span>Amount</span>
+                            <span>Status</span>
+                            <span>Date</span>
+                        </div>
+                        <div class="table-row">
+                            <span class="po-number">PO-2024-1247</span>
+                            <span>Facebook Ads</span>
+                            <span>$25,000</span>
+                            <span class="status delivered">Delivered</span>
+                            <span>Dec 15, 2024</span>
+                        </div>
+                        <div class="table-row">
+                            <span class="po-number">PO-2024-1246</span>
+                            <span>Google Ads</span>
+                            <span>$18,500</span>
+                            <span class="status pending">Pending</span>
+                            <span>Dec 14, 2024</span>
+                        </div>
+                        <div class="table-row">
+                            <span class="po-number">PO-2024-1245</span>
+                            <span>Microsoft Services</span>
+                            <span>$8,200</span>
+                            <span class="status approved">Approved</span>
+                            <span>Dec 13, 2024</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Compliance Tab -->
+        <div class="tab-content" id="compliance">
+            <div class="compliance-container">
+                <div class="section-header">
+                    <h2>Compliance & Risk Management</h2>
+                    <p class="subtitle">Ensure procurement policy adherence and risk mitigation</p>
+                </div>
+
+                <!-- Compliance Score -->
+                <div class="compliance-score-card">
+                    <div class="score-visual">
+                        <div class="score-circle">
+                            <div class="score-number">94</div>
+                            <div class="score-label">Compliance Score</div>
+                        </div>
+                    </div>
+                    <div class="score-breakdown">
+                        <div class="score-item">
+                            <span class="score-category">Policy Adherence</span>
+                            <div class="score-bar">
+                                <div class="score-fill" style="width: 96%"></div>
+                            </div>
+                            <span class="score-percent">96%</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="score-category">Documentation</span>
+                            <div class="score-bar">
+                                <div class="score-fill" style="width: 92%"></div>
+                            </div>
+                            <span class="score-percent">92%</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="score-category">Approval Process</span>
+                            <div class="score-bar">
+                                <div class="score-fill" style="width: 98%"></div>
+                            </div>
+                            <span class="score-percent">98%</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="score-category">Vendor Verification</span>
+                            <div class="score-bar">
+                                <div class="score-fill" style="width: 89%"></div>
+                            </div>
+                            <span class="score-percent">89%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Risk Alerts -->
+                <div class="risk-alerts">
+                    <h3>Risk Alerts</h3>
+                    <div class="alert-list">
+                        <div class="alert-item medium">
+                            <div class="alert-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="alert-content">
+                                <h4>Vendor Concentration Risk</h4>
+                                <p>Facebook Ads represents 20.3% of total spend. Consider diversification.</p>
+                                <span class="alert-date">2 hours ago</span>
+                            </div>
+                        </div>
+                        <div class="alert-item low">
+                            <div class="alert-icon">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                            <div class="alert-content">
+                                <h4>Contract Renewal Due</h4>
+                                <p>Microsoft Services contract expires in 30 days. Review required.</p>
+                                <span class="alert-date">1 day ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Audit Trail -->
+                <div class="audit-trail">
+                    <h3>Recent Audit Trail</h3>
+                    <div class="audit-list">
+                        <div class="audit-item">
+                            <div class="audit-timestamp">Dec 15, 2024 2:34 PM</div>
+                            <div class="audit-action">Purchase Order PO-2024-1247 approved by John Smith</div>
+                            <div class="audit-user">john.smith@tagstrategies.com</div>
+                        </div>
+                        <div class="audit-item">
+                            <div class="audit-timestamp">Dec 15, 2024 11:22 AM</div>
+                            <div class="audit-action">Vendor profile updated for Facebook Ads</div>
+                            <div class="audit-user">system@tagstrategies.com</div>
+                        </div>
+                        <div class="audit-item">
+                            <div class="audit-timestamp">Dec 14, 2024 4:15 PM</div>
+                            <div class="audit-action">New purchase request submitted by Sarah Johnson</div>
+                            <div class="audit-user">sarah.johnson@tagstrategies.com</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Templates Tab -->
+        <div class="tab-content" id="templates">
+            <div class="templates-container">
+                <div class="templates-header">
+                    <h2>Proven Message Templates</h2>
+                    <p class="subtitle">High-performing templates tested across thousands of successful campaigns</p>
+                </div>
+
+                <div class="templates-grid">
+                    <div class="template-card">
+                        <div class="template-header">
+                            <div class="template-category">SMS - Donation</div>
+                            <div class="template-performance">
+                                <span class="performance-badge">92% CTR</span>
+                            </div>
+                        </div>
+                        <div class="template-content">
+                            <p>URGENT: The radical left is trying to defund our police! We need YOUR help to stop them. Donate $25 NOW to protect our communities. Time is running out!</p>
+                        </div>
+                        <div class="template-actions">
+                            <button class="use-template-btn">
+                                <i class="fas fa-plus"></i>
+                                Use Template
+                            </button>
+                            <div class="template-stats">
+                                <span>158 chars • 1 segment</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="template-card">
+                        <div class="template-header">
+                            <div class="template-category">SMS - Urgency</div>
+                            <div class="template-performance">
+                                <span class="performance-badge">89% CTR</span>
+                            </div>
+                        </div>
+                        <div class="template-content">
+                            <p>🚨 BREAKING: Biden's policies are destroying America! Join thousands fighting back. Donate $15 to STOP the madness → [LINK]</p>
+                        </div>
+                        <div class="template-actions">
+                            <button class="use-template-btn">
+                                <i class="fas fa-plus"></i>
+                                Use Template
+                            </button>
+                            <div class="template-stats">
+                                <span>124 chars • 1 segment</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="template-card">
+                        <div class="template-header">
+                            <div class="template-category">SMS - Deadline</div>
+                            <div class="template-performance">
+                                <span class="performance-badge">94% CTR</span>
+                            </div>
+                        </div>
+                        <div class="template-content">
+                            <p>MIDNIGHT DEADLINE: We're $2,847 short of our goal! Can you chip in $25 to help us fight the radical agenda? Every dollar counts!</p>
+                        </div>
+                        <div class="template-actions">
+                            <button class="use-template-btn">
+                                <i class="fas fa-plus"></i>
+                                Use Template
+                            </button>
+                            <div class="template-stats">
+                                <span>142 chars • 1 segment</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="template-card">
+                        <div class="template-header">
+                            <div class="template-category">Email Subject</div>
+                            <div class="template-performance">
+                                <span class="performance-badge">76% Open Rate</span>
+                            </div>
+                        </div>
+                        <div class="template-content">
+                            <p>Re: Your Membership Status - URGENT ACTION REQUIRED</p>
+                        </div>
+                        <div class="template-actions">
+                            <button class="use-template-btn">
+                                <i class="fas fa-plus"></i>
+                                Use Template
+                            </button>
+                            <div class="template-stats">
+                                <span>48 chars • Email Subject</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="template-card">
+                        <div class="template-header">
+                            <div class="template-category">Social Media</div>
+                            <div class="template-performance">
+                                <span class="performance-badge">85% Engagement</span>
+                            </div>
+                        </div>
+                        <div class="template-content">
+                            <p>🇺🇸 PATRIOTS UNITE! The swamp is trying to silence us, but WE THE PEOPLE will not be stopped! Share if you stand with America! #MAGA #PatriotPower</p>
+                        </div>
+                        <div class="template-actions">
+                            <button class="use-template-btn">
+                                <i class="fas fa-plus"></i>
+                                Use Template
+                            </button>
+                            <div class="template-stats">
+                                <span>138 chars • Social Post</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="template-card">
+                        <div class="template-header">
+                            <div class="template-category">WinRed</div>
+                            <div class="template-performance">
+                                <span class="performance-badge">91% Conversion</span>
+                            </div>
+                        </div>
+                        <div class="template-content">
+                            <p>FINAL NOTICE: Donate $25 NOW to defend conservative values!</p>
+                        </div>
+                        <div class="template-actions">
+                            <button class="use-template-btn">
+                                <i class="fas fa-plus"></i>
+                                Use Template
+                            </button>
+                            <div class="template-stats">
+                                <span>63 chars • WinRed CTA</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Looker Builder Tab (Internal Only) -->
+            <div class="tab-content internal-only" id="looker-builder">
+                <div class="looker-container">
+                    <div class="looker-header">
+                        <h2>Custom Looker Report Builder</h2>
+                        <p class="subtitle">Build custom reports with GCP BigQuery integration</p>
+                        <div class="looker-status">
+                            <div class="status-indicator connected">
+                                <i class="fas fa-check-circle"></i>
+                                <span>GCP Connected</span>
+                            </div>
+                            <div class="status-indicator">
+                                <i class="fas fa-database"></i>
+                                <span>BigQuery: tag-strategies-prod</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="report-builder">
+                        <div class="builder-sidebar">
+                            <div class="data-sources">
+                                <h3>Data Sources</h3>
+                                <div class="source-tree">
+                                    <div class="source-group">
+                                        <div class="source-header">
+                                            <i class="fas fa-database"></i>
+                                            <span>Campaign Data</span>
+                                            <i class="fas fa-chevron-down"></i>
+                                        </div>
+                                        <div class="source-tables">
+                                            <div class="table-item" draggable="true">
+                                                <i class="fas fa-table"></i>
+                                                <span>sms_messages</span>
+                                            </div>
+                                            <div class="table-item" draggable="true">
+                                                <i class="fas fa-table"></i>
+                                                <span>email_campaigns</span>
+                                            </div>
+                                            <div class="table-item" draggable="true">
+                                                <i class="fas fa-table"></i>
+                                                <span>social_posts</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="source-group">
+                                        <div class="source-header">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            <span>P2P Data</span>
+                                            <i class="fas fa-chevron-down"></i>
+                                        </div>
+                                        <div class="source-tables">
+                                            <div class="table-item" draggable="true">
+                                                <i class="fas fa-table"></i>
+                                                <span>purchase_orders</span>
+                                            </div>
+                                            <div class="table-item" draggable="true">
+                                                <i class="fas fa-table"></i>
+                                                <span>vendors</span>
+                                            </div>
+                                            <div class="table-item" draggable="true">
+                                                <i class="fas fa-table"></i>
+                                                <span>invoices</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="source-group">
+                                        <div class="source-header">
+                                            <i class="fas fa-chart-bar"></i>
+                                            <span>Analytics</span>
+                                            <i class="fas fa-chevron-down"></i>
+                                        </div>
+                                        <div class="source-tables">
+                                            <div class="table-item" draggable="true">
+                                                <i class="fas fa-table"></i>
+                                                <span>campaign_metrics</span>
+                                            </div>
+                                            <div class="table-item" draggable="true">
+                                                <i class="fas fa-table"></i>
+                                                <span>user_engagement</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="builder-main">
+                            <div class="query-builder">
+                                <div class="builder-tabs">
+                                    <button class="builder-tab active" data-tab="visual">
+                                        <i class="fas fa-mouse-pointer"></i>
+                                        Visual Builder
+                                    </button>
+                                    <button class="builder-tab" data-tab="sql">
+                                        <i class="fas fa-code"></i>
+                                        SQL Editor
+                                    </button>
+                                </div>
+
+                                <div class="builder-content">
+                                    <div class="visual-builder active">
+                                        <div class="query-sections">
+                                            <div class="query-section">
+                                                <h4>Select Fields</h4>
+                                                <div class="drop-zone" id="select-fields">
+                                                    <div class="drop-placeholder">
+                                                        <i class="fas fa-plus-circle"></i>
+                                                        <span>Drag fields here</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="query-section">
+                                                <h4>Filters</h4>
+                                                <div class="drop-zone" id="filters">
+                                                    <div class="drop-placeholder">
+                                                        <i class="fas fa-filter"></i>
+                                                        <span>Add filters</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="query-section">
+                                                <h4>Group By</h4>
+                                                <div class="drop-zone" id="group-by">
+                                                    <div class="drop-placeholder">
+                                                        <i class="fas fa-layer-group"></i>
+                                                        <span>Group by fields</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="sql-builder">
+                                        <div class="sql-editor">
+                                            <textarea id="sql-query" placeholder="SELECT * FROM campaign_data WHERE...">
+-- Custom SQL Query
+SELECT 
+    campaign_name,
+    message_type,
+    COUNT(*) as message_count,
+    AVG(engagement_rate) as avg_engagement,
+    SUM(cost) as total_cost
+FROM campaign_data 
+WHERE created_date >= '2024-01-01'
+GROUP BY campaign_name, message_type
+ORDER BY total_cost DESC;</textarea>
+                                        </div>
+                                        <div class="sql-controls">
+                                            <button class="sql-btn format">
+                                                <i class="fas fa-align-left"></i>
+                                                Format
+                                            </button>
+                                            <button class="sql-btn validate">
+                                                <i class="fas fa-check"></i>
+                                                Validate
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="builder-actions">
+                                    <button class="action-btn secondary">
+                                        <i class="fas fa-save"></i>
+                                        Save Query
+                                    </button>
+                                    <button class="action-btn primary" id="run-query">
+                                        <i class="fas fa-play"></i>
+                                        Run Query
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="results-section">
+                                <div class="results-header">
+                                    <h3>Query Results</h3>
+                                    <div class="result-controls">
+                                        <button class="result-btn">
+                                            <i class="fas fa-table"></i>
+                                            Table
+                                        </button>
+                                        <button class="result-btn active">
+                                            <i class="fas fa-chart-bar"></i>
+                                            Chart
+                                        </button>
+                                        <button class="result-btn">
+                                            <i class="fas fa-download"></i>
+                                            Export
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="results-content">
+                                    <div class="sample-chart">
+                                        <canvas id="lookerChart" width="800" height="400"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Tab (Internal Only) -->
+            <div class="tab-content internal-only" id="admin">
+                <div class="admin-container">
+                    <div class="admin-header">
+                        <h2>System Administration</h2>
+                        <p class="subtitle">Manage users, permissions, and system settings</p>
+                    </div>
+
+                    <div class="admin-grid">
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <i class="fas fa-users"></i>
+                                <h3>User Management</h3>
+                            </div>
+                            <div class="admin-stats">
+                                <div class="stat">
+                                    <span class="stat-number">247</span>
+                                    <span class="stat-label">Active Users</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-number">12</span>
+                                    <span class="stat-label">Pending Invites</span>
+                                </div>
+                            </div>
+                            <button class="admin-btn">Manage Users</button>
+                        </div>
+
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <i class="fas fa-shield-alt"></i>
+                                <h3>Security & Permissions</h3>
+                            </div>
+                            <div class="admin-stats">
+                                <div class="stat">
+                                    <span class="stat-number">8</span>
+                                    <span class="stat-label">Role Templates</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-number">156</span>
+                                    <span class="stat-label">Custom Permissions</span>
+                                </div>
+                            </div>
+                            <button class="admin-btn">Security Settings</button>
+                        </div>
+
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <i class="fas fa-database"></i>
+                                <h3>Data Integration</h3>
+                            </div>
+                            <div class="admin-stats">
+                                <div class="stat">
+                                    <span class="stat-number">5</span>
+                                    <span class="stat-label">Connected Sources</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-number">99.9%</span>
+                                    <span class="stat-label">Uptime</span>
+                                </div>
+                            </div>
+                            <button class="admin-btn">Manage Integrations</button>
+                        </div>
+
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <i class="fas fa-cog"></i>
+                                <h3>System Settings</h3>
+                            </div>
+                            <div class="admin-stats">
+                                <div class="stat">
+                                    <span class="stat-number">24</span>
+                                    <span class="stat-label">Active Workspaces</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-number">3</span>
+                                    <span class="stat-label">Maintenance Windows</span>
+                                </div>
+                            </div>
+                            <button class="admin-btn">System Config</button>
+                        </div>
+                    </div>
+
+                    <div class="recent-activity">
+                        <h3>Recent System Activity</h3>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-user-plus"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <span class="activity-action">New user added: Sarah Johnson</span>
+                                    <span class="activity-time">2 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <span class="activity-action">BigQuery sync completed</span>
+                                    <span class="activity-time">4 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <span class="activity-action">Security policy updated</span>
+                                    <span class="activity-time">1 day ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             </div>
         </div>
     </div>

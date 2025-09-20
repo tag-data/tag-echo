@@ -1,0 +1,10 @@
+The function lives here: https://console.cloud.google.com/run/detail/us-central1/accounting-expenses/metrics?inv=1&invt=Abza0A&project=tag-stg-db
+
+This will read new files from this Google Drive folder, process the CSV by splitting expenses by employee and create new csv’s for quickbook format and just a generic CSV by employee format. Additionally it will append expenses to each respective employee's Google Sheet. The processed files can be found in this Google Drive folder.
+
+Processed folder/files example:
+
+
+If a new employee/card needs to be added to this process, enter the First/Last name of the employee AS IT APPEARS ON THE ORIGINALLY PULLED EXPENSE REPORT to this Google Sheet into column A, and then the respective employee’s expense Google Sheet ID to column B. Finally, you will need to give the Google Service account access to the new employee’s expense Google Sheet by clicking “Share” and adding this email address as an editor to the sheet: python-script@tag-stg-db.iam.gserviceaccount.com
+
+The function used to email the processed quickbook files to Amanda Walton, but Google has since updated their policy to no longer allow SMTP access via username/password only. So the function does everything it needs to do (process files and add to Google Drive, append expenses to employee’s Google Sheets, etc.) but it fails at the end when it tries to email the quickbook-formatted CSV’s to Amanda. She has since accommodated this change by just manually downloading the quickbook files from the Google Drive folder but if you want to re-implement the function to email the quickbook files to the appropriate accounting person at TAG, you will have to authorize the SMTP/Gmail portion of this code to utilize OAuth2. The error in the log message may be of some use: smtplib.SMTPAuthenticationError: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials e9e14a558f8ab-3ddcf1585bfsm19229515ab.30 - gsmtp')

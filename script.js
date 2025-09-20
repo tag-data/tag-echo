@@ -293,6 +293,7 @@ class TagEcho {
         this.setupCharacterCounter();
         this.setupChatAssistant();
         this.loadDemoData();
+        this.initializeLiveCounter();
     }
 
     setupEventListeners() {
@@ -367,7 +368,9 @@ class TagEcho {
             item.addEventListener('click', (e) => {
                 document.querySelectorAll('.workspace-item').forEach(i => i.classList.remove('active'));
                 e.currentTarget.classList.add('active');
-                this.switchWorkspace(e.currentTarget.textContent.trim());
+                const workspaceName = e.currentTarget.querySelector('.workspace-name').textContent;
+                const workspaceMeta = e.currentTarget.querySelector('.workspace-meta').textContent;
+                this.switchWorkspace(workspaceName, workspaceMeta);
             });
         });
 
@@ -417,6 +420,38 @@ class TagEcho {
         if (newWorkspaceBtn) {
             newWorkspaceBtn.addEventListener('click', () => {
                 this.createNewWorkspace();
+            });
+        }
+
+        // Export button functionality
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('export-btn') || e.target.closest('.export-btn')) {
+                e.preventDefault();
+                this.showExportOptions();
+            }
+        });
+
+        // Client toggle functionality
+        document.querySelectorAll('.toggle-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const mode = e.currentTarget.dataset.mode;
+                this.switchClientMode(mode);
+            });
+        });
+
+        // Get Started buttons
+        const getStartedBtn = document.getElementById('get-started');
+        const ctaGetStartedBtn = document.getElementById('cta-get-started');
+        
+        if (getStartedBtn) {
+            getStartedBtn.addEventListener('click', () => {
+                this.showAppInterface();
+            });
+        }
+        
+        if (ctaGetStartedBtn) {
+            ctaGetStartedBtn.addEventListener('click', () => {
+                this.showAppInterface();
             });
         }
     }
@@ -632,8 +667,8 @@ class TagEcho {
     
     checkSMSCompliance(message, analysis, effectiveLimit, hasFirstNameTag) {
         const rules = [];
-        const links = (text.match(/https?:\/\/[^\s]+/g) || []).length;
-        const baseLength = text.length;
+        const links = (message.match(/https?:\/\/[^\s]+/g) || []).length;
+        const baseLength = message.length;
         const adjustedLength = hasFirstNameTag ? baseLength + 8 : baseLength;
         const totalLength = adjustedLength + (links * 22); // Each link adds ~22 chars
         
@@ -683,9 +718,9 @@ class TagEcho {
         }
         
         // Rule 4: Multi-segment warning
-        if (segments > 1) {
+        if (analysis.segments > 1) {
             rules.push({
-                rule: `Multi-segment message: ${segments} segments (DOUBLES CLIENT COSTS!)`,
+                rule: `Multi-segment message: ${analysis.segments} segments (DOUBLES CLIENT COSTS!)`,
                 status: 'fail',
                 icon: 'fas fa-exclamation-triangle'
             });
@@ -698,7 +733,7 @@ class TagEcho {
         }
         
         // Rule 5: Character encoding
-        if (isUnicode) {
+        if (analysis.encoding === 'Unicode') {
             rules.push({
                 rule: 'Unicode encoding detected: Reduces character limit',
                 status: 'warning',
@@ -731,7 +766,7 @@ class TagEcho {
         }
         
         // Generate character matrix
-        this.generateCharacterMatrix(analysis.characters);
+        this.generateCharacterMatrix(analysis.characterBreakdown);
         
         // Update compliance results
         this.displayComplianceResults(analysis.compliance);
@@ -745,19 +780,19 @@ class TagEcho {
             const charSquare = document.createElement('div');
             charSquare.className = 'char-square';
             
-            if (charData.isSpace) {
+            if (charData.type === 'space') {
                 charSquare.className += ' space';
                 charSquare.textContent = '·'; // Middle dot for spaces
                 charSquare.title = 'Space';
-            } else if (charData.isNewline) {
+            } else if (charData.char === '\n') {
                 charSquare.className += ' gsm7';
                 charSquare.textContent = '↵';
                 charSquare.title = 'Newline';
-            } else if (charData.isGSM7) {
+            } else if (charData.type === 'gsm7') {
                 charSquare.className += ' gsm7';
                 charSquare.textContent = charData.char;
                 charSquare.title = `GSM 7-bit: ${charData.char}`;
-            } else {
+            } else if (charData.type === 'unicode') {
                 charSquare.className += ' unicode';
                 charSquare.textContent = charData.char;
                 charSquare.title = `Unicode: ${charData.char}`;
@@ -1030,9 +1065,81 @@ class TagEcho {
         this.showNotification('AI Copy Generator coming soon! This will integrate with advanced language models.', 'info');
     }
 
-    switchWorkspace(workspaceName) {
-        this.showNotification(`Switched to workspace: ${workspaceName}`, 'success');
-        // In a real app, this would load workspace-specific data
+    switchWorkspace(workspaceName, workspaceMeta) {
+        // Update header workspace display
+        const workspaceNameEl = document.querySelector('.workspace-name');
+        const workspaceTypeEl = document.querySelector('.workspace-type');
+        
+        if (workspaceNameEl) {
+            workspaceNameEl.textContent = workspaceName;
+        }
+        
+        if (workspaceTypeEl) {
+            // Extract type from meta (e.g., "Louisiana • Internal Client" -> "Internal Client")
+            const type = workspaceMeta.split('•').pop().trim();
+            workspaceTypeEl.textContent = type;
+        }
+        
+        // Update the live counter for the selected workspace
+        this.updateCounterForWorkspace(workspaceName, workspaceMeta);
+        
+        // Show different content based on workspace type
+        if (workspaceMeta.includes('Internal Client')) {
+            this.loadInternalClientData(workspaceName);
+        } else if (workspaceMeta.includes('P2P Active')) {
+            this.loadP2PClientData(workspaceName);
+        } else if (workspaceMeta.includes('Revenue Share')) {
+            this.loadRevenueShareData(workspaceName);
+        }
+        
+        this.showNotification(`Switched to: ${workspaceName}`, 'success');
+    }
+    
+    loadInternalClientData(clientName) {
+        // Load internal client specific data
+        console.log(`Loading internal client data for: ${clientName}`);
+        
+        // Update P2P dashboard with client-specific metrics
+        this.updateP2PMetrics({
+            type: 'internal',
+            client: clientName,
+            showFullAccess: true
+        });
+    }
+    
+    loadP2PClientData(clientName) {
+        // Load P2P client specific data
+        console.log(`Loading P2P client data for: ${clientName}`);
+        
+        // Update dashboard with P2P specific metrics
+        this.updateP2PMetrics({
+            type: 'p2p',
+            client: clientName,
+            showLimitedAccess: true
+        });
+    }
+    
+    loadRevenueShareData(clientName) {
+        // Load revenue share client data
+        console.log(`Loading revenue share data for: ${clientName}`);
+        
+        // Update dashboard with revenue share metrics
+        this.updateP2PMetrics({
+            type: 'revshare',
+            client: clientName,
+            showRevenueMetrics: true
+        });
+    }
+    
+    updateP2PMetrics(config) {
+        // Update the P2P dashboard with client-specific data
+        const dashboardTitle = document.querySelector('.header-main h2');
+        if (dashboardTitle) {
+            dashboardTitle.textContent = `P2P Analytics - ${config.client}`;
+        }
+        
+        // Update the live counter for this client
+        this.updateCounterForWorkspace(config.client, config.type);
     }
 
     loadProject(projectName) {
@@ -1198,6 +1305,133 @@ class TagEcho {
             this.showNotification(`Workspace "${cleanName}" created successfully!`, 'success');
         }
     }
+
+    showExportOptions() {
+        // Create export modal
+        const modal = document.createElement('div');
+        modal.className = 'export-modal-overlay';
+        modal.innerHTML = `
+            <div class="export-modal">
+                <div class="export-modal-header">
+                    <h3>Export P2P Analytics Report</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="export-modal-body">
+                    <p>Choose your preferred export format:</p>
+                    <div class="export-options">
+                        <button class="export-option" data-format="pdf">
+                            <i class="fas fa-file-pdf"></i>
+                            <span>PDF Report</span>
+                            <small>Formatted report for viewing and printing</small>
+                        </button>
+                        <button class="export-option" data-format="csv">
+                            <i class="fas fa-file-csv"></i>
+                            <span>CSV Data</span>
+                            <small>Raw data for analysis and import</small>
+                        </button>
+                        <button class="export-option" data-format="excel">
+                            <i class="fas fa-file-excel"></i>
+                            <span>Excel Spreadsheet</span>
+                            <small>Formatted data for Excel analysis</small>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+
+        // Add event listeners
+        modal.querySelector('.close-modal').addEventListener('click', () => {
+            document.body.removeChild(modal);
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                document.body.removeChild(modal);
+            }
+        });
+
+        modal.querySelectorAll('.export-option').forEach(option => {
+            option.addEventListener('click', (e) => {
+                const format = e.currentTarget.dataset.format;
+                this.exportP2PReport(format);
+                document.body.removeChild(modal);
+            });
+        });
+
+        // Animate modal in
+        setTimeout(() => {
+            modal.classList.add('show');
+        }, 10);
+    }
+
+    switchClientMode(mode) {
+        const appInterface = document.getElementById('app-interface');
+        const toggleBtns = document.querySelectorAll('.toggle-btn');
+        const userRole = document.getElementById('user-role');
+        
+        // Update toggle buttons
+        toggleBtns.forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.dataset.mode === mode) {
+                btn.classList.add('active');
+            }
+        });
+        
+        // Update app interface mode
+        appInterface.classList.remove('internal-mode', 'external-mode');
+        appInterface.classList.add(`${mode}-mode`);
+        
+        // Update navigation groups
+        const navGroups = document.querySelectorAll('.nav-group');
+        navGroups.forEach(group => {
+            group.classList.remove('active');
+        });
+        
+        const activeNavGroup = document.querySelector(`.${mode}-nav`);
+        if (activeNavGroup) {
+            activeNavGroup.classList.add('active');
+        }
+        
+        // Update user role based on mode
+        if (mode === 'external') {
+            userRole.textContent = 'Campaign Manager';
+            this.showNotification('Switched to External Client view', 'info');
+            
+            // Switch to a safe tab for external users
+            this.switchTab('analyzer');
+        } else {
+            userRole.textContent = 'Internal Admin';
+            this.showNotification('Switched to Internal Team view', 'info');
+        }
+        
+        // Update workspace visibility
+        const internalWorkspaces = document.querySelectorAll('.internal-only');
+        internalWorkspaces.forEach(workspace => {
+            if (mode === 'internal') {
+                workspace.style.display = 'block';
+            } else {
+                workspace.style.display = 'none';
+            }
+        });
+    }
+
+    showAppInterface() {
+        // Hide the marketing homepage content
+        document.querySelector('.hero').style.display = 'none';
+        document.querySelector('.features').style.display = 'none';
+        document.querySelector('.cta').style.display = 'none';
+        
+        // Show the app interface
+        const appInterface = document.getElementById('app-interface');
+        appInterface.classList.remove('hidden');
+        
+        // Smooth scroll to app interface
+        appInterface.scrollIntoView({ behavior: 'smooth' });
+        
+        this.showNotification('Welcome to TAG Echo! Start by analyzing your SMS messages.', 'success');
+    }
 }
 
 // Add CSS animations for notifications
@@ -1227,14 +1461,6 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Initialize the application when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    window.tagEcho = new TagEcho();
-    
-    // Add some demo interactions
-    console.log('🚀 TAG Echo initialized successfully!');
-    console.log('💡 Try analyzing some political copy to see the AI in action');
-});
 
 // Add keyboard shortcuts
 document.addEventListener('keydown', (e) => {
@@ -1253,6 +1479,349 @@ document.addEventListener('keydown', (e) => {
         window.tagEcho.toggleChat();
     }
 });
+
+    // P2P Export functionality
+    exportP2PReport(format = 'pdf') {
+        const reportData = this.generateP2PReportData();
+        
+        switch (format.toLowerCase()) {
+            case 'pdf':
+                this.exportToPDF(reportData);
+                break;
+            case 'csv':
+                this.exportToCSV(reportData);
+                break;
+            case 'excel':
+                this.exportToExcel(reportData);
+                break;
+            default:
+                this.showNotification('Unsupported export format', 'error');
+        }
+    }
+
+    generateP2PReportData() {
+        const currentDate = new Date().toLocaleDateString();
+        const workspace = document.querySelector('.workspace-name')?.textContent || 'All Workspaces';
+        
+        return {
+            metadata: {
+                title: 'Procure-to-Pay Analytics Report',
+                workspace: workspace,
+                generatedDate: currentDate,
+                period: '30 Days',
+                generatedBy: 'Ted Clark'
+            },
+            metrics: {
+                totalSpend: '$2,400,000',
+                purchaseOrders: '1,247',
+                activeVendors: '156',
+                avgPayTime: '4.2 days'
+            },
+            vendors: [
+                { name: 'Facebook Ads', category: 'Media & Advertising', spend: '$487,250', orders: 89, payTime: '2.1 days', performance: 'Excellent' },
+                { name: 'Google Ads', category: 'Media & Advertising', spend: '$398,100', orders: 76, payTime: '1.8 days', performance: 'Excellent' },
+                { name: 'Microsoft Services', category: 'Technology', spend: '$156,800', orders: 23, payTime: '3.4 days', performance: 'Good' },
+                { name: 'Twitter Ads', category: 'Media & Advertising', spend: '$134,500', orders: 45, payTime: '5.2 days', performance: 'Average' },
+                { name: 'Salesforce', category: 'Technology', spend: '$98,200', orders: 12, payTime: '2.8 days', performance: 'Good' },
+                { name: 'Adobe Creative Suite', category: 'Software', spend: '$45,600', orders: 8, payTime: '1.5 days', performance: 'Excellent' }
+            ],
+            categories: [
+                { name: 'Media & Advertising', spend: '$1,080,000', percentage: '45%' },
+                { name: 'Technology Services', spend: '$600,000', percentage: '25%' },
+                { name: 'Professional Services', spend: '$360,000', percentage: '15%' },
+                { name: 'Office Supplies', spend: '$240,000', percentage: '10%' },
+                { name: 'Other', spend: '$120,000', percentage: '5%' }
+            ],
+            compliance: {
+                score: 94,
+                policyAdherence: 96,
+                documentation: 92,
+                approvalProcess: 98,
+                vendorVerification: 89
+            }
+        };
+    }
+
+    exportToPDF(data) {
+        // Create PDF content
+        const pdfContent = `
+<!DOCTYPE html>
+<html>
+<head>
+    <title>P2P Analytics Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .title { font-size: 24px; font-weight: bold; color: #333; }
+        .subtitle { color: #666; margin-top: 10px; }
+        .section { margin: 30px 0; }
+        .section h2 { color: #007AFF; border-bottom: 2px solid #007AFF; padding-bottom: 5px; }
+        .metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin: 20px 0; }
+        .metric-card { border: 1px solid #ddd; padding: 15px; border-radius: 8px; text-align: center; }
+        .metric-value { font-size: 24px; font-weight: bold; color: #007AFF; }
+        .metric-label { color: #666; margin-top: 5px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #f5f5f5; font-weight: bold; }
+        .performance-excellent { color: #30D158; font-weight: bold; }
+        .performance-good { color: #007AFF; font-weight: bold; }
+        .performance-average { color: #FF9F0A; font-weight: bold; }
+        .footer { margin-top: 50px; text-align: center; color: #666; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="title">${data.metadata.title}</div>
+        <div class="subtitle">Workspace: ${data.metadata.workspace} | Period: ${data.metadata.period}</div>
+        <div class="subtitle">Generated: ${data.metadata.generatedDate} by ${data.metadata.generatedBy}</div>
+    </div>
+
+    <div class="section">
+        <h2>Key Metrics</h2>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-value">${data.metrics.totalSpend}</div>
+                <div class="metric-label">Total Spend</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">${data.metrics.purchaseOrders}</div>
+                <div class="metric-label">Purchase Orders</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">${data.metrics.activeVendors}</div>
+                <div class="metric-label">Active Vendors</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">${data.metrics.avgPayTime}</div>
+                <div class="metric-label">Avg. Pay Time</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Top Vendor Performance</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Vendor</th>
+                    <th>Category</th>
+                    <th>Total Spend</th>
+                    <th>Orders</th>
+                    <th>Avg. Pay Time</th>
+                    <th>Performance</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${data.vendors.map(vendor => `
+                    <tr>
+                        <td>${vendor.name}</td>
+                        <td>${vendor.category}</td>
+                        <td>${vendor.spend}</td>
+                        <td>${vendor.orders}</td>
+                        <td>${vendor.payTime}</td>
+                        <td class="performance-${vendor.performance.toLowerCase()}">${vendor.performance}</td>
+                    </tr>
+                `).join('')}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Category Breakdown</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Total Spend</th>
+                    <th>Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${data.categories.map(category => `
+                    <tr>
+                        <td>${category.name}</td>
+                        <td>${category.spend}</td>
+                        <td>${category.percentage}</td>
+                    </tr>
+                `).join('')}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Compliance Score</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Overall Compliance Score</strong></td>
+                    <td><strong>${data.compliance.score}%</strong></td>
+                </tr>
+                <tr>
+                    <td>Policy Adherence</td>
+                    <td>${data.compliance.policyAdherence}%</td>
+                </tr>
+                <tr>
+                    <td>Documentation</td>
+                    <td>${data.compliance.documentation}%</td>
+                </tr>
+                <tr>
+                    <td>Approval Process</td>
+                    <td>${data.compliance.approvalProcess}%</td>
+                </tr>
+                <tr>
+                    <td>Vendor Verification</td>
+                    <td>${data.compliance.vendorVerification}%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer">
+        <p>This report was generated by TAG Echo - Copywriting Intelligence Platform</p>
+        <p>© 2024 TAG Strategies. All rights reserved.</p>
+    </div>
+</body>
+</html>`;
+
+        // Convert HTML to PDF and download
+        const printWindow = window.open('', '_blank');
+        printWindow.document.write(pdfContent);
+        printWindow.document.close();
+        
+        setTimeout(() => {
+            printWindow.print();
+            printWindow.close();
+        }, 500);
+
+        this.showNotification('PDF report generated successfully!', 'success');
+    }
+
+    exportToCSV(data) {
+        let csvContent = '';
+        
+        // Add metadata
+        csvContent += `P2P Analytics Report\n`;
+        csvContent += `Workspace,${data.metadata.workspace}\n`;
+        csvContent += `Period,${data.metadata.period}\n`;
+        csvContent += `Generated,${data.metadata.generatedDate}\n`;
+        csvContent += `Generated By,${data.metadata.generatedBy}\n\n`;
+        
+        // Add key metrics
+        csvContent += `KEY METRICS\n`;
+        csvContent += `Metric,Value\n`;
+        csvContent += `Total Spend,${data.metrics.totalSpend}\n`;
+        csvContent += `Purchase Orders,${data.metrics.purchaseOrders}\n`;
+        csvContent += `Active Vendors,${data.metrics.activeVendors}\n`;
+        csvContent += `Avg Pay Time,${data.metrics.avgPayTime}\n\n`;
+        
+        // Add vendor data
+        csvContent += `VENDOR PERFORMANCE\n`;
+        csvContent += `Vendor Name,Category,Total Spend,Orders,Avg Pay Time,Performance\n`;
+        data.vendors.forEach(vendor => {
+            csvContent += `${vendor.name},${vendor.category},${vendor.spend},${vendor.orders},${vendor.payTime},${vendor.performance}\n`;
+        });
+        
+        csvContent += `\nCATEGORY BREAKDOWN\n`;
+        csvContent += `Category,Total Spend,Percentage\n`;
+        data.categories.forEach(category => {
+            csvContent += `${category.name},${category.spend},${category.percentage}\n`;
+        });
+        
+        csvContent += `\nCOMPLIANCE SCORES\n`;
+        csvContent += `Category,Score\n`;
+        csvContent += `Overall Compliance Score,${data.compliance.score}%\n`;
+        csvContent += `Policy Adherence,${data.compliance.policyAdherence}%\n`;
+        csvContent += `Documentation,${data.compliance.documentation}%\n`;
+        csvContent += `Approval Process,${data.compliance.approvalProcess}%\n`;
+        csvContent += `Vendor Verification,${data.compliance.vendorVerification}%\n`;
+
+        // Create and download CSV file
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        
+        link.setAttribute('href', url);
+        link.setAttribute('download', `P2P_Analytics_Report_${data.metadata.generatedDate.replace(/\//g, '-')}.csv`);
+        link.style.visibility = 'hidden';
+        
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        this.showNotification('CSV report downloaded successfully!', 'success');
+    }
+
+    exportToExcel(data) {
+        // Create Excel-compatible HTML table
+        let excelContent = `
+            <table>
+                <tr><td colspan="6"><strong>P2P Analytics Report</strong></td></tr>
+                <tr><td>Workspace:</td><td>${data.metadata.workspace}</td></tr>
+                <tr><td>Period:</td><td>${data.metadata.period}</td></tr>
+                <tr><td>Generated:</td><td>${data.metadata.generatedDate}</td></tr>
+                <tr><td>Generated By:</td><td>${data.metadata.generatedBy}</td></tr>
+                <tr><td></td></tr>
+                
+                <tr><td colspan="6"><strong>KEY METRICS</strong></td></tr>
+                <tr><td>Total Spend</td><td>${data.metrics.totalSpend}</td></tr>
+                <tr><td>Purchase Orders</td><td>${data.metrics.purchaseOrders}</td></tr>
+                <tr><td>Active Vendors</td><td>${data.metrics.activeVendors}</td></tr>
+                <tr><td>Avg Pay Time</td><td>${data.metrics.avgPayTime}</td></tr>
+                <tr><td></td></tr>
+                
+                <tr><td colspan="6"><strong>VENDOR PERFORMANCE</strong></td></tr>
+                <tr><td><strong>Vendor Name</strong></td><td><strong>Category</strong></td><td><strong>Total Spend</strong></td><td><strong>Orders</strong></td><td><strong>Avg Pay Time</strong></td><td><strong>Performance</strong></td></tr>
+        `;
+        
+        data.vendors.forEach(vendor => {
+            excelContent += `<tr><td>${vendor.name}</td><td>${vendor.category}</td><td>${vendor.spend}</td><td>${vendor.orders}</td><td>${vendor.payTime}</td><td>${vendor.performance}</td></tr>`;
+        });
+        
+        excelContent += `
+                <tr><td></td></tr>
+                <tr><td colspan="6"><strong>CATEGORY BREAKDOWN</strong></td></tr>
+                <tr><td><strong>Category</strong></td><td><strong>Total Spend</strong></td><td><strong>Percentage</strong></td></tr>
+        `;
+        
+        data.categories.forEach(category => {
+            excelContent += `<tr><td>${category.name}</td><td>${category.spend}</td><td>${category.percentage}</td></tr>`;
+        });
+        
+        excelContent += `
+                <tr><td></td></tr>
+                <tr><td colspan="6"><strong>COMPLIANCE SCORES</strong></td></tr>
+                <tr><td>Overall Compliance Score</td><td>${data.compliance.score}%</td></tr>
+                <tr><td>Policy Adherence</td><td>${data.compliance.policyAdherence}%</td></tr>
+                <tr><td>Documentation</td><td>${data.compliance.documentation}%</td></tr>
+                <tr><td>Approval Process</td><td>${data.compliance.approvalProcess}%</td></tr>
+                <tr><td>Vendor Verification</td><td>${data.compliance.vendorVerification}%</td></tr>
+            </table>
+        `;
+
+        // Create and download Excel file
+        const blob = new Blob([excelContent], { 
+            type: 'application/vnd.ms-excel;charset=utf-8;' 
+        });
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        
+        link.setAttribute('href', url);
+        link.setAttribute('download', `P2P_Analytics_Report_${data.metadata.generatedDate.replace(/\//g, '-')}.xls`);
+        link.style.visibility = 'hidden';
+        
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        this.showNotification('Excel report downloaded successfully!', 'success');
+    }
+}
 
 // Export for potential external use
 if (typeof module !== 'undefined' && module.exports) {
